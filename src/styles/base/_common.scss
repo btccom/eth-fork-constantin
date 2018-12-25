@@ -1,0 +1,133 @@
+@import './variable';
+h1{
+  font-size:18px;
+}
+h2{
+  font-size: 16px;
+}
+h3{
+  font-size: 14px;
+}
+
+.page-width{
+  max-width:1200px;
+  margin:0 auto;
+}
+.view-width{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 20px;
+  
+  @media only screen and (max-width: $break-middle) {
+    padding:0 4px;
+  }
+  @media only screen and (max-width: $break-small) {
+    padding:0 4px;
+  }
+}
+
+.em-text{
+  font-size:16px;
+}
+
+
+.cell-text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+a.link:hover {
+  //color:#149718;
+  color:lighten(#149718,10%) ;
+  text-decoration: none;
+
+  
+}
+a.link,
+a.link,
+a.link a:visited {
+  color:#149718;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.bsv-color{
+  color:#F5A623 !important;
+}
+
+.bsv-line{
+  border-bottom: 1px dashed #F5A623 !important;
+}
+
+
+.relative{
+  position: relative;
+}
+
+
+i.cell-icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background: no-repeat center center;
+  background-size: 18px 18px;
+  vertical-align: middle;
+  &.token-name-icon {
+    vertical-align: top;
+    margin-right: 5px;
+    position: absolute;
+    left:0px;
+    top: -1px;
+    @media only screen and (max-width: $break-middle) {
+      display: none;
+    }
+    @media only screen and (max-width: $break-small) {
+      display: none;
+    }
+  }
+  &.forked-icon {
+    vertical-align: top;
+    margin-right: 5px;
+    position: absolute;
+    left:-20px;
+    top: -1px;
+    background: url(fork.png) no-repeat center center;
+    transform: rotate(180deg);
+    background-size: 18px 18px;
+    @media only screen and (max-width: $break-middle) {
+      display: none;
+    }
+    @media only screen and (max-width: $break-small) {
+      display: none;
+    }
+   
+
+  }
+}
+
+
+.with-icon-left {
+  position: relative;
+  white-space: nowrap;
+  padding-left: 25px;
+ 
+  
+}
+table > thead > tr > th.with-icon-left-header {
+  padding-left: 45px !important;
+  @media only screen and (max-width: $break-middle) {
+    padding-left: 25px !important;
+  }
+  @media only screen and (max-width: $break-small) {
+    padding-left: 25px !important;
+  }
+  // &:first-child{
+  //   padding-left: 25px !important;
+  // }
+  // @media only screen and (max-width: $break-middle) {
+  //   padding-left: 30px !important;
+  // }
+}

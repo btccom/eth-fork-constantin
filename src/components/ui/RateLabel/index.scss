@@ -1,0 +1,50 @@
+$increaseColor:#52C41A;
+$declineColor:#F5222D;
+
+.rate-label{
+  display: inline-block;
+  margin-left: 10px;
+}
+//#region increase and decline icon
+.increase-icon {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  position: relative;
+  &:after {
+    content: '';
+    top: -5px;
+    position: absolute;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: 6px solid transparent;
+    border-bottom: 6px solid $increaseColor;
+  }
+}
+.decline-icon {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  position: relative;
+  &:after {
+    content: '';
+    top: 2px;
+    position: absolute;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: 6px solid transparent;
+    border-top: 6px solid $declineColor;
+  }
+}
+
+.increase-text {
+  color: $increaseColor;
+}
+.decline-text {
+  color: $declineColor;
+}
+//#endregion increase and decline icon

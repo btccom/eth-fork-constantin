@@ -1,0 +1,55 @@
+@import '../../../styles/base/variable';
+table.bf-table{
+  color:rgba(0,0,0,0.65);
+  width:100%;
+  font-size:16px;
+
+  tr{
+    th,td{
+      color:rgba(0,0,0,0.65);
+      padding:6px 20px;
+      text-align: right;
+      font-weight: 400;
+      overflow: hidden;
+     
+       @media only screen and (max-width: $break-middle) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+      @media only screen and (max-width: $break-small) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+      
+      // &:last-child{
+      //   @media only screen and (max-width: $break-middle) {
+      //     padding-right: 0;
+      //   }
+      //   @media only screen and (max-width: $break-small) {
+      //     padding-right: 0;
+      //   }
+      // }
+
+       // &:first-child{
+      //   padding-left: 0;
+      // }
+      // &:last-child{
+      //   padding-right: 0;
+      // }
+      
+      // @media only screen and (max-width: $break-middle) {
+      //   padding:6px 12px;
+      //   font-size:12px;
+      // }
+      // @media only screen and (max-width: $break-small) {
+      //   padding:6px 10px;
+      //   font-size:10px;
+      // }
+  
+    }
+    th{
+      font-size: 14px;
+    }
+  }
+ 
+}
