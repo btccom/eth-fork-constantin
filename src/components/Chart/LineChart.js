@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import ReactEcharts from 'echarts-for-react';
+import ReactEchartsCore from 'echarts-for-react/lib/core';
+import echarts from 'echarts/lib/echarts';
+import 'echarts/lib/component/tooltip';
+import 'echarts/lib/chart/line';
 import './index.scss';
 import { abbreviateNumber_zh, abbreviateNumber_en } from 'utils';
 
-class Chart extends Component {
+export default class LineChart extends Component {
   constructor(props) {
     super(props);
   }
@@ -24,7 +27,7 @@ class Chart extends Component {
       type: 'line'
     }));
     let option = {
-      color: ['#4A90E2', '#149718'],
+      color: ['#2A69CF', '#149718'],
       xAxis: {
         type: 'category',
         boundaryGap: false,
@@ -42,12 +45,6 @@ class Chart extends Component {
       yAxis: {
         show: true,
 
-        min: function(value) {
-          return Math.floor(value.min - value.min * 0.2);
-        },
-        max: function(value) {
-          return Math.floor(value.max + value.max * 0.2);
-        },
         name: yAxisName,
         nameLocation: 'middle',
         nameGap: 50,
@@ -94,63 +91,23 @@ class Chart extends Component {
         left: 65
       },
       tooltip: {
-        //confine: true,
-        trigger: 'axis',
         show: true,
-        axisPointer: {
-          type: 'none'
-        },
-        backgroundColor: 'rgba(0,0,0,0.75);',
-        formatter: function(params, index) {
-          var result = `${params[0].name}
-          <br>
-          ${params[1].marker} ${params[1].seriesName}    : ${
-            isFixed ? params[1].value.toFixed(2) : params[1].value
-          }
-          `;
-          if (isForked) {
-            result =
-              result +
-              `<br>
-          ${params[0].marker}   ${params[0].seriesName} : ${
-                isFixed ? params[0].value.toFixed(2) : params[0].value
-              }`;
-          }
-          return result;
-        }
+        backgroundColor: '#F5FAFF'
       },
       series: seriesDataList
     };
     return option;
   };
 
-  getLegend = (legendNames = []) => {
-    if (legendNames.length > 0) {
-      return (
-        <ul>
-          {legendNames.map(item => {
-            return <li key={item}>{item}</li>;
-          })}
-        </ul>
-      );
-    } else {
-      return null;
-    }
-  };
-
   render() {
-    const { title, subTitle, legendNames } = this.props;
+    const { title } = this.props;
     return (
       <div className="chart-container">
         <div className="chart-title">
           <h2>{title}</h2>
-          <p className="sub-title">{subTitle}</p>
         </div>
-        <ReactEcharts option={this.getOption()} />
-        <div className="chart-legend">{this.getLegend(legendNames)}</div>
+        <ReactEchartsCore echarts={echarts} option={this.getOption()} />
       </div>
     );
   }
 }
-
-export default Chart;

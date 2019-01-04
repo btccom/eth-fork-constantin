@@ -4,7 +4,6 @@ import { inject, observer } from 'mobx-react';
 import Ts from 'Trans';
 import Table from '../../components/ui/Table';
 import RateLabel from '../../components/ui/RateLabel';
-import Chart from '../../components/Chart';
 import { Grid, Row, Col } from 'react-bootstrap';
 import {
   getCurrency,
