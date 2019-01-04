@@ -89,13 +89,13 @@ class HomeStore {
 
   @action
   getForkInfo = async () => {
-    const res = await ajax.get(`/fork-time`);
-    if (res && res.data) {
-      runInAction(() => {
-        this.forkInfo = res.data;
-        this.isFinishedQuery = true;
-      });
-    }
+    // const res = await ajax.get(`/fork-time`);
+    // if (res && res.data) {
+    //   runInAction(() => {
+    //     this.forkInfo = res.data;
+    //     this.isFinishedQuery = true;
+    //   });
+    // }
   };
 
   @computed
@@ -111,83 +111,83 @@ class HomeStore {
 
   @action
   getStatsInfo = async () => {
-    const res = await ajax.get(`/fork-stats`);
-    if (res && res.data) {
-      runInAction(() => {
-        this.statsInfo = res.data;
-      });
-    }
+    // const res = await ajax.get(`/fork-stats`);
+    // if (res && res.data) {
+    //   runInAction(() => {
+    //     this.statsInfo = res.data;
+    //   });
+    // }
   };
 
   @action
   getBCHBlockList = async () => {
-    const res = await ajax.get(`/bch/block/list`);
-    if (res && res.data) {
-      runInAction(() => {
-        this.bchBlockList = res.data.block_list;
-      });
-    }
+    // const res = await ajax.get(`/bch/block/list`);
+    // if (res && res.data) {
+    //   runInAction(() => {
+    //     this.bchBlockList = res.data.block_list;
+    //   });
+    // }
   };
 
   @action
   getBSVBlockList = async () => {
-    const res = await ajax.get(`/bsv/block/list`);
-    if (res && res.data) {
-      runInAction(() => {
-        this.bsvBlockList = res.data.block_list;
-      });
-    }
+    // const res = await ajax.get(`/bsv/block/list`);
+    // if (res && res.data) {
+    //   runInAction(() => {
+    //     this.bsvBlockList = res.data.block_list;
+    //   });
+    // }
   };
 
   @action
   getBCHSpecialCodeList = async () => {
-    const res = await ajax.get(`/bch/code/list`);
-    if (res && res.data) {
-      runInAction(() => {
-        this.bchSpecialCodeList = res.data.list;
-      });
-    }
+    // const res = await ajax.get(`/bch/code/list`);
+    // if (res && res.data) {
+    //   runInAction(() => {
+    //     this.bchSpecialCodeList = res.data.list;
+    //   });
+    // }
   };
 
   @action
   getBSVSpecialCodeList = async () => {
-    const res = await ajax.get(`/bsv/code/list`);
-    if (res && res.data) {
-      runInAction(() => {
-        this.bsvSpecialCodeList = res.data.list;
-      });
-    }
+    // const res = await ajax.get(`/bsv/code/list`);
+    // if (res && res.data) {
+    //   runInAction(() => {
+    //     this.bsvSpecialCodeList = res.data.list;
+    //   });
+    // }
   };
 
   @action
   getForkChartData = async () => {
-    const res = await ajax.get(`/fork-chart`);
-    if (res && res.data) {
-      runInAction(() => {
-        if (res.data.transaction_count) {
-          let transactionData = res.data.transaction_count;
-          this.transactionXAxisChartData_zh = transactionData.timestamp.map(
-            item => dateLocaleFormat(item, 'zh-CN')
-          );
-          this.transactionXAxisChartData_en = transactionData.timestamp.map(
-            item => dateLocaleFormat(item, 'en-US')
-          );
-          this.transactionChartData_BCH = transactionData.bch;
-          this.transactionChartData_BSV = transactionData.bsv;
-        }
-        if (res.data.block_reward) {
-          let blockRewardData = res.data.block_reward;
-          this.blockRewardXAxisChartData_en = blockRewardData.timestamp.map(
-            item => dateLocaleFormat(item, 'en-US')
-          );
-          this.blockRewardXAxisChartData_zh = blockRewardData.timestamp.map(
-            item => dateLocaleFormat(item, 'zh-CN')
-          );
-          this.blockRewardChartData_BCH = blockRewardData.bch;
-          this.blockRewardChartData_BSV = blockRewardData.bsv;
-        }
-      });
-    }
+    // const res = await ajax.get(`/fork-chart`);
+    // if (res && res.data) {
+    //   runInAction(() => {
+    //     if (res.data.transaction_count) {
+    //       let transactionData = res.data.transaction_count;
+    //       this.transactionXAxisChartData_zh = transactionData.timestamp.map(
+    //         item => dateLocaleFormat(item, 'zh-CN')
+    //       );
+    //       this.transactionXAxisChartData_en = transactionData.timestamp.map(
+    //         item => dateLocaleFormat(item, 'en-US')
+    //       );
+    //       this.transactionChartData_BCH = transactionData.bch;
+    //       this.transactionChartData_BSV = transactionData.bsv;
+    //     }
+    //     if (res.data.block_reward) {
+    //       let blockRewardData = res.data.block_reward;
+    //       this.blockRewardXAxisChartData_en = blockRewardData.timestamp.map(
+    //         item => dateLocaleFormat(item, 'en-US')
+    //       );
+    //       this.blockRewardXAxisChartData_zh = blockRewardData.timestamp.map(
+    //         item => dateLocaleFormat(item, 'zh-CN')
+    //       );
+    //       this.blockRewardChartData_BCH = blockRewardData.bch;
+    //       this.blockRewardChartData_BSV = blockRewardData.bsv;
+    //     }
+    //   });
+    // }
   };
 }
 

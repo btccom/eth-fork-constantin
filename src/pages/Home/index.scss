@@ -1,75 +1,116 @@
 @import '../../styles/base/variable';
-.card {
-  height: 300px;
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  padding: 24px 40px;
-  margin-top: 20px;
-  
-  &.block-card{
-    margin-top: -40px;
-   
-    @media only screen and (max-width: $break-horizontal) {
-      margin-top:20px;
-      padding: 24px 15px;
-    }
-    &.bch-block-card{
-      @media only screen and (max-width: $break-middle) {
-        margin-top:-40px;
-        padding: 24px 15px;
-      }    
-    }
-  }
-  &.op-code-card{
-    height: 160px;
-    h2{
-      margin-bottom: 18px;
-    }
-  }
-  @media only screen and (max-width: $break-middle) {
-    padding: 24px 10px;
-  }
-
-}
-
-.block-container{
-  background: #F7FEFC;
-  padding-bottom: 40px;
-}
-
-.card-header{
+.countdown-container {
   text-align: center;
-  color:rgba(0,0,0,0.65);
-  margin-bottom: 30px;
-  .coin-icon{
-    margin-left: 10px;
-    display: inline-block;
-    width:38px;
-    height: 24px;
-    background-size: 38px 24px;
-    vertical-align: text-bottom;
+  margin: 48px 0 40px 0;
 
-    &.bch-icon{
-      background: url(logo_bch@2x.png) center center no-repeat;
-      background-size: 38px 24px;
+  .countdown-progress {
+    margin: 16px 220px 0;
+    display: flex;
+    align-items: center;
+    p {
+      flex: 1;
+      background: rgba(108, 200, 255, 0.2);
+      height: 12px;
+      span {
+        display: block;
+        width: 88%;
+        height: 12px;
+        background: $primary-color;
+      }
     }
-    &.bsv-icon{
-      background: url(logo_bsv@2x.png) center center no-repeat;
-      background-size: 38px 24px;
+    .progress-text {
+      width: 70px;
     }
   }
-  .coin-name{
-    margin-left:10px;
-    margin-right: 20px;
-    font-size: 24px;
-    font-weight: 500;
+
+  .block-upgrade {
+    margin-top: 8px;
+    margin-bottom: 16px;
+    font-size: 32px;
+    color: $text-color-primary;
+    .current-block {
+      color: $primary-color;
+    }
   }
-  .coin-value{
-    font-size:18px;
-    font-weight: 400;
+
+  .countdown-info {
+    padding-top: 20px;
+    padding-bottom: 40px;
+    font-size: 16px;
+    font-weight: 600;
+    color: $text-color-default;
+    line-height: 1.8rem;
+    ul {
+      display: flex;
+      li {
+        flex: 1;
+        padding: 0 42px;
+        &:first-child {
+          text-align: right;
+        }
+        &:last-child {
+          text-align: left;
+        }
+      }
+    }
+    .fork-remark {
+      font-size: 14px;
+      font-weight: 400;
+    }
   }
 }
 
+.intro-container {
+  h3 {
+    text-align: center;
+    color: $text-color-primary;
+  }
 
+  h4 {
+    font-weight: 600;
+    padding-top: 16px;
+    line-height: 30px;
+    color: $text-color-primary;
+  }
+  .intro-content {
+    line-height: 26px;
+    .sub-item {
+      padding-left: 13px;
+    }
+  }
 
+  .eip-info {
+    display: flex;
+    flex-direction:row;
+
+    @media only screen and (max-width: $break-horizontal) {
+      flex-direction:column;
+    }
+   
+
+    li {
+      flex: 1;
+      color:#fff;
+      text-align: center;
+      height: 88px;
+      line-height: 24px;
+      margin:8px 28px 0 28px;
+      h3{
+        color:#fff;
+        margin: 8px auto ;
+      }
+      a{
+        display: block;
+        width:100%;
+        height: 100%;
+        color:#fff;
+        text-decoration: none;
+        &:hover{
+          color:#fff;
+         
+        }
+      }
+     
+    }
+  }
+}

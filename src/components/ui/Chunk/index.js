@@ -5,9 +5,9 @@ import './index.scss';
  *
  */
 const Chunk = ({
-  type = 'primary',
+  type,
   children,
-  paddings = ['auto', 'auto', 'auto', 'auto'],
+  paddings = ['auto', '10px', 'auto', '10px'],
   //mode = 'default',
   style
 }) => {
@@ -16,7 +16,13 @@ const Chunk = ({
   return (
     <div
       className={`chunk chunk-${type}`}
-      style={{ ...style, paddingTop, paddingRight, paddingBottom, paddingLeft }}
+      style={{
+        ...style,
+        paddingTop,
+        paddingRight,
+        paddingBottom,
+        paddingLeft
+      }}
     >
       {children}
     </div>

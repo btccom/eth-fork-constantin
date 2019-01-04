@@ -1,0 +1,12 @@
+@import '../../../styles/base/variable';
+
+.card{
+  padding:18px 16px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.16);
+
+  &.highlight{
+    border-top: 4px solid $primary-color;
+  }
+}

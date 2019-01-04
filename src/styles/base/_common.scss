@@ -1,21 +1,36 @@
 @import './variable';
 h1{
-  font-size:18px;
+  font-size:24px;
+  color:rgba(0,0,0,0.85);
 }
 h2{
-  font-size: 16px;
+  font-size: 18px;
 }
 h3{
+  font-size: 16px;
+}
+h4{
   font-size: 14px;
 }
 
+.md-font{
+  font-size: 16px;
+}
+.sm-font{
+  font-size: 14px;
+}
+.lg-font{
+  font-size:24px;
+}
+
 .page-width{
-  max-width:1200px;
+  max-width:1180px;
   margin:0 auto;
 }
 .view-width{
   max-width:1200px;
-  margin:0 auto;
+  margin-right: auto;
+  margin-left: auto;
   padding:0 20px;
   
   @media only screen and (max-width: $break-middle) {
@@ -27,7 +42,7 @@ h3{
 }
 
 .em-text{
-  font-size:16px;
+  color:$primary-color;
 }
 
 
@@ -41,27 +56,19 @@ h3{
 
 a.link:hover {
   //color:#149718;
-  color:lighten(#149718,10%) ;
+  color:lighten($primary-color,10%) ;
   text-decoration: none;
 
   
 }
+.link,
 a.link,
 a.link,
 a.link a:visited {
-  color:#149718;
+  color:$primary-color;
   cursor: pointer;
   text-decoration: none;
 }
-
-.bsv-color{
-  color:#F5A623 !important;
-}
-
-.bsv-line{
-  border-bottom: 1px dashed #F5A623 !important;
-}
-
 
 .relative{
   position: relative;
@@ -88,24 +95,6 @@ i.cell-icon {
       display: none;
     }
   }
-  &.forked-icon {
-    vertical-align: top;
-    margin-right: 5px;
-    position: absolute;
-    left:-20px;
-    top: -1px;
-    background: url(fork.png) no-repeat center center;
-    transform: rotate(180deg);
-    background-size: 18px 18px;
-    @media only screen and (max-width: $break-middle) {
-      display: none;
-    }
-    @media only screen and (max-width: $break-small) {
-      display: none;
-    }
-   
-
-  }
 }
 
 
@@ -130,4 +119,33 @@ table > thead > tr > th.with-icon-left-header {
   // @media only screen and (max-width: $break-middle) {
   //   padding-left: 30px !important;
   // }
+}
+
+
+.margin-top-xlg {
+  margin-top: 40px;
+}
+
+.margin-top-lg {
+  margin-top: 25px;
+}
+
+.margin-top-md {
+  margin-top: 15px;
+}
+
+.margin-top-sm {
+  margin-top: 10px;
+}
+
+.margin-bottom-lg {
+  margin-bottom: 25px;
+}
+
+.margin-bottom-md {
+  margin-bottom: 15px;
+}
+
+.margin-bottom-sm {
+  margin-bottom: 10px;
 }

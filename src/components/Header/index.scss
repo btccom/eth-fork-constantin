@@ -1,162 +1,35 @@
 @import '../../styles/base/variable';
-.header {
-  display: flex;
-  color: #fff;
+.header{
+  z-index: 9;
+  background: #fff;
+  width:100%;
+  height: 54px;
+  line-height: 54px;
+  flex: 0 0 auto;
+  box-shadow: 0px 4px 6px 0px rgba(108,200,255,0.2);
 
-  .header-center {
-    width: 100%;
-    max-width: 1200px;
-    height: 360px;
-    background: url(bg@2x.png) center center no-repeat;
-    background-size: 100% 360px;
-    padding-top: 20px;
-    @media only screen and (max-width: $break-middle) {
-      background: url(bg_sm@2x.png) center center no-repeat;
-    }
-
-    .logo {
-      display: inline-block;
-      width: 126px;
-      height: 21px;
-      background: url(logo_BTC.png) center center no-repeat;
-      background-size: 126px 21px;
-      @media only screen and (max-width: $break-small) {
-        margin-left: 10px;
-      }
-      @media only screen and (max-width: $break-middle) and (min-width: $break-small) {
-        margin-left: 10px;
-      }
-      
-    }
-    .count-down-container {
-      margin-top: 46px;
-      .fork-text-tip {
-        text-align: center;
-        font-size: 30px;
-        font-weight: 400;
-        line-height: 36px;
-        @media only screen and (max-width: $break-small) {
-          font-size: 16px;
-        }
-        @media only screen and (max-width: $break-middle) and (min-width: $break-small) {
-          font-size: 16px;
-        }
-      }
-      .fork-utc-time{
-        margin-top:10px;
-        font-size: 20px;
-        @media only screen and (max-width: $break-small) {
-          font-size: 13px;
-        }
-        @media only screen and (max-width: $break-middle) and (min-width: $break-small) {
-          font-size: 14px;
-        }
-      }
-      .fork-time {
-        text-align: center;
-        font-size: 36px;
-        font-weight: bold;
-        text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.25);
-        margin-top: 17px;
-        li {
-          display: inline-block;
-        }
-        @media only screen and (max-width: $break-small) {
-          font-size: 17px;
-        }
-        @media only screen and (max-width: $break-middle) and (min-width: $break-small) {
-          font-size: 24px;
-        }
-      }
-
-      .countdown-progress {
-        margin: 36px 320px 0;
-
-        p {
-          background: rgba(0, 0, 0, 0.25);
-          border-radius: 10px;
-          height: 20px;
-          span {
-            display: block;
-            width: 88%;
-            border-radius: 10px;
-            height: 20px;
-            background: #f8e71c;
-            i {
-              position: absolute;
-              bottom: -30px;
-              right: -18px;
-              background: rgba(0, 0, 0, 0.75);
-              height: 26px;
-              padding: 0 8px;
-              border-radius: 4px;
-              line-height: 26px;
-              box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
-              &:before {
-                content: '';
-                height: 0;
-                width: 0;
-                overflow: hidden;
-                font-size: 0;
-                line-height: 0;
-                border-color: transparent transparent rgba(0, 0, 0, 0.75)
-                  transparent;
-                border-style: solid dashed dashed dashed;
-                border-width: 5px;
-                position: absolute;
-                left: 50%;
-                top: -10px;
-                margin-left: -4px;
-              }
-            }
-          }
-        }
-        @media only screen and (max-width: $break-horizontal) {
-          margin: 36px 20% 0;
-          p {
-            height: 10px;
-            span {
-              height: 10px;
-            }
-          }
-        }
-        @media only screen and (max-width: $break-middle) {
-          margin: 36px 50px 0;
-          p {
-            height: 10px;
-            span {
-              height: 10px;
-            }
-          }
-        }
-      }
-    }
-
-    .intl-select {
-      position: absolute;
-      right: 10px;
-      top: 15px;
-      .dropdown {
-        .dropdown-toggle {
-          width: 86px;
-          padding: 4px 12px;
-          background-color: transparent;
-          color: #fff;
-          border-color: #fff;
-        }
-        .dropdown-menu {
-          min-width: auto;
-        }
-      }
-    }
+  .logo {
+    display: block;
+    float: left;
+    height: 54px;
+    width:54px;
+    background: url(logo.png) no-repeat left center;
+    background-size: 36px 36px;
   }
 
-  .header-left {
-    flex: 1;
-    background-color: #1fd89c;
+  .app-name{
+    background:url(icon_eth.png) no-repeat left center;
+    padding-left:40px;
+    background-clip: border-box;
+    background-size: 32px 32px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right:30px;
   }
-  .header-right {
-    flex: 1;
-    background-color: #1997c7;
-  }
+  
+  
+}
+
+.header-pull-right{
+  float: right;
 }

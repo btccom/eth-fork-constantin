@@ -17,13 +17,14 @@ const Trans = ({
   transKey,
   transKeyPlural,
   values,
+  tagName = 'span',
   pluralValue,
   type = 'message',
   currency = 'USD',
   decimal
 }) => {
   if (type === 'message') {
-    return <FormattedMessage tagName="span" id={transKey} values={values} />;
+    return <FormattedMessage tagName={tagName} id={transKey} values={values} />;
   }
   if (type === 'pluralMessage') {
     //only support one value param
