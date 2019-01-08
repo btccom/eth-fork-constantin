@@ -8,10 +8,14 @@ import createBrowserHistory from 'history/createBrowserHistory';
 //import babelPolyfill from 'babel-polyfill';
 import stores from './stores'; //必须引入
 import { isProduction } from './utils/constants';
+import { dateFormat } from 'utils';
 import IntlProviderWrap from './components/IntlProviderWrap';
 import App from './App';
 
 import('./styles/main.scss');
+
+//init prototype method
+dateFormat();
 
 const renderApp = Component => {
   const browserHistory = createBrowserHistory();

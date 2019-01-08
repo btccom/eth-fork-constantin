@@ -9,6 +9,7 @@ $mark-color: #f5a623;
   padding: 2px 4px;
   margin-top: 16px;
   cursor: pointer;
+  user-select: none;
 }
 .mark-icon {
   display: inline-block;

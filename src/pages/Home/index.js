@@ -14,6 +14,7 @@ import {
 import Overview from './section/Overview';
 import RewardChart from '../Common/RewardChart';
 import AvgGasChart from '../Common/AvgGasChart';
+import EtherPriceChart from '../Common/EtherPriceChart';
 import Introduction from './section/Introduction';
 
 import './index.scss';
@@ -26,15 +27,21 @@ export default class Home extends Component {
     super(props);
     this.store = this.props.store.homeStore;
     this.appsStore = this.props.store.appStore;
-    console.log(window.location.href);
     this.state = {
       intervalId: null
     };
   }
 
   componentWillMount() {
-    this.store.getForkInfo();
-    this.store.getAvgGasChartData('20190103', 0);
+    this.store.getForkInfo(isForked => {
+      if (isForked) {
+        this.getHistoryBlockList();
+      }
+    });
+    this.store.getLatestBlockList();
+    this.store.getAvgGasChartData('20190103', 1);
+    this.store.getPricesChartData('20190103', 1);
+    this.store.getBlockRewardChartData('20190103', 1);
   }
   componentDidMount() {
     let intervalId = setInterval(this.loopQuery.bind(this), 20000);
@@ -47,6 +54,11 @@ export default class Home extends Component {
     clearInterval(this.state.intervalId);
   }
 
+  getBigChartUrl = chartType => {
+    let url = window.location.href.split('/')[0];
+    return `${url}/chartdetail/${chartType}/`;
+  };
+
   loopQuery = () => {
     this.store.getInstantData();
   };
@@ -57,6 +69,7 @@ export default class Home extends Component {
       forkInfo,
       isForked,
       isFinishedQuery,
+      forkStatusInfo,
       statsInfo,
       bchBlockList,
       bsvBlockList,
@@ -72,154 +85,45 @@ export default class Home extends Component {
       bsvSpecialCodeList
     } = this.store;
 
-    const bchColumns = [
-      {
-        title: <Ts transKey="pages.height" />,
-        align: 'left',
-        render: data => {
-          return (
-            <a
-              className="link"
-              href={`https://bch.btc.com/${data.block_hash}`}
-              target="_blank"
-            >
-              {data.height}
-            </a>
-          );
-        }
-      },
-      {
-        title: <Ts transKey="pages.relayedBy" />,
-        align: 'left',
-        className: 'with-icon-left-header',
-        render: data => {
-          return (
-            <span className="with-icon-left">
-              {data.miner}
-              {data.icon_url && (
-                <i
-                  className="cell-icon token-name-icon"
-                  style={{ backgroundImage: `url(${data.icon_url})` }}
-                />
-              )}
-            </span>
-          );
-        }
-      },
-      {
-        title: <Ts transKey="pages.Time" />,
-        render: data => {
-          return <span>{second2Relative(data.time_in_sec, lang)}</span>;
-        }
-      }
-    ];
-
-    const bsvColumns = [
-      {
-        title: <Ts transKey="pages.height" />,
-        align: 'left',
-        render: data => {
-          return (
-            <a
-              className={`link relative ${
-                isForked && forkInfo.fork_height <= data.height
-                  ? 'bsv-color'
-                  : ''
-              }`}
-              // href={`https://bsv.btc.com/${data.block_hash}`}
-              href="javascript:void 0"
-              target="_blank"
-            >
-              {data.height}
-              {isForked && forkInfo.fork_height == data.height && (
-                <i className="cell-icon forked-icon" />
-              )}
-            </a>
-          );
-        }
-      },
-      {
-        title: <Ts transKey="pages.relayedBy" />,
-        align: 'left',
-        className: 'with-icon-left-header',
-        render: data => {
-          return (
-            <span
-              className={`with-icon-left ${
-                isForked && forkInfo.fork_height <= data.height
-                  ? 'bsv-color'
-                  : ''
-              }`}
-            >
-              {data.miner}
-              {data.icon_url && (
-                <i
-                  className="cell-icon token-name-icon"
-                  style={{ backgroundImage: `url(${data.icon_url})` }}
-                />
-              )}
-            </span>
-          );
-        }
-      },
-      {
-        title: <Ts transKey="pages.Time" />,
-        render: data => {
-          return (
-            <span
-              className={`${
-                isForked && forkInfo.fork_height <= data.height
-                  ? 'bsv-color'
-                  : ''
-              }`}
-            >
-              {second2Relative(data.time_in_sec, lang)}
-            </span>
-          );
-        }
-      }
-    ];
-
     return (
       <div className="view-width relative" style={{ marginBottom: 100 }}>
         <Grid>
           <Row>
             <Col xs={12} sm={12} md={12}>
-              <Overview
-                forkInfo={forkInfo}
-                isForked={isForked}
-                isFinishedQuery={isFinishedQuery}
-              />
+              <Overview />
             </Col>
           </Row>
           <Row>
             <Col xs={12} sm={12} md={6} className="relative">
               <div className="card hightlight" style={{ height: 500 }}>
                 <RewardChart
+                  isSimple={true}
                   onClickZoom={() => {
-                    //debugger;
-                    // this.props.history.push({
-                    //   pathname: `/chartdetail`,
-                    //   search: '?sort=name'
-                    // });
-                    window.open(
-                      `${window.location.href}chartdetail/reward/`,
-                      '_blank'
-                    );
+                    window.open(this.getBigChartUrl('reward'), '_blank');
                   }}
                 />
               </div>
             </Col>
             <Col xs={12} sm={12} md={6}>
               <div className="card hightlight" style={{ height: 500 }}>
-                <AvgGasChart />
+                <AvgGasChart
+                  isSimple={true}
+                  onClickZoom={() => {
+                    window.open(this.getBigChartUrl('avgGasPrice'), '_blank');
+                  }}
+                />
               </div>
             </Col>
           </Row>
           <Row className="margin-top-lg ">
             <Col xs={12} sm={12} md={12}>
               <div className="card hightlight" style={{ height: 500 }}>
-                <RewardChart />
+                <EtherPriceChart
+                  isSimple={true}
+                  onClickZoom={() => {
+                    window.open(this.getBigChartUrl('etherPrice'), '_blank');
+                  }}
+                />
               </div>
             </Col>
           </Row>

@@ -9,6 +9,9 @@ class HomeStore {
   loading;
 
   @observable
+  isForked;
+
+  @observable
   forkStatusInfo;
 
   @observable
@@ -33,6 +36,7 @@ class HomeStore {
   constructor() {
     this.loading = false;
     this.isFinishedQuery = false;
+    this.isForked = false;
     this.forkTargetHeight = 7080000;
     this.forkStatusInfo = {};
     this.forkBlockInfo = {};
@@ -75,28 +79,31 @@ class HomeStore {
   };
 
   @action
-  getForkInfo = async () => {
+  getForkInfo = async callback => {
     this.isFinishedQuery = false;
 
-    this.forkStatusInfo = {
-      fork_height: 7080000,
-      fork_timestamp: 1547649000,
-      latest_height: 7050300, //7050300,
-      latest_height_timestamp: 1546843540
-    };
-    // const res = await ajax.get(`/fork/status`);
+    // this.forkStatusInfo = {
+    //   fork_height: 7080000,
+    //   fork_timestamp: 1547649000,
+    //   latest_height: 7050300, //7050300,
+    //   latest_height_timestamp: 1546843540
+    // };
+    const res = await ajax.get(`/fork/status`);
     this.isFinishedQuery = true;
-    // if (res && res.data) {
-    //   runInAction(() => {
-    //     this.forkStatusInfo = res.data;
-    //   });
-    // }
+    if (res && res.data) {
+      runInAction(() => {
+        this.forkStatusInfo = res.data;
+        this.isForked =
+          this.forkStatusInfo.fork_height <= this.forkStatusInfo.latest_height;
+        callback && callback(this.isForked);
+      });
+    }
   };
 
-  @computed
-  get isForked() {
-    return this.forkStatusInfo.fork_height <= this.forkStatusInfo.latest_height;
-  }
+  // @computed
+  // get isForked() {
+  //   return this.forkStatusInfo.fork_height <= this.forkStatusInfo.latest_height;
+  // }
 
   @action
   getLatestBlockList = async () => {
@@ -180,19 +187,28 @@ class HomeStore {
   };
 
   @action
-  getBlockRewardChartData = async () => {
-    this.blockRewardChartData = {};
-    const res = await ajax.get(`/fork/chart/block-reward`);
+  getBlockRewardChartData = async (start, freq) => {
+    const res = await ajax.get(`/fork/chart/block-reward`, {
+      params: {
+        start,
+        freq
+      }
+    });
     if (res && res.data) {
       runInAction(() => {
-        this.blockRewardChartData = res.data;
+        let { fork_timestamp, time_axis, reward_axis } = res.data;
+        time_axis = time_axis.map(item => item.substr(0, 16));
+        this.blockRewardChartData = {
+          fork_timestamp,
+          time_axis,
+          reward_axis
+        };
       });
     }
   };
 
   @action
   getAvgGasChartData = async (start, freq) => {
-    this.avgGasChartData = {};
     const res = await ajax.get(`/fork/chart/average-gas`, {
       params: {
         start,
@@ -209,12 +225,28 @@ class HomeStore {
   };
 
   @action
-  getPricesChartData = async () => {
-    this.pricesChartData = {};
-    const res = await ajax.get(`/fork/chart/price`);
+  getPricesChartData = async (start, freq) => {
+    const res = await ajax.get(`/fork/chart/price`, {
+      params: {
+        start,
+        freq
+      }
+    });
     if (res && res.data) {
       runInAction(() => {
-        this.pricesChartData = res.data;
+        let {
+          fork_timestamp,
+          time_axis,
+          price_usd_axis,
+          price_cny_axis
+        } = res.data;
+        time_axis = time_axis.map(item => item.substr(0, 16));
+        this.pricesChartData = {
+          fork_timestamp,
+          time_axis,
+          price_usd_axis,
+          price_cny_axis
+        };
       });
     }
   };

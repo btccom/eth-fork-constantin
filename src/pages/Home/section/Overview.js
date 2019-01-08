@@ -7,7 +7,8 @@ import {
   second2Relative,
   timestamp2Relative,
   getCurrentTimestamp,
-  timestamp2UTC
+  timestamp2UTC,
+  handlerToByte
 } from 'utils';
 import RCTable from '../../../components/ui/RCTable';
 import '../index.scss';
@@ -60,18 +61,12 @@ export default class Overview extends Component {
     }
     return (
       formatNumber(
-        ((forkStatusInfo.latest_height - 6850300) /
-          (this.store.forkTargetHeight - 6850300)) *
+        ((forkStatusInfo.latest_height - 6840000) /
+          (this.store.forkTargetHeight - 6840000)) *
           100,
         2
       ) + '%'
     );
-    // return (
-    //   formatNumber(
-    //     (forkStatusInfo.latest_height / this.store.forkTargetHeight) * 100,
-    //     2
-    //   ) + '%'
-    // );
   };
 
   getBlockSpan = () => {
@@ -82,17 +77,22 @@ export default class Overview extends Component {
 
   render() {
     const { lang } = this.appStore;
-    const { isForked, isFinishedQuery, forkStatusInfo } = this.store;
+    const {
+      isForked,
+      isFinishedQuery,
+      forkStatusInfo,
+      latestBlockList
+    } = this.store;
 
     const columns = [
       {
         title: <Ts transKey="pages.height" />,
-        dataIndex: 'height',
-        key: 'height',
+        dataIndex: 'block_height',
+        key: 'block_height',
         width: 140,
         align: 'left',
         fixed: 'left',
-        render: (height, data) => data.height
+        render: (block_height, data) => block_height
       },
       {
         title: <Ts transKey="pages.age" />,
@@ -103,35 +103,42 @@ export default class Overview extends Component {
       {
         title: <Ts transKey="pages.miner" />,
         width: '5%',
-        dataIndex: 'miner',
-        key: 'miner',
-        render: (miner, data) => {
-          return <span className="cell-text-ellipsis">{data.miner}</span>;
+        align: 'left',
+        dataIndex: 'miner_hash',
+        key: 'miner_hash',
+        render: (miner_hash, data) => {
+          return (
+            <span className="cell-text-ellipsis" style={{ width: 130 }}>
+              {' '}
+              {data.miner_name ? data.miner_name : miner_hash}
+            </span>
+          );
         }
       },
       {
         title: <Ts transKey="pages.reward" />,
-        dataIndex: 'reward',
-        key: 'reward',
-        render: (reward, data) => data.reward
+        dataIndex: 'block_reward',
+        key: 'block_reward',
+        render: (block_reward, data) => formatNumber(block_reward, 5) + ' ETH'
       },
       {
         title: <Ts transKey="pages.blockTime" />,
-        dataIndex: 'block_time',
-        key: 'block_time',
-        render: (block_time, data) => data.block_time
+        dataIndex: 'block_time_in_sec',
+        key: 'block_time_in_sec',
+        render: (block_time_in_sec, data) =>
+          formatNumber(block_time_in_sec, 0) + ' s'
       },
       {
         title: <Ts transKey="pages.txns" />,
-        dataIndex: 'txns_count',
-        key: 'txns_count',
-        render: (txns_count, data) => data.txns_count
+        dataIndex: 'total_tx',
+        key: 'total_tx',
+        render: (total_tx, data) => total_tx
       },
       {
         title: <Ts transKey="pages.size" />,
-        dataIndex: 'size',
-        key: 'size',
-        render: (size, data) => data.size
+        dataIndex: 'block_size',
+        key: 'block_size',
+        render: (block_size, data) => handlerToByte(block_size)
       }
     ];
 
@@ -183,7 +190,8 @@ export default class Overview extends Component {
               <span className="em-text">
                 {timestamp2Relative(
                   forkStatusInfo.latest_height_timestamp,
-                  lang
+                  lang,
+                  false
                 )}{' '}
               </span>
               <Ts transKey="pages.sinceLastBlock" />
@@ -199,9 +207,11 @@ export default class Overview extends Component {
               transKey="pages.activeAt"
               values={{
                 block: this.store.forkTargetHeight,
-                time: timestamp2UTC(
-                  this.store.forkStatusInfo.fork_timestamp * 1000
-                )
+                time: isForked
+                  ? timestamp2UTC(
+                      this.store.forkStatusInfo.fork_timestamp * 1000
+                    )
+                  : '2019-01-16'
               }}
             />
           </p>
@@ -214,7 +224,7 @@ export default class Overview extends Component {
         </div>
         <RCTable
           columns={columns}
-          dataSource={list}
+          dataSource={latestBlockList.toJS()}
           style={{ width: '100%' }}
         />
       </div>

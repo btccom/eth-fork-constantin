@@ -1,0 +1,44 @@
+.group-button-radio {
+  ul {
+    li {
+      display: inline-block;
+      background: rgba(255, 255, 255, 1);
+      padding: 4px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(217, 217, 217, 1);
+      text-align: center;
+      &:first-child {
+        width: 75px;
+        border-radius: 4px 0 0 4px;
+      }
+      &:last-child {
+        width: 74px;
+        border-left: none;
+        border-radius: 0 4px 4px 0;
+      }
+
+      &:hover, &.active{
+        color:#2A69CF;
+        border:1px solid #2A69CF;
+        cursor: pointer;
+      }
+
+    }
+  }
+}
+
+.btn.btn-default {
+  background: #fff;
+  border: 1px solid rgba(217, 217, 217, 1);
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.65);
+  &:hover,
+  &.active {
+    border: 1px solid #2a69cf;
+    color: #2a69cf;
+    box-shadow: none;
+  }
+  &:focus {
+    outline: none;
+  }
+}

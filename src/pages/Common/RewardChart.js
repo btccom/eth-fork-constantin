@@ -10,27 +10,46 @@ export default class RewardChart extends Component {
   constructor(props) {
     super(props);
     this.appStore = this.props.store.appStore;
+    this.store = this.props.store.homeStore;
+    console.log(this.store.blockRewardChartData.price_axis);
   }
+
+  componentWillMount() {}
 
   render() {
     const { lang } = this.appStore;
-    const { onClickZoom } = this.props;
+    const { blockRewardChartData, forkStatusInfo } = this.store;
+    const { onClickZoom, isSimple } = this.props;
 
-    const datasource = [820, 932, 901, 934, 1290, 1330, 1320];
-    const xaxisData = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     return (
       <div>
         <LineChart
+          chartType="line"
           title={<Ts transKey="pages.rewardChartTitle" />}
           isFixed={true}
           isForked={true}
+          chartHeight={380}
+          showMarkLine={!!forkStatusInfo.fork_timestamp}
+          markLinePoint={
+            forkStatusInfo.fork_timestamp
+              ? new Date(forkStatusInfo.fork_timestamp * 1000).format(
+                  'yyyy-MM-dd HH:mm'
+                )
+              : null
+          }
           yAxisName={
             lang === 'zh-CN'
               ? '每小时新以太币产生'
               : 'New Ether Supply Per Hour'
           }
-          xAxisData={lang === 'zh-CN' ? xaxisData : xaxisData}
-          seriesDataList={[{ data: datasource, name: 'BSV' }]}
+          xAxisData={blockRewardChartData.time_axis}
+          seriesDataList={[
+            {
+              data: blockRewardChartData.reward_axis,
+              name: 'BSV'
+            }
+          ]}
+          isSimple={isSimple}
           onClickZoom={onClickZoom}
         />
       </div>

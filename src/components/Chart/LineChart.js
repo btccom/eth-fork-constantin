@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+//import ReactEcharts from 'echarts-for-react';
 import ReactEchartsCore from 'echarts-for-react/lib/core';
 import echarts from 'echarts/lib/echarts';
 import 'echarts/lib/component/tooltip';
+import 'echarts/lib/component/toolbox';
 import 'echarts/lib/chart/line';
 import 'echarts/lib/chart/bar';
+import 'echarts/lib/component/markLine';
+import 'echarts/lib/component/dataZoom';
 import './index.scss';
 import ChartMarkButton from '../ui/ChartMarkButton';
 import { abbreviateNumber_zh, abbreviateNumber_en } from 'utils';
@@ -11,36 +15,50 @@ import { abbreviateNumber_zh, abbreviateNumber_en } from 'utils';
 export default class LineChart extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showMarkLine: props.showMarkLine
+    };
   }
 
-  getOption = () => {
+  getOption = showMarkLine => {
     let {
       chartType = 'line',
       xAxisData,
       seriesDataList,
       yAxisName,
       abbreviateFunc,
+      markLinePoint,
+      isSimple,
       isFixed,
       isForked
     } = this.props;
-
+    console.log('mkl', markLinePoint);
     seriesDataList = seriesDataList.map(item => ({
       data: item.data,
       name: item.name,
       type: chartType,
-      markLine: {
-        //show: item.data === 901,
-        data: [
-          {
-            // 起点和终点的项会共用一个 name
-            name: '最小值到最大值',
-            type: 'min'
-          },
-          {
-            type: 'max'
+      markLine: !showMarkLine
+        ? null
+        : {
+            lineStyle: {
+              color: '#F5A623',
+              type: 'solid'
+            },
+
+            data: [
+              [
+                {
+                  name: 'Constantinople Fork',
+                  coord: [markLinePoint, 500]
+                },
+                {
+                  symbol: 'none',
+                  coord: [markLinePoint, 500],
+                  y: '8%'
+                }
+              ]
+            ]
           }
-        ]
-      }
     }));
     let option = {
       color: ['#2A69CF', '#149718'],
@@ -80,6 +98,10 @@ export default class LineChart extends Component {
         },
         type: 'value',
         splitLine: {
+          interval: function(index, value) {
+            console.log(index);
+            return false;
+          },
           lineStyle: {
             type: 'dashed',
             color: '#E9E9E9'
@@ -102,17 +124,29 @@ export default class LineChart extends Component {
                 if (abbreviateNumber_zh === abbreviateFunc) {
                   return abbreviateFunc(value, 0);
                 }
-                return abbreviateFunc(value, 1);
+                return abbreviateFunc(value, 0);
               }
             }
             return value;
-          },
-          showMinLabel: false,
-          showMaxLabel: false
+          }
+          //showMinLabel: false,
+          //showMaxLabel: false
+        },
+        min: function(value) {
+          return 500;
         }
+
+        // max:
+        //   chartType === 'line'
+        //     ? function(value) {
+        //         return Math.floor(value.max + value.max * 0.35);
+        //       }
+        //     : null
+        // showMinLabel: false,
+        // showMaxLabel: false
       },
       grid: {
-        top: 10,
+        top: 30,
         right: 20,
         bottom: 110,
         left: 65
@@ -122,34 +156,67 @@ export default class LineChart extends Component {
         extraCssText:
           'background-color: rgba(0,0,0,0.75);box-shadow:0px 2px 8px 0px rgba(0,0,0,0.15);border-radius:4px'
       },
-      series: seriesDataList
+      toolbox: {
+        show: !isSimple,
+        showTitle: false,
+        feature: {
+          restore: {},
+          saveAsImage: {},
+          dataView: {
+            show: false
+          },
+          dataZoom: {
+            show: true,
+            title: {
+              zoom: ' ',
+              back: ' '
+            }
+          },
+          x: 'left'
+        }
+      },
+      series: seriesDataList,
+      dataZoom: [
+        {
+          type: 'inside',
+          zoomOnMouseWheel: true
+        }
+      ]
     };
     return option;
   };
 
   handleToggleMark = type => {
-    console.log(type);
+    this.setState({ showMarkLine: type === 'add' });
     //this.props.onMarkToggle();
   };
 
   render() {
-    const { title, onClickZoom, chartHeight } = this.props;
+    const { title, onClickZoom, isSimple, chartHeight } = this.props;
+    const { showMarkLine } = this.state;
     return (
       <div className="chart-container">
         <div className="chart-title">
           <h2>
             {title}
-            <i
-              className="cell-icon zoom-icon pull-right"
-              onClick={onClickZoom}
-            />
+            {isSimple && (
+              <i
+                className="cell-icon zoom-icon pull-right"
+                onClick={onClickZoom}
+              />
+            )}
           </h2>
         </div>
         <ReactEchartsCore
           echarts={echarts}
-          option={this.getOption()}
+          option={this.getOption(showMarkLine)}
           style={{ height: chartHeight }}
         />
+        {/* <ReactEcharts
+          option={this.getOption(showMarkLine)}
+          style={{ height: chartHeight }}
+        /> */}
+
         <div className="pull-right">
           <ChartMarkButton
             onClick={type => {

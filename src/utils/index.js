@@ -157,61 +157,6 @@ export const formatNumber = (value, decimalPlaces) => {
   }
 };
 
-// export const abbreviateNumber_en = (value, decimalPlaces, isLowerCase) => {
-//   if (!value) {
-//     return '';
-//   }
-//   var SI_SYMBOL = ['', 'K', 'M', 'B', 'T'];
-//   var SI_SYMBOLLower = ['', 'k', 'm', 'b', 't'];
-//   var tier = (Math.log10(value) / 3) | 0;
-//   if (tier == 0) return value;
-//   var suffix = isLowerCase ? SI_SYMBOLLower[tier] : SI_SYMBOL[tier];
-//   var scale = Math.pow(10, tier * 3);
-//   var scaled = value / scale;
-//   // return {
-//   //   full: scaled.toFixed(decimalPlaces) + suffix,
-//   //   value: scaled.toFixed(decimalPlaces),
-//   //   suffix
-//   // };
-//   return scaled.toFixed(decimalPlaces) + ' ' + suffix;
-// };
-
-// export const abbreviateNumber_zh = (value, decimalPlaces) => {
-//   if (!value) {
-//     return '';
-//   }
-//   var SI_SYMBOL = ['', '万', '亿', '万亿'];
-
-//   var tier = (Math.log10(value) / 4) | 0;
-//   if (tier == 0) return value;
-//   var suffix = SI_SYMBOL[tier];
-//   var scale = Math.pow(10, tier * 4);
-//   var scaled = value / scale;
-//   return scaled.toFixed(decimalPlaces) + ' ' + suffix;
-//   // return {
-//   //   full: scaled.toFixed(decimalPlaces) + suffix,
-//   //   value: scaled.toFixed(decimalPlaces),
-//   //   suffix
-//   // };
-// };
-
-// /**
-//  * 将数字字符串根据当前语言转换成带单位的字符串
-//  * @param {string|number} value
-//  * @param {number} decimalPlaces
-//  * @param {string} localeLanguage
-//  */
-// export const abbreviateNumber = (
-//   value,
-//   decimalPlaces,
-//   localeLanguage,
-//   isLowerCase
-// ) => {
-//   if (localeLanguage === 'zh-CN')
-//     return abbreviateNumber_zh(value, decimalPlaces);
-//   else return abbreviateNumber_en(value, decimalPlaces, isLowerCase);
-// };
-
 // const HASH_TRUNC_LENGTH = 15;
 
 // export const truncString = (str, length) => {
@@ -318,25 +263,25 @@ export const formatNumber = (value, decimalPlaces) => {
 //   return '';
 // };
 
-// export const handlerToByte = input => {
-//   var input = input || 0;
-//   var num = parseFloat(input);
-//   if (input >= 1000 && input < 1000 * 1000) {
-//     num = parseFloat(input / 1000).toFixed(2);
-//     return num + ' KB';
-//   } else if (input >= 1000 * 1000 && input < 1000 * 1000 * 1000) {
-//     num = parseFloat(input / 1000 / 1000).toFixed(2);
-//     return num + ' MB';
-//   } else if (input >= 1000 * 1000 * 1000 && input < 1000 * 1000 * 1000 * 1000) {
-//     num = parseFloat(input / 1000 / 1000 / 1000).toFixed(2);
-//     return num + ' GB';
-//   } else if (input >= 1000 * 1000 * 1000 * 1000) {
-//     num = parseFloat(input / 1000 / 1000 / 1000 / 1000).toFixed(2);
-//     return num + ' TB';
-//   } else {
-//     return num.toFixed(2) + ' B';
-//   }
-// };
+export const handlerToByte = input => {
+  var input = input || 0;
+  var num = parseFloat(input);
+  if (input >= 1000 && input < 1000 * 1000) {
+    num = parseFloat(input / 1000).toFixed(2);
+    return num + ' KB';
+  } else if (input >= 1000 * 1000 && input < 1000 * 1000 * 1000) {
+    num = parseFloat(input / 1000 / 1000).toFixed(2);
+    return num + ' MB';
+  } else if (input >= 1000 * 1000 * 1000 && input < 1000 * 1000 * 1000 * 1000) {
+    num = parseFloat(input / 1000 / 1000 / 1000).toFixed(2);
+    return num + ' GB';
+  } else if (input >= 1000 * 1000 * 1000 * 1000) {
+    num = parseFloat(input / 1000 / 1000 / 1000 / 1000).toFixed(2);
+    return num + ' TB';
+  } else {
+    return num.toFixed(2) + ' B';
+  }
+};
 
 // export const isContract = type => {
 //   return type == 1;
@@ -394,7 +339,7 @@ export const formatNumber = (value, decimalPlaces) => {
  * @param {number} current millisecond
  * @param {number} previous millisecond
  */
-export const timeDifference = (current, previous, lang) => {
+export const timeDifference = (current, previous, lang, isShowAgo) => {
   var msPerMinute = 60 * 1000;
   var msPerHour = msPerMinute * 60;
   var msPerDay = msPerHour * 24;
@@ -407,7 +352,7 @@ export const timeDifference = (current, previous, lang) => {
     return formatLocaleRelative(
       [{ value: Math.round(elapsed / 1000), unit: 'second' }],
       lang,
-      true,
+      isShowAgo,
       true
     );
   } else if (elapsed < msPerHour) {
@@ -417,7 +362,7 @@ export const timeDifference = (current, previous, lang) => {
         { value: Math.floor((elapsed % msPerMinute) / 1000), unit: 'second' }
       ],
       lang,
-      true,
+      isShowAgo,
       true
     );
   } else if (elapsed < msPerDay) {
@@ -430,7 +375,7 @@ export const timeDifference = (current, previous, lang) => {
         }
       ],
       lang,
-      true,
+      isShowAgo,
       true
     );
   } else if (elapsed < msPerMonth) {
@@ -443,21 +388,21 @@ export const timeDifference = (current, previous, lang) => {
         }
       ],
       lang,
-      true,
+      isShowAgo,
       true
     );
   } else if (elapsed < msPerYear) {
     return formatLocaleRelative(
       [{ value: Math.round(elapsed / msPerMonth), unit: 'month' }],
       lang,
-      true,
+      isShowAgo,
       true
     );
   } else {
     return formatLocaleRelative(
       [{ value: Math.round(elapsed / msPerYear), unit: 'year' }],
       lang,
-      true,
+      isShowAgo,
       true
     );
   }
@@ -483,12 +428,12 @@ const formatLocaleRelative = (
       year: '年'
     },
     'en-US': {
-      second: 'S',
-      minute: 'M',
-      hour: 'H',
-      day: 'D',
-      month: 'Mon',
-      year: 'Y'
+      second: 'sec',
+      minute: 'min',
+      hour: 'hr',
+      day: 'day',
+      month: 'month',
+      year: 'year'
     }
   };
   const unitLocalesplural = {
@@ -501,12 +446,12 @@ const formatLocaleRelative = (
       year: '年'
     },
     'en-US': {
-      second: 'S',
-      minute: 'M',
-      hour: 'H',
-      day: 'D',
-      month: 'Mon',
-      year: 'Y'
+      second: 'secs',
+      minute: 'mins',
+      hour: 'hrs',
+      day: 'days',
+      month: 'months',
+      year: 'years'
     }
   };
 
@@ -519,24 +464,25 @@ const formatLocaleRelative = (
   });
   if (isShowAgo) {
     return currentLocales.join(' ') + agoLocales[lang];
+  } else {
+    return currentLocales.join(' ');
   }
-  return currentLocales;
 };
 
 /**
  * convert time second to relative time
  * @param {number} second
  */
-export const second2Relative = (second, lang) => {
+export const second2Relative = (second, lang, isShowAgo = true) => {
   if (typeof second !== 'number') {
     return '';
   }
-  return timeDifference(second * 1000, 0, lang);
+  return timeDifference(second * 1000, 0, lang, isShowAgo);
 };
 
-export const timestamp2Relative = (timestamp, lang) => {
+export const timestamp2Relative = (timestamp, lang, isShowAgo) => {
   let current = new Date().getTime();
-  return timeDifference(current, timestamp * 1000, lang);
+  return timeDifference(current, timestamp * 1000, lang, isShowAgo);
 };
 
 export const getCountdownTime = (endTimestamp, currentTimestamp, lang) => {

@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
-import Ts from 'Trans';
-import RateLabel from '../../components/ui/RateLabel';
 import { Grid, Row, Col } from 'react-bootstrap';
-import {
-  getCurrency,
-  second2Relative,
-  abbreviateNumber,
-  abbreviateNumber_zh,
-  abbreviateNumber_en
-} from 'utils';
-
+import Ts from 'Trans';
+import debounce from 'lodash.debounce';
+import ToggleGroupButton from '../../components/ui/ToggleGroupButton';
+import RewardChart from '../Common/RewardChart';
+import AvgGasChart from '../Common/AvgGasChart';
+import EtherPriceChart from '../Common/EtherPriceChart';
 import './index.scss';
-
+const startTimeRangeMap = {
+  '1': '20190103',
+  '2': '20181003'
+};
 @withRouter //必须放在最前面
 @inject('store')
 @observer
@@ -22,18 +21,69 @@ export default class ChartDetail extends Component {
     super(props);
     this.store = this.props.store.homeStore;
     this.appsStore = this.props.store.appStore;
-    console.log(window.location.href);
+
+    console.log(this.props);
   }
 
-  componentWillMount() {}
+  componentWillMount() {
+    this.store.getForkInfo();
+    this.store.getAvgGasChartData('20190103', 1);
+    this.store.getPricesChartData('20190103', 1);
+    this.store.getBlockRewardChartData('20190103', 1);
+  }
   componentDidMount() {}
 
   componentWillUnmount() {}
 
-  render() {
-    const { lang } = this.appsStore;
-    const { forkInfo, isForked, isFinishedQuery } = this.store;
+  getTimeRangeButton = () => {
+    return [
+      {
+        text: <Ts transKey="common.previous" />,
+        onClick: debounce(this.handleClickPrevious, 500)
+      },
+      {
+        text: <Ts transKey="common.next" />,
+        onClick: debounce(this.handleClickNext, 500)
+      }
+    ];
+  };
 
-    return <div className="view-width relative">reward</div>;
+  handleTimeRangeChange = timerangeType => {
+    let chartType = this.props.match.params.type;
+    let startTime = startTimeRangeMap[timerangeType];
+    if (chartType === 'reward') {
+      this.store.getBlockRewardChartData(startTime, timerangeType);
+    } else if (chartType === 'avgGasPrice') {
+      this.store.getAvgGasChartData(startTime, timerangeType);
+    } else if (chartType === 'avgGasPrice') {
+      this.store.getPricesChartData(startTime, timerangeType);
+    }
+  };
+
+  render() {
+    let chartType = this.props.match.params.type;
+
+    return (
+      <div className="view-width relative margin-top-lg">
+        <Grid>
+          <Row>
+            <Col xs={12} sm={12} md={12} className="relative">
+              <div className="card hightlight" style={{ height: 800 }}>
+                <div className="">
+                  <ToggleGroupButton onChange={this.handleTimeRangeChange} />
+                </div>
+                {chartType === 'reward' && <RewardChart isSimple={false} />}
+                {chartType === 'avgGasPrice' && (
+                  <AvgGasChart isSimple={false} />
+                )}
+                {chartType === 'etherPrice' && (
+                  <EtherPriceChart isSimple={false} />
+                )}
+              </div>
+            </Col>
+          </Row>
+        </Grid>
+      </div>
+    );
   }
 }

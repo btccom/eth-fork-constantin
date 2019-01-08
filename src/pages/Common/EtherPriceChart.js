@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import Ts from 'Trans';
+
 import LineChart from '../../components/Chart/LineChart';
-import { abbreviateNumber_zh, abbreviateNumber_en } from 'utils';
 @withRouter //必须放在最前面
 @inject('store')
 @observer
-export default class AvgGasChart extends Component {
+export default class EtherPriceChart extends Component {
   constructor(props) {
     super(props);
     this.appStore = this.props.store.appStore;
@@ -16,20 +16,17 @@ export default class AvgGasChart extends Component {
 
   render() {
     const { lang } = this.appStore;
-    const { avgGasChartData, forkStatusInfo } = this.store;
+    const { pricesChartData, forkStatusInfo } = this.store;
     const { onClickZoom, isSimple } = this.props;
 
     return (
       <div>
         <LineChart
-          chartType="bar"
-          title={<Ts transKey="pages.gasUsedChartTitle" />}
+          chartType="line"
+          title={<Ts transKey="pages.priceChart" />}
           isFixed={true}
           isForked={true}
           chartHeight={380}
-          abbreviateFunc={
-            lang === 'zh-CN' ? abbreviateNumber_zh : abbreviateNumber_en
-          }
           showMarkLine={!!forkStatusInfo.fork_timestamp}
           markLinePoint={
             forkStatusInfo.fork_timestamp
@@ -39,12 +36,18 @@ export default class AvgGasChart extends Component {
               : '2019-01-06 12:00'
           }
           yAxisName={
-            lang === 'zh-CN'
-              ? '每笔交易平均Gas使用量'
-              : 'Average Gas Used Per Transaction'
+            lang === 'zh-CN' ? '以太币价格（CNY）' : 'Ether Prices（USD）'
           }
-          xAxisData={avgGasChartData.time_axis}
-          seriesDataList={[{ data: avgGasChartData.price_axis, name: 'BSV' }]}
+          xAxisData={pricesChartData.time_axis}
+          seriesDataList={[
+            {
+              data:
+                lang === 'zh-CN'
+                  ? pricesChartData.price_usd_axis
+                  : pricesChartData.price_cny_axis,
+              name: 'BSV'
+            }
+          ]}
           isSimple={isSimple}
           onClickZoom={onClickZoom}
         />
