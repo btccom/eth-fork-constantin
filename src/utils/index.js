@@ -1,3 +1,4 @@
+import { BigNumber } from 'bignumber.js';
 export const dateFormat = () => {
   Date.prototype.format = function(fmt) {
     var o = {
@@ -128,33 +129,33 @@ export const dateFormat = () => {
 // //   // return '';
 // // };
 
-// /**
-//  * 格式化数据
-//  * @param {string|number} value 要格式化的值
-//  * @param {number} decimalPlaces 保留的小树位数
-//  */
-// export const formatNumber = (value, decimalPlaces) => {
-//   try {
-//     // let format = {
-//     //   groupSeparator: ',',
-//     //   groupSize: 3
-//     // };
-//     // BigNumber.config({ FORMAT: format });
+/**
+ * 格式化数据
+ * @param {string|number} value 要格式化的值
+ * @param {number} decimalPlaces 保留的小树位数
+ */
+export const formatNumber = (value, decimalPlaces) => {
+  try {
+    // let format = {
+    //   groupSeparator: ',',
+    //   groupSize: 3
+    // };
+    // BigNumber.config({ FORMAT: format });
 
-//     if (isNaN(value) || value === '' || value === null || value === undefined) {
-//       return '';
-//     }
-//     if (value === '0' || value === 0) {
-//       return 0;
-//     }
-//     let result = '';
-//     result = BigNumber(value);
+    if (isNaN(value) || value === '' || value === null || value === undefined) {
+      return '';
+    }
+    if (value === '0' || value === 0) {
+      return 0;
+    }
+    let result = '';
+    result = BigNumber(value);
 
-//     return result.toFormat(decimalPlaces).toString();
-//   } catch (error) {
-//     return '';
-//   }
-// };
+    return result.toFormat(decimalPlaces).toString();
+  } catch (error) {
+    return '';
+  }
+};
 
 // export const abbreviateNumber_en = (value, decimalPlaces, isLowerCase) => {
 //   if (!value) {
@@ -590,7 +591,7 @@ export const timestamp2UTC = timestamp => {
     if (D[i] < 10) D[i] = '0' + D[i];
     if (T[i] < 10) T[i] = '0' + T[i];
   }
-  return 'UTC : ' + D.join('-') + ' ' + T.join(':');
+  return D.join('-') + ' ' + T.join(':') + ' UTC';
 };
 
 export const getCurrency = lang => {

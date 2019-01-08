@@ -3,7 +3,9 @@ import ReactEchartsCore from 'echarts-for-react/lib/core';
 import echarts from 'echarts/lib/echarts';
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/chart/line';
+import 'echarts/lib/chart/bar';
 import './index.scss';
+import ChartMarkButton from '../ui/ChartMarkButton';
 import { abbreviateNumber_zh, abbreviateNumber_en } from 'utils';
 
 export default class LineChart extends Component {
@@ -13,6 +15,7 @@ export default class LineChart extends Component {
 
   getOption = () => {
     let {
+      chartType = 'line',
       xAxisData,
       seriesDataList,
       yAxisName,
@@ -24,7 +27,20 @@ export default class LineChart extends Component {
     seriesDataList = seriesDataList.map(item => ({
       data: item.data,
       name: item.name,
-      type: 'line'
+      type: chartType,
+      markLine: {
+        //show: item.data === 901,
+        data: [
+          {
+            // 起点和终点的项会共用一个 name
+            name: '最小值到最大值',
+            type: 'min'
+          },
+          {
+            type: 'max'
+          }
+        ]
+      }
     }));
     let option = {
       color: ['#2A69CF', '#149718'],
@@ -39,7 +55,18 @@ export default class LineChart extends Component {
         },
         axisLabel: {
           color: '#545454',
-          fontWeight: 400
+          fontWeight: 400,
+          rotate: 90,
+          fontFamily: 'Arial',
+          verticalAlign: 'middle',
+          rich: {
+            x: {
+              fontSize: 18,
+              fontFamily: 'Droid Sans Mono',
+              borderColor: '#449933',
+              borderRadius: 4
+            }
+          }
         }
       },
       yAxis: {
@@ -87,26 +114,49 @@ export default class LineChart extends Component {
       grid: {
         top: 10,
         right: 20,
-        bottom: 30,
+        bottom: 110,
         left: 65
       },
       tooltip: {
         show: true,
-        backgroundColor: '#F5FAFF'
+        extraCssText:
+          'background-color: rgba(0,0,0,0.75);box-shadow:0px 2px 8px 0px rgba(0,0,0,0.15);border-radius:4px'
       },
       series: seriesDataList
     };
     return option;
   };
 
+  handleToggleMark = type => {
+    console.log(type);
+    //this.props.onMarkToggle();
+  };
+
   render() {
-    const { title } = this.props;
+    const { title, onClickZoom, chartHeight } = this.props;
     return (
       <div className="chart-container">
         <div className="chart-title">
-          <h2>{title}</h2>
+          <h2>
+            {title}
+            <i
+              className="cell-icon zoom-icon pull-right"
+              onClick={onClickZoom}
+            />
+          </h2>
         </div>
-        <ReactEchartsCore echarts={echarts} option={this.getOption()} />
+        <ReactEchartsCore
+          echarts={echarts}
+          option={this.getOption()}
+          style={{ height: chartHeight }}
+        />
+        <div className="pull-right">
+          <ChartMarkButton
+            onClick={type => {
+              this.handleToggleMark(type);
+            }}
+          />
+        </div>
       </div>
     );
   }

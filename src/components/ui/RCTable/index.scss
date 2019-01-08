@@ -1,0 +1,91 @@
+@import '../../../styles/base/variable';
+.table-container{
+  border-radius: 5px;
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.16);
+  overflow: hidden;
+
+  .rc-table-body{
+    @media (min-width: 1200px) {
+      overflow-x: hidden !important;
+    }
+  }
+  table {
+    color: rgba(0, 0, 0, 0.65);
+   
+    font-size: 16px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.16);
+  
+    tbody {
+      tr {
+        &:hover {
+          background-color: #f5faff;
+        }
+        &:first-child {
+          background-color: #2a69cf;
+          td {
+            color: #fff;
+          }
+        }
+      }
+    }
+  
+    tr {
+      th,
+      td {
+        color: rgba(0, 0, 0, 0.65);
+        padding: 8px 20px;
+        text-align: right;
+        font-weight: 400;
+        overflow: hidden;
+  
+        @media only screen and (max-width: $break-middle) {
+          padding-left: 0;
+          padding-right: 0;
+        }
+        @media only screen and (max-width: $break-small) {
+          padding-left: 0;
+          padding-right: 0;
+        }
+  
+        // &:last-child{
+        //   @media only screen and (max-width: $break-middle) {
+        //     padding-right: 0;
+        //   }
+        //   @media only screen and (max-width: $break-small) {
+        //     padding-right: 0;
+        //   }
+        // }
+  
+        // &:first-child{
+        //   padding-left: 0;
+        // }
+        // &:last-child{
+        //   padding-right: 0;
+        // }
+  
+        // @media only screen and (max-width: $break-middle) {
+        //   padding:6px 12px;
+        //   font-size:12px;
+        // }
+        // @media only screen and (max-width: $break-small) {
+        //   padding:6px 10px;
+        //   font-size:10px;
+        // }
+      }
+  
+      th {
+        font-weight: 500;
+        font-size: 14px;
+        color: $text-color-primary;
+        background-color: #fff;
+      }
+    }
+  }
+  
+}
+
+.rc-table tr:hover,.rc-table tr.rc-table-row-hover {
+  background-color: #f5faff;
+}

@@ -6,7 +6,7 @@ const pageMesage = {
     block: '区块',
     sinceLastBlock: '自最新区块',
     blockstoGo: '区块倒计',
-    activeAt: '君士坦丁堡将在{block}区块激活，预计时间约为 {time}。',
+    activeAt: '君士坦丁堡将在 {block} 区块激活，预计时间约为 {time}。',
     forkRemark:
       '君士坦丁堡分叉升级主要变动为延迟难度炸弹、以太币减产、减少Gas消耗成本等。',
     viewMore: '点此查看更多',
@@ -54,6 +54,7 @@ const pageMesage = {
     introPrg3Item4: '4.宁静（时间待定）：采用POS共识即Casper共识算法',
     perHour: '小时线',
     perDay: '日线',
+    chartForkRemarkText: '君士坦丁堡分叉',
     reset: '重置',
     zoom: '缩放',
     totalSupplyEther: '新增以太币供应总计：',

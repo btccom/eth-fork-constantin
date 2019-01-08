@@ -60,6 +60,7 @@ const pageMessage = {
       '4.Serenity (TBA) : Proof of Stake using the Casper consensus algorithm.',
     perHour: 'Per Hour',
     perDay: 'Per Day',
+    chartForkRemarkText: 'Constantinople Fork',
     reset: 'Reset',
     zoom: 'Zoom',
     totalSupplyEther: 'Total New Supply Ether:',

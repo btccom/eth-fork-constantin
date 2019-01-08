@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import Ts from 'Trans';
-import Table from '../../components/ui/Table';
 import RateLabel from '../../components/ui/RateLabel';
 import { Grid, Row, Col } from 'react-bootstrap';
 import {
@@ -13,7 +12,8 @@ import {
   abbreviateNumber_en
 } from 'utils';
 import Overview from './section/Overview';
-import RewardChart from './section/RewardChart';
+import RewardChart from '../Common/RewardChart';
+import AvgGasChart from '../Common/AvgGasChart';
 import Introduction from './section/Introduction';
 
 import './index.scss';
@@ -26,13 +26,15 @@ export default class Home extends Component {
     super(props);
     this.store = this.props.store.homeStore;
     this.appsStore = this.props.store.appStore;
+    console.log(window.location.href);
     this.state = {
       intervalId: null
     };
   }
 
   componentWillMount() {
-    this.store.getAll();
+    this.store.getForkInfo();
+    this.store.getAvgGasChartData('20190103', 0);
   }
   componentDidMount() {
     let intervalId = setInterval(this.loopQuery.bind(this), 20000);
@@ -180,23 +182,45 @@ export default class Home extends Component {
 
     return (
       <div className="view-width relative" style={{ marginBottom: 100 }}>
-        <Overview
-          forkInfo={forkInfo}
-          isForked={isForked}
-          isFinishedQuery={isFinishedQuery}
-        />
         <Grid>
           <Row>
-            <Col xs={12} sm={12} md={6}>
-              <RewardChart />
+            <Col xs={12} sm={12} md={12}>
+              <Overview
+                forkInfo={forkInfo}
+                isForked={isForked}
+                isFinishedQuery={isFinishedQuery}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} sm={12} md={6} className="relative">
+              <div className="card hightlight" style={{ height: 500 }}>
+                <RewardChart
+                  onClickZoom={() => {
+                    //debugger;
+                    // this.props.history.push({
+                    //   pathname: `/chartdetail`,
+                    //   search: '?sort=name'
+                    // });
+                    window.open(
+                      `${window.location.href}chartdetail/reward/`,
+                      '_blank'
+                    );
+                  }}
+                />
+              </div>
             </Col>
             <Col xs={12} sm={12} md={6}>
-              <RewardChart />
+              <div className="card hightlight" style={{ height: 500 }}>
+                <AvgGasChart />
+              </div>
             </Col>
           </Row>
           <Row className="margin-top-lg ">
             <Col xs={12} sm={12} md={12}>
-              <RewardChart />
+              <div className="card hightlight" style={{ height: 500 }}>
+                <RewardChart />
+              </div>
             </Col>
           </Row>
           <Row className="margin-top-lg ">

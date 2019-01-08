@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import Ts from 'Trans';
-import { second2Relative, getCurrentTimestamp, timestamp2UTC } from 'utils';
-import Table from '../../../components/ui/Table';
+import {
+  formatNumber,
+  second2Relative,
+  timestamp2Relative,
+  getCurrentTimestamp,
+  timestamp2UTC
+} from 'utils';
+import RCTable from '../../../components/ui/RCTable';
 import '../index.scss';
 @withRouter //必须放在最前面
 @inject('store')
@@ -12,6 +18,7 @@ export default class Overview extends Component {
   constructor(props) {
     super(props);
     this.appStore = this.props.store.appStore;
+    this.store = this.props.store.homeStore;
     this.state = {
       intervalId: null,
       currentSecond: Math.floor(new Date().getTime() / 1000),
@@ -47,46 +54,84 @@ export default class Overview extends Component {
     this.appStore.setLocaleLang(key);
   };
 
-  getUpgradeProgress = (forkInfo, isForked) => {
-    return '88.88%';
+  getUpgradeProgress = (forkStatusInfo, isForked) => {
+    if (isForked) {
+      return '100%';
+    }
+    return (
+      formatNumber(
+        ((forkStatusInfo.latest_height - 6850300) /
+          (this.store.forkTargetHeight - 6850300)) *
+          100,
+        2
+      ) + '%'
+    );
+    // return (
+    //   formatNumber(
+    //     (forkStatusInfo.latest_height / this.store.forkTargetHeight) * 100,
+    //     2
+    //   ) + '%'
+    // );
+  };
+
+  getBlockSpan = () => {
+    return (
+      this.store.forkTargetHeight - this.store.forkStatusInfo.latest_height
+    );
   };
 
   render() {
     const { lang } = this.appStore;
-    const {} = this.props;
+    const { isForked, isFinishedQuery, forkStatusInfo } = this.store;
 
     const columns = [
       {
         title: <Ts transKey="pages.height" />,
+        dataIndex: 'height',
+        key: 'height',
+        width: 140,
         align: 'left',
-        render: data => data.height
+        fixed: 'left',
+        render: (height, data) => data.height
       },
       {
         title: <Ts transKey="pages.age" />,
-        render: data => second2Relative(data.time_in_sec, lang)
+        dataIndex: 'time_in_sec',
+        key: 'time_in_sec',
+        render: (time_in_sec, data) => second2Relative(data.time_in_sec, lang)
       },
       {
         title: <Ts transKey="pages.miner" />,
         width: '5%',
-        render: data => {
+        dataIndex: 'miner',
+        key: 'miner',
+        render: (miner, data) => {
           return <span className="cell-text-ellipsis">{data.miner}</span>;
         }
       },
       {
         title: <Ts transKey="pages.reward" />,
-        render: data => data.reward
+        dataIndex: 'reward',
+        key: 'reward',
+        render: (reward, data) => data.reward
       },
       {
         title: <Ts transKey="pages.blockTime" />,
-        render: data => data.block_time
+        dataIndex: 'block_time',
+        key: 'block_time',
+        render: (block_time, data) => data.block_time
       },
       {
         title: <Ts transKey="pages.txns" />,
-        render: data => data.txns_count
+        dataIndex: 'txns_count',
+        key: 'txns_count',
+        render: (txns_count, data) => data.txns_count
       },
       {
         title: <Ts transKey="pages.size" />,
-        render: data => data.size
+        dataIndex: 'size',
+        key: 'size',
+        render: (size, data) => data.size
       }
     ];
 
@@ -109,46 +154,69 @@ export default class Overview extends Component {
           <Ts transKey="pages.upgradedTip" />
         </h1>
         <p className="block-upgrade">
-          <span className="current-block">3232</span>
-          <span className="target-block"> / {123324}</span>
+          <span className="current-block">{forkStatusInfo.latest_height}</span>
+          <span className="target-block"> / {7080000}</span>
           {` `}
           <span className="md-font">
             <Ts transKey="pages.block" />
           </span>
         </p>
-        <div className="countdown-progress">
-          <p>
-            <span
-              className="relative"
-              style={{
-                width: this.getUpgradeProgress()
-              }}
-            />
-          </p>
-          <span className="progress-text">{this.getUpgradeProgress()}</span>
-        </div>
+        {isFinishedQuery && !isForked && (
+          <div className="countdown-progress">
+            <p>
+              <span
+                className="relative"
+                style={{
+                  width: this.getUpgradeProgress(forkStatusInfo)
+                }}
+              />
+            </p>
+            <span className="progress-text">
+              {this.getUpgradeProgress(forkStatusInfo)}
+            </span>
+          </div>
+        )}
+
         <div className="countdown-info">
           <ul>
             <li>
-              <span className="em-text">{'00:13'} </span>
+              <span className="em-text">
+                {timestamp2Relative(
+                  forkStatusInfo.latest_height_timestamp,
+                  lang
+                )}{' '}
+              </span>
               <Ts transKey="pages.sinceLastBlock" />
             </li>
             <li>
-              <span className="em-text">{'00:13'} </span>
+              <span className="em-text">{this.getBlockSpan()} </span>
               <Ts transKey="pages.sinceLastBlock" />
             </li>
           </ul>
           <p>
-            <Ts transKey="pages.activeAt" />
+            {isForked && <i className="cell-icon check-mark-icon" />}
+            <Ts
+              transKey="pages.activeAt"
+              values={{
+                block: this.store.forkTargetHeight,
+                time: timestamp2UTC(
+                  this.store.forkStatusInfo.fork_timestamp * 1000
+                )
+              }}
+            />
           </p>
           <p className="fork-remark">
             <Ts transKey="pages.forkRemark" />{' '}
-            <a className="link" href="">
+            <a className="link" href="#introduction">
               <Ts transKey="pages.viewMore" />
             </a>
           </p>
         </div>
-        <Table columns={columns} dataSource={list} style={{ width: '100%' }} />
+        <RCTable
+          columns={columns}
+          dataSource={list}
+          style={{ width: '100%' }}
+        />
       </div>
     );
   }

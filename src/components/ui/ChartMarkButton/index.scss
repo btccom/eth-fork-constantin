@@ -1,0 +1,46 @@
+$mark-color: #f5a623;
+.chartmark-button {
+  display: inline-block;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 4px;
+  color: $mark-color;
+  font-size: 12px;
+  border: 1px dashed$mark-color;
+  padding: 2px 4px;
+  margin-top: 16px;
+  cursor: pointer;
+}
+.mark-icon {
+  display: inline-block;
+  margin-right: 8px;
+  margin-left: 8px;
+  background: $mark-color;
+  user-select: none;
+}
+
+.add-icon {
+  height: 10px;
+  position: relative;
+  width: 1px;
+}
+
+.add-icon:after {
+  background: $mark-color;
+  content: '';
+  height: 10px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1px;
+  transform: rotateZ(90deg);
+}
+/*减号*/
+
+.remove-icon {
+  height: 10px;
+  position: relative;
+  width: 1px;
+  transform: rotateZ(90deg);
+  text-align: center;
+  line-height: 20px;
+}

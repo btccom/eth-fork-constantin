@@ -95,7 +95,25 @@ i.cell-icon {
       display: none;
     }
   }
+
+  &.check-mark-icon{
+    width:10px;
+    border: 2px solid #F5A623;
+    border-width: 0 2px 2px 0;
+    transform:rotate(45deg);
+    margin-right:9px;
+    vertical-align: baseline;
+  }
+
+  &.zoom-icon{
+    cursor: pointer;
+    background: url(icon_zoom.png) no-repeat;
+    background-size: 18px 18px;
+
+  }
 }
+
+
 
 
 .with-icon-left {
@@ -148,4 +166,15 @@ table > thead > tr > th.with-icon-left-header {
 
 .margin-bottom-sm {
   margin-bottom: 10px;
+}
+
+.card{
+  padding:18px 16px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.16);
+
+  &.hightlight{
+    border-top: 4px solid $primary-color;
+  }
 }
