@@ -23,17 +23,19 @@
           background-color: #f5faff;
         }
         &:first-child {
-          background-color: #2a69cf;
+          //background-color: #2a69cf;
           td {
-            color: #fff;
+            //color: #fff;
           }
         }
       }
     }
   
     tr {
+      
       th,
       td {
+        
         color: rgba(0, 0, 0, 0.65);
         padding: 8px 20px;
         text-align: right;
@@ -80,6 +82,10 @@
         font-size: 14px;
         color: $text-color-primary;
         background-color: #fff;
+        border-bottom:1px solid #e9e9e9;
+      }
+      td{
+        border-bottom:none;
       }
     }
   }

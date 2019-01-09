@@ -1,3 +1,6 @@
+import { dateFormat } from 'utils';
+dateFormat();
+
 const doughnuChartColors = [
   '#975FE4',
   '#3AA0FF',
@@ -14,4 +17,14 @@ const doughnuChartColors = [
 
 const defaultPageSizeOptions = ['10', '25', '50', '100', '150'];
 
-export { doughnuChartColors, defaultPageSizeOptions };
+const getTimespanStr = dayTimespan => {
+  return new Date(
+    new Date().getTime() - dayTimespan * 24 * 60 * 60 * 1000
+  ).format('yyyyMMdd');
+};
+const chartStartTimeRangeMap = {
+  '1': getTimespanStr(7), // per hour
+  '2': getTimespanStr(30) // per day
+};
+
+export { doughnuChartColors, defaultPageSizeOptions, chartStartTimeRangeMap };

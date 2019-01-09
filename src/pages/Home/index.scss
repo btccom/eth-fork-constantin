@@ -1,7 +1,7 @@
 @import '../../styles/base/variable';
 .countdown-container {
   text-align: center;
-  margin: 48px 0 40px 0;
+  margin: 48px 0 20px 0;
 
   .countdown-progress {
     margin: 16px 220px 0;
@@ -119,3 +119,14 @@
   cursor: pointer;
   position: absolute;
 }
+table tr td{
+  &.em-cell-primary{
+    color: #fff !important;
+    background-color: #2A69CF;
+    
+  }
+  &.em-cell-secondary{
+    background-color: rgba(42,105,207,0.2);
+  }
+}
+

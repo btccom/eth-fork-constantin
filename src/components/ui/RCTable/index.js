@@ -74,6 +74,7 @@ import Table from 'rc-table';
 const RCTable = ({
   columns,
   dataSource,
+  hasFixedColumn = false,
   showHeader = true,
   style,
   isForked,
@@ -81,7 +82,11 @@ const RCTable = ({
 }) => {
   return (
     <div className="table-container">
-      <Table columns={columns} data={dataSource} scroll={{ x: 1140 }} />
+      {hasFixedColumn ? (
+        <Table columns={columns} data={dataSource} scroll={{ x: 1140 }} />
+      ) : (
+        <Table columns={columns} data={dataSource} />
+      )}
     </div>
   );
 };

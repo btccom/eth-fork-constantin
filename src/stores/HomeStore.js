@@ -82,17 +82,18 @@ class HomeStore {
   getForkInfo = async callback => {
     this.isFinishedQuery = false;
 
-    // this.forkStatusInfo = {
-    //   fork_height: 7080000,
-    //   fork_timestamp: 1547649000,
-    //   latest_height: 7050300, //7050300,
-    //   latest_height_timestamp: 1546843540
-    // };
     const res = await ajax.get(`/fork/status`);
     this.isFinishedQuery = true;
     if (res && res.data) {
       runInAction(() => {
         this.forkStatusInfo = res.data;
+        // let mockHeight = 7035393;
+        // this.forkStatusInfo = {
+        //   fork_height: mockHeight,
+        //   fork_timestamp: 1547649000,
+        //   latest_height: mockHeight, //7050300,
+        //   latest_height_timestamp: 1546843540
+        // };
         this.isForked =
           this.forkStatusInfo.fork_height <= this.forkStatusInfo.latest_height;
         callback && callback(this.isForked);
@@ -117,10 +118,35 @@ class HomeStore {
       runInAction(() => {
         if (this.isForked) {
           let tempList = res.data.list;
-          if (
-            res.data.list[10].block_height > this.forkBlockInfo.block_height
-          ) {
-            tempList.splice(-1, 1, this.forkBlockInfo);
+          for (let i = 0; i < 10; i++) {
+            if (tempList[i].block_height < this.forkStatusInfo.fork_height) {
+              tempList[i] = {};
+            }
+          }
+          if (res.data.list[9].block_height > this.forkStatusInfo.fork_height) {
+            tempList = tempList.slice(0, 8);
+            let s = '......';
+            tempList.push({
+              id: s,
+              block_height: s,
+              block_reward: s,
+              miner_hash: s,
+              miner_name: s
+            });
+            const {
+              id,
+              block_height,
+              block_reward,
+              miner_hash,
+              miner_name
+            } = this.forkBlockInfo;
+            tempList.push({
+              id,
+              block_height,
+              block_reward,
+              miner_hash,
+              miner_name
+            });
           }
           this.latestBlockList = tempList;
         } else {
@@ -181,7 +207,9 @@ class HomeStore {
       runInAction(() => {
         let historyList = res.data.list;
         this.forkBlockInfo = historyList[0];
-        this.historyBlockList = historyList.slice(1, 10);
+        this.historyBlockList = historyList.slice(1, 11);
+
+        this.getLatestBlockList();
       });
     }
   };

@@ -16,9 +16,12 @@ export default class AvgGasChart extends Component {
 
   render() {
     const { lang } = this.appStore;
-    const { avgGasChartData, forkStatusInfo } = this.store;
+    const { avgGasChartData, forkStatusInfo, isForked } = this.store;
     const { onClickZoom, isSimple } = this.props;
 
+    let forkTimeStr = new Date(forkStatusInfo.fork_timestamp * 1000).format(
+      'yyyy-MM-dd hh:mm'
+    );
     return (
       <div>
         <LineChart
@@ -30,13 +33,12 @@ export default class AvgGasChart extends Component {
           abbreviateFunc={
             lang === 'zh-CN' ? abbreviateNumber_zh : abbreviateNumber_en
           }
-          showMarkLine={!!forkStatusInfo.fork_timestamp}
-          markLinePoint={
-            forkStatusInfo.fork_timestamp
-              ? new Date(forkStatusInfo.fork_timestamp * 1000).format(
-                  'yyyy-MM-dd HH:mm'
-                )
-              : '2019-01-06 12:00'
+          showMarkLine={isForked}
+          markLinePoint={forkStatusInfo.fork_timestamp ? forkTimeStr : null}
+          markLinePointName={
+            lang === 'zh-CN'
+              ? `${forkTimeStr} Constantinople Fork`
+              : `${forkTimeStr} 君士坦丁堡分叉`
           }
           yAxisName={
             lang === 'zh-CN'

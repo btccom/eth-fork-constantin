@@ -3,16 +3,14 @@ import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import Ts from 'Trans';
+import { chartStartTimeRangeMap } from 'config';
 import debounce from 'lodash.debounce';
 import ToggleGroupButton from '../../components/ui/ToggleGroupButton';
 import RewardChart from '../Common/RewardChart';
 import AvgGasChart from '../Common/AvgGasChart';
 import EtherPriceChart from '../Common/EtherPriceChart';
 import './index.scss';
-const startTimeRangeMap = {
-  '1': '20190103',
-  '2': '20181003'
-};
+
 @withRouter //必须放在最前面
 @inject('store')
 @observer
@@ -27,9 +25,11 @@ export default class ChartDetail extends Component {
 
   componentWillMount() {
     this.store.getForkInfo();
-    this.store.getAvgGasChartData('20190103', 1);
-    this.store.getPricesChartData('20190103', 1);
-    this.store.getBlockRewardChartData('20190103', 1);
+    let timeRangeType = '1';
+    let startTime = chartStartTimeRangeMap[timeRangeType];
+    this.store.getAvgGasChartData(startTime, timeRangeType);
+    this.store.getPricesChartData(startTime, timeRangeType);
+    this.store.getBlockRewardChartData(startTime, timeRangeType);
   }
   componentDidMount() {}
 
@@ -50,7 +50,7 @@ export default class ChartDetail extends Component {
 
   handleTimeRangeChange = timerangeType => {
     let chartType = this.props.match.params.type;
-    let startTime = startTimeRangeMap[timerangeType];
+    let startTime = chartStartTimeRangeMap[timerangeType];
     if (chartType === 'reward') {
       this.store.getBlockRewardChartData(startTime, timerangeType);
     } else if (chartType === 'avgGasPrice') {

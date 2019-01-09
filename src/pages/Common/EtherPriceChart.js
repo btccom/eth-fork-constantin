@@ -16,9 +16,12 @@ export default class EtherPriceChart extends Component {
 
   render() {
     const { lang } = this.appStore;
-    const { pricesChartData, forkStatusInfo } = this.store;
+    const { pricesChartData, forkStatusInfo, isForked } = this.store;
     const { onClickZoom, isSimple } = this.props;
 
+    let forkTimeStr = new Date(forkStatusInfo.fork_timestamp * 1000).format(
+      'yyyy-MM-dd hh:mm'
+    );
     return (
       <div>
         <LineChart
@@ -27,13 +30,18 @@ export default class EtherPriceChart extends Component {
           isFixed={true}
           isForked={true}
           chartHeight={380}
-          showMarkLine={!!forkStatusInfo.fork_timestamp}
+          showMarkLine={isForked}
           markLinePoint={
             forkStatusInfo.fork_timestamp
               ? new Date(forkStatusInfo.fork_timestamp * 1000).format(
                   'yyyy-MM-dd HH:mm'
                 )
               : '2019-01-06 12:00'
+          }
+          markLinePointName={
+            lang === 'zh-CN'
+              ? `${forkTimeStr} Constantinople Fork`
+              : `${forkTimeStr} 君士坦丁堡分叉`
           }
           yAxisName={
             lang === 'zh-CN' ? '以太币价格（CNY）' : 'Ether Prices（USD）'

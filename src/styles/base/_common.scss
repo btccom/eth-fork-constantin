@@ -179,4 +179,18 @@ table > thead > tr > th.with-icon-left-header {
   }
 }
 
-//bootstrap reset
+
+.nopadding-sides {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.nopadding-right {
+  padding-right: 0 !important;
+}
+.nopadding-left {
+  padding-left: 0 !important;
+}
+.smpadding-sides {
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+}

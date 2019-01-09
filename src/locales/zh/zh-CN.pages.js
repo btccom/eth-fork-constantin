@@ -50,7 +50,7 @@ const pageMesage = {
     introPrg3Item3:
       '3.大都会（2017年10月）——扩容提速，提升安全。分解为两个版本：',
     introPrg3Item3Sub1: '（1）拜占庭（2017年10月）',
-    introPrg3Item3Sub2: '（2）君士坦丁堡（2018年1月）',
+    introPrg3Item3Sub2: '（2）君士坦丁堡（2019年1月）',
     introPrg3Item4: '4.宁静（时间待定）：采用POS共识即Casper共识算法',
     perHour: '小时线',
     perDay: '日线',

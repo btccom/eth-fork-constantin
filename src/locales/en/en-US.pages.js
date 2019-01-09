@@ -55,7 +55,7 @@ const pageMessage = {
     introPrg3Item3:
       '3.Metropolis (Oct 2017) ——Lighter, faster and more secure. It is broken down into two releases:',
     introPrg3Item3Sub1: ' (1)Byzantium (Oct 2017）',
-    introPrg3Item3Sub2: ' (2)Constantinople (Jan 2018)',
+    introPrg3Item3Sub2: ' (2)Constantinople (Jan 2019)',
     introPrg3Item4:
       '4.Serenity (TBA) : Proof of Stake using the Casper consensus algorithm.',
     perHour: 'Per Hour',

@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
-import Ts from 'Trans';
-import RateLabel from '../../components/ui/RateLabel';
 import { Grid, Row, Col } from 'react-bootstrap';
-import {
-  getCurrency,
-  second2Relative,
-  abbreviateNumber,
-  abbreviateNumber_zh,
-  abbreviateNumber_en
-} from 'utils';
+import { chartStartTimeRangeMap } from 'config';
 import Overview from './section/Overview';
 import RewardChart from '../Common/RewardChart';
 import AvgGasChart from '../Common/AvgGasChart';
 import EtherPriceChart from '../Common/EtherPriceChart';
 import Introduction from './section/Introduction';
+import BlocksBeforeFork from './section/BlocksBeforeFork';
+import BlocksAfterFork from './section/BlocksAfterFork';
 
 import './index.scss';
 
@@ -35,13 +29,25 @@ export default class Home extends Component {
   componentWillMount() {
     this.store.getForkInfo(isForked => {
       if (isForked) {
-        this.getHistoryBlockList();
+        this.store.getHistoryBlockList();
+      } else {
+        this.store.getLatestBlockList();
       }
     });
-    this.store.getLatestBlockList();
-    this.store.getAvgGasChartData('20190103', 1);
-    this.store.getPricesChartData('20190103', 1);
-    this.store.getBlockRewardChartData('20190103', 1);
+    let timeRangeType = '1';
+
+    this.store.getAvgGasChartData(
+      chartStartTimeRangeMap[timeRangeType],
+      timeRangeType
+    );
+    this.store.getPricesChartData(
+      chartStartTimeRangeMap[timeRangeType],
+      timeRangeType
+    );
+    this.store.getBlockRewardChartData(
+      chartStartTimeRangeMap[timeRangeType],
+      timeRangeType
+    );
   }
   componentDidMount() {
     let intervalId = setInterval(this.loopQuery.bind(this), 20000);
@@ -85,6 +91,8 @@ export default class Home extends Component {
       bsvSpecialCodeList
     } = this.store;
 
+    //let isForked = true;
+
     return (
       <div className="view-width relative" style={{ marginBottom: 100 }}>
         <Grid>
@@ -93,6 +101,15 @@ export default class Home extends Component {
               <Overview />
             </Col>
           </Row>
+          <Row>
+            <Col xs={12} sm={12} md={12}>
+              {!isForked && <BlocksBeforeFork />}
+            </Col>
+          </Row>
+        </Grid>
+        {isForked && <BlocksAfterFork />}
+
+        <Grid className="margin-top-lg">
           <Row>
             <Col xs={12} sm={12} md={6} className="relative">
               <div className="card hightlight" style={{ height: 500 }}>

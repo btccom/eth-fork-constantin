@@ -16,11 +16,11 @@ export default class LineChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showMarkLine: props.showMarkLine
+      toggleMarkLine: false
     };
   }
 
-  getOption = showMarkLine => {
+  getOption = toggleMarkLine => {
     let {
       chartType = 'line',
       xAxisData,
@@ -28,16 +28,18 @@ export default class LineChart extends Component {
       yAxisName,
       abbreviateFunc,
       markLinePoint,
+      markLinePointName,
       isSimple,
+      tooltipFunc,
       isFixed,
       isForked
     } = this.props;
-    console.log('mkl', markLinePoint);
     seriesDataList = seriesDataList.map(item => ({
       data: item.data,
-      name: item.name,
+      additionData: item.additionData,
+      //name: item.name,
       type: chartType,
-      markLine: !showMarkLine
+      markLine: !toggleMarkLine
         ? null
         : {
             lineStyle: {
@@ -48,7 +50,7 @@ export default class LineChart extends Component {
             data: [
               [
                 {
-                  name: 'Constantinople Fork',
+                  name: markLinePointName,
                   coord: [markLinePoint, 500]
                 },
                 {
@@ -133,7 +135,7 @@ export default class LineChart extends Component {
           //showMaxLabel: false
         },
         min: function(value) {
-          return 500;
+          return 200;
         }
 
         // max:
@@ -153,6 +155,29 @@ export default class LineChart extends Component {
       },
       tooltip: {
         show: true,
+        formatter: tooltipFunc,
+        // formatter: function(params) {
+        //   console.log(params);
+        //   let result = params.name;
+        //   result =
+        //     result + `</br> <span style="padding-right:120px;">${params.value}`;
+
+        //   // //${item.marker}
+        //   // seriesDataList[0].additionData.forEach(item => {
+
+        //   //   result =
+        //   //     result +
+        //   //     `</br> <span style="padding-right:120px;">${
+        //   //       item.name
+        //   //     }</span> <span style="position:absolute;right:0;padding-right:10px">${
+        //   //       isFormat2Percent
+        //   //         ? formatNumber(item.value[params[0].dataIndex] * 100, 2) + '%'
+        //   //         : item.value[params[0].dataIndex]
+        //   //     }</span>`;
+        //   // });
+        //   return result;
+        // },
+
         extraCssText:
           'background-color: rgba(0,0,0,0.75);box-shadow:0px 2px 8px 0px rgba(0,0,0,0.15);border-radius:4px'
       },
@@ -175,25 +200,31 @@ export default class LineChart extends Component {
           x: 'left'
         }
       },
-      series: seriesDataList,
-      dataZoom: [
-        {
-          type: 'inside',
-          zoomOnMouseWheel: true
-        }
-      ]
+      series: seriesDataList
+      // dataZoom: [
+      //   {
+      //     type: 'inside',
+      //     zoomOnMouseWheel: true
+      //   }
+      // ]
     };
     return option;
   };
 
   handleToggleMark = type => {
-    this.setState({ showMarkLine: type === 'add' });
+    this.setState({ toggleMarkLine: type === 'add' });
     //this.props.onMarkToggle();
   };
 
   render() {
-    const { title, onClickZoom, isSimple, chartHeight } = this.props;
-    const { showMarkLine } = this.state;
+    const {
+      title,
+      onClickZoom,
+      isSimple,
+      chartHeight,
+      showMarkLine
+    } = this.props;
+    const { toggleMarkLine } = this.state;
     return (
       <div className="chart-container">
         <div className="chart-title">
@@ -209,7 +240,7 @@ export default class LineChart extends Component {
         </div>
         <ReactEchartsCore
           echarts={echarts}
-          option={this.getOption(showMarkLine)}
+          option={this.getOption(toggleMarkLine)}
           style={{ height: chartHeight }}
         />
         {/* <ReactEcharts
@@ -217,13 +248,15 @@ export default class LineChart extends Component {
           style={{ height: chartHeight }}
         /> */}
 
-        <div className="pull-right">
-          <ChartMarkButton
-            onClick={type => {
-              this.handleToggleMark(type);
-            }}
-          />
-        </div>
+        {showMarkLine && (
+          <div className="pull-right">
+            <ChartMarkButton
+              onClick={type => {
+                this.handleToggleMark(type);
+              }}
+            />
+          </div>
+        )}
       </div>
     );
   }

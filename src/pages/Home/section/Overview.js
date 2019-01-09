@@ -59,10 +59,11 @@ export default class Overview extends Component {
     if (isForked) {
       return '100%';
     }
+    let progressStartHeight = 6840000;
     return (
       formatNumber(
-        ((forkStatusInfo.latest_height - 6840000) /
-          (this.store.forkTargetHeight - 6840000)) *
+        ((forkStatusInfo.latest_height - progressStartHeight) /
+          (this.store.forkTargetHeight - progressStartHeight)) *
           100,
         2
       ) + '%'
@@ -81,79 +82,8 @@ export default class Overview extends Component {
       isForked,
       isFinishedQuery,
       forkStatusInfo,
-      latestBlockList
+      forkTargetHeight
     } = this.store;
-
-    const columns = [
-      {
-        title: <Ts transKey="pages.height" />,
-        dataIndex: 'block_height',
-        key: 'block_height',
-        width: 140,
-        align: 'left',
-        fixed: 'left',
-        render: (block_height, data) => block_height
-      },
-      {
-        title: <Ts transKey="pages.age" />,
-        dataIndex: 'time_in_sec',
-        key: 'time_in_sec',
-        render: (time_in_sec, data) => second2Relative(data.time_in_sec, lang)
-      },
-      {
-        title: <Ts transKey="pages.miner" />,
-        width: '5%',
-        align: 'left',
-        dataIndex: 'miner_hash',
-        key: 'miner_hash',
-        render: (miner_hash, data) => {
-          return (
-            <span className="cell-text-ellipsis" style={{ width: 130 }}>
-              {' '}
-              {data.miner_name ? data.miner_name : miner_hash}
-            </span>
-          );
-        }
-      },
-      {
-        title: <Ts transKey="pages.reward" />,
-        dataIndex: 'block_reward',
-        key: 'block_reward',
-        render: (block_reward, data) => formatNumber(block_reward, 5) + ' ETH'
-      },
-      {
-        title: <Ts transKey="pages.blockTime" />,
-        dataIndex: 'block_time_in_sec',
-        key: 'block_time_in_sec',
-        render: (block_time_in_sec, data) =>
-          formatNumber(block_time_in_sec, 0) + ' s'
-      },
-      {
-        title: <Ts transKey="pages.txns" />,
-        dataIndex: 'total_tx',
-        key: 'total_tx',
-        render: (total_tx, data) => total_tx
-      },
-      {
-        title: <Ts transKey="pages.size" />,
-        dataIndex: 'block_size',
-        key: 'block_size',
-        render: (block_size, data) => handlerToByte(block_size)
-      }
-    ];
-
-    let list = [];
-    for (let i = 0; i < 10; i++) {
-      list.push({
-        height: 783982,
-        time_in_sec: 235,
-        miner: 'Ethermine',
-        reward: 234,
-        block_time: 21,
-        txns_count: 189,
-        size: 85939
-      });
-    }
 
     return (
       <div className="countdown-container">
@@ -162,7 +92,7 @@ export default class Overview extends Component {
         </h1>
         <p className="block-upgrade">
           <span className="current-block">{forkStatusInfo.latest_height}</span>
-          <span className="target-block"> / {7080000}</span>
+          <span className="target-block"> / {forkTargetHeight}</span>
           {` `}
           <span className="md-font">
             <Ts transKey="pages.block" />
@@ -222,11 +152,6 @@ export default class Overview extends Component {
             </a>
           </p>
         </div>
-        <RCTable
-          columns={columns}
-          dataSource={latestBlockList.toJS()}
-          style={{ width: '100%' }}
-        />
       </div>
     );
   }
