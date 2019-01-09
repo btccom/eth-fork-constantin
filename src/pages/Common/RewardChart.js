@@ -81,7 +81,9 @@ export default class RewardChart extends Component {
         }</span><span style="font-weight:500">${
           currentData.block_reward
         } ETH  (${currentData.block_found} ${blocksLocale[lang]})<span></div>
-        <div><span style="padding-right:5px;">${ucleInclRward}</span><span style="font-weight:500">${formatNumber(
+        <div><span style="padding-right:5px;">${
+          ucleInclRward[lang]
+        }</span><span style="font-weight:500">${formatNumber(
           currentData.uncle_ref_reward,
           2
         )} ETH<span></div>
