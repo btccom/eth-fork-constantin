@@ -106,6 +106,8 @@ i.cell-icon {
   }
 
   &.zoom-icon{
+    position: absolute;
+    right: 0;
     cursor: pointer;
     background: url(icon_zoom.png) no-repeat;
     background-size: 18px 18px;

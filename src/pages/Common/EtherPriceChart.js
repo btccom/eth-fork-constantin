@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
+import { formatNumber } from 'utils';
 import Ts from 'Trans';
 
 import LineChart from '../../components/Chart/LineChart';
@@ -13,6 +14,28 @@ export default class EtherPriceChart extends Component {
     this.appStore = this.props.store.appStore;
     this.store = this.props.store.homeStore;
   }
+
+  getChartTooltipFormatterFunc = () => {
+    const { lang } = this.appStore;
+    let totalTitle = {
+      'zh-CN': '以太币价格（CNY）：',
+      'en-US': 'Ether Price(USD): '
+    };
+    return function(params) {
+      console.log(params);
+      let result = params.name;
+      result =
+        result +
+        `</br> <div><span style="padding-right:5px;color:#2A69CF">${
+          totalTitle[lang]
+        }</span><span style="font-weight:500">${formatNumber(
+          params.value,
+          1
+        )}<span></div>`;
+
+      return result;
+    };
+  };
 
   render() {
     const { lang } = this.appStore;
@@ -56,6 +79,7 @@ export default class EtherPriceChart extends Component {
               name: 'BSV'
             }
           ]}
+          tooltipFunc={this.getChartTooltipFormatterFunc()}
           isSimple={isSimple}
           onClickZoom={onClickZoom}
         />

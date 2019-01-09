@@ -230,15 +230,12 @@ export default class LineChart extends Component {
     return (
       <div className="chart-container">
         <div className="chart-title">
-          <h2>
+          <h3 className="relative">
             {title}
             {isSimple && (
-              <i
-                className="cell-icon zoom-icon pull-right"
-                onClick={onClickZoom}
-              />
+              <i className="cell-icon zoom-icon" onClick={onClickZoom} />
             )}
-          </h2>
+          </h3>
         </div>
         <ReactEchartsCore
           echarts={echarts}

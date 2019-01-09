@@ -65,7 +65,6 @@ export default class RewardChart extends Component {
       'en-US': 'Uncles'
     };
     return function(params) {
-      console.log(params);
       let result = params.name;
       let currentData = addtionData[params.dataIndex];
       result =

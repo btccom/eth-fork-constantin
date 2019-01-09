@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import Ts from 'Trans';
 import LineChart from '../../components/Chart/LineChart';
-import { abbreviateNumber_zh, abbreviateNumber_en } from 'utils';
+import { abbreviateNumber_zh, abbreviateNumber_en, formatNumber } from 'utils';
 @withRouter //必须放在最前面
 @inject('store')
 @observer
@@ -13,6 +13,28 @@ export default class AvgGasChart extends Component {
     this.appStore = this.props.store.appStore;
     this.store = this.props.store.homeStore;
   }
+
+  getChartTooltipFormatterFunc = () => {
+    const { lang } = this.appStore;
+    let totalTitle = {
+      'zh-CN': '单笔平均Gas使用量：',
+      'en-US': 'Avg Gas Used Per Txn: '
+    };
+    return function(params) {
+      console.log(params);
+      let result = params.name;
+      result =
+        result +
+        `</br> <div><span style="padding-right:5px;color:#2A69CF">${
+          totalTitle[lang]
+        }</span><span style="font-weight:500">${formatNumber(
+          params.value,
+          1
+        )}<span></div>`;
+
+      return result;
+    };
+  };
 
   render() {
     const { lang } = this.appStore;
@@ -47,6 +69,7 @@ export default class AvgGasChart extends Component {
           }
           xAxisData={avgGasChartData.time_axis}
           seriesDataList={[{ data: avgGasChartData.price_axis, name: 'BSV' }]}
+          tooltipFunc={this.getChartTooltipFormatterFunc()}
           isSimple={isSimple}
           onClickZoom={onClickZoom}
         />
