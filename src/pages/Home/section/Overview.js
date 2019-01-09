@@ -128,7 +128,7 @@ export default class Overview extends Component {
             </li>
             <li>
               <span className="em-text">{this.getBlockSpan()} </span>
-              <Ts transKey="pages.sinceLastBlock" />
+              <Ts transKey="pages.blockstoGo" />
             </li>
           </ul>
           <p>
