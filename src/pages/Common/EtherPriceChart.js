@@ -22,7 +22,6 @@ export default class EtherPriceChart extends Component {
       'en-US': 'Ether Price(USD): '
     };
     return function(params) {
-      console.log(params);
       let result = params.name;
       result =
         result +
