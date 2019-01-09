@@ -162,6 +162,7 @@ class HomeStore {
       if (!latestBlocks) {
         return;
       }
+
       let result = JSON.parse(latestBlocks);
       let oldList = this.latestBlockList.slice();
       let isExist = false;
@@ -189,7 +190,6 @@ class HomeStore {
           latest_height_timestamp
         };
 
-        this.summary.total_blocks = result[0].block_height;
         this.latestBlockList = oldList.slice(-10);
       }
     });
