@@ -177,9 +177,11 @@ export default class LineChart extends Component {
         //   // });
         //   return result;
         // },
-
+        textStyle: {
+          color: 'rgba(0,0,0,0.65)'
+        },
         extraCssText:
-          'background-color: rgba(0,0,0,0.75);box-shadow:0px 2px 8px 0px rgba(0,0,0,0.15);border-radius:4px'
+          'background-color: #F5FAFF;box-shadow:0px 0px 4px 0px rgba(0,0,0,0.16);border-radius:4px;color:color:rgba(0,0,0,0.65);'
       },
       toolbox: {
         show: !isSimple,

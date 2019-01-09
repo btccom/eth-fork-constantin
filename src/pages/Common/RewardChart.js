@@ -35,34 +35,62 @@ export default class RewardChart extends Component {
   };
 
   getChartTooltipFormatterFunc = () => {
+    const { lang } = this.appStore;
     let addtionData = this.getRewardSeriesData(
       this.store.blockRewardChartData.reward_axis
     ).additionData;
-    let totalTitle = 'Total New Supply Ether: ';
-    let blockRewardTitle = 'From Block Rewards: ';
-    let ucleInclRward = 'From UcleIncl. Rewards: ';
-    let ucleRewardTitle = 'From Ucle Rewards: ';
+    let totalTitle = {
+      'zh-CN': '新增以太币供应总计：',
+      'en-US': 'Total New Supply Ether: '
+    };
+    let blockRewardTitle = {
+      'zh-CN': '来自区块播报奖励：',
+      'en-US': 'From Block Rewards: '
+    };
+    let ucleInclRward = {
+      'zh-CN': '来自叔块引用奖励：',
+      'en-US': 'From UcleIncl. Rewards: '
+    };
+    let ucleRewardTitle = {
+      'zh-CN': '来自叔块播报奖励：',
+      'en-US': 'From Ucle Rewards: '
+    };
+    let blocksLocale = {
+      'zh-CN': '区块',
+      'en-US': 'Blocks'
+    };
+
+    let uncleLocale = {
+      'zh-CN': '叔块',
+      'en-US': 'Uncles'
+    };
     return function(params) {
       console.log(params);
       let result = params.name;
       let currentData = addtionData[params.dataIndex];
       result =
         result +
-        `</br> <div><span style="padding-right:5px;color:#2A69CF">${totalTitle}</span><span style="font-weight:500">${formatNumber(
+        `</br> <div><span style="padding-right:5px;color:#2A69CF">${
+          totalTitle[lang]
+        }</span><span style="font-weight:500">${formatNumber(
           params.value,
           5
         )}<span></div>
-        <div><span style="padding-right:5px;color:#2A69CF">${blockRewardTitle}</span><span style="font-weight:500">${
+        <div><span style="padding-right:5px;">${
+          blockRewardTitle[lang]
+        }</span><span style="font-weight:500">${
           currentData.block_reward
-        } ETH  (${currentData.block_found} Blocks)<span></div>
-        <div><span style="padding-right:5px;color:#2A69CF">${ucleInclRward}</span><span style="font-weight:500">${formatNumber(
+        } ETH  (${currentData.block_found} ${blocksLocale[lang]})<span></div>
+        <div><span style="padding-right:5px;">${ucleInclRward}</span><span style="font-weight:500">${formatNumber(
           currentData.uncle_ref_reward,
           2
         )} ETH<span></div>
-        <div><span style="padding-right:5px;color:#2A69CF">${ucleRewardTitle}</span><span style="font-weight:500">${formatNumber(
+        <div><span style="padding-right:5px;">${
+          ucleRewardTitle[lang]
+        }</span><span style="font-weight:500">${formatNumber(
           currentData.uncle_reward,
           3
-        )} ETH  (${currentData.uncle_found} Uncles)<span></div>
+        )} ETH  (${currentData.uncle_found} ${uncleLocale[lang]})<span></div>
         `;
 
       // //${item.marker}
