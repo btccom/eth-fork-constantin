@@ -33,6 +33,7 @@ export default class Home extends Component {
       } else {
         this.store.getLatestBlockList();
       }
+      this.store.startSocket();
     });
     let timeRangeType = '1';
 
