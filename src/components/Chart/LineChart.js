@@ -133,10 +133,10 @@ export default class LineChart extends Component {
           }
           //showMinLabel: false,
           //showMaxLabel: false
-        },
-        min: function(value) {
-          return 200;
         }
+        // min: function(value) {
+        //   return 200;
+        // }
 
         // max:
         //   chartType === 'line'

@@ -51,8 +51,8 @@ export default class EtherPriceChart extends Component {
             {
               data:
                 lang === 'zh-CN'
-                  ? pricesChartData.price_usd_axis
-                  : pricesChartData.price_cny_axis,
+                  ? pricesChartData.price_cny_axis
+                  : pricesChartData.price_usd_axis,
               name: 'BSV'
             }
           ]}
