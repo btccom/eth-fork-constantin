@@ -32,8 +32,8 @@ const pageMesage = {
     introPrg2: '君士坦丁堡硬分叉包括5项以太坊改进方案',
     introPrg2eip145:
       'EIP 145：EVM中的按位移位指令。提供原生的按位移位，运行成本相同，执行更加快速。',
-    introPrg2eip1014: 'EIP 1014: Skinny CREATE2. 状态通道性能显著提高。',
-    introPrg2eip1052: 'EIP 1052: EXTCODEHASH操作码， 指定新的操作码。',
+    introPrg2eip1014: 'EIP 1014：Skinny CREATE2. 状态通道性能显著提高。',
+    introPrg2eip1052: 'EIP 1052：EXTCODEHASH操作码， 指定新的操作码。',
     introPrg2eip1283:
       'EIP 1283：使用不同的合约数据存储定价方式，大幅度削减Gas成本。',
     introPrg2eip1234: 'EIP 1234：难度炸弹延迟，区块以太币奖励减产。',

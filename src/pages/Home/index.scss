@@ -2,6 +2,7 @@
 .countdown-container {
   text-align: center;
   margin: 48px 0 20px 0;
+  font-weight: 600;
 
   .countdown-progress {
     margin: 10px 220px;
@@ -20,6 +21,7 @@
     }
     .progress-text {
       width: 70px;
+      font-weight:400;
     }
   }
 

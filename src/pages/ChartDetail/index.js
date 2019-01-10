@@ -55,7 +55,7 @@ export default class ChartDetail extends Component {
       this.store.getBlockRewardChartData(startTime, timerangeType);
     } else if (chartType === 'avgGasPrice') {
       this.store.getAvgGasChartData(startTime, timerangeType);
-    } else if (chartType === 'avgGasPrice') {
+    } else if (chartType === 'etherPrice') {
       this.store.getPricesChartData(startTime, timerangeType);
     }
   };

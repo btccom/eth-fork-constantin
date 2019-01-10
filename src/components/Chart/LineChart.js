@@ -39,6 +39,9 @@ export default class LineChart extends Component {
       additionData: item.additionData,
       //name: item.name,
       type: chartType,
+      itemStyle: {
+        opacity: 0.4
+      },
       markLine: !toggleMarkLine
         ? null
         : {
