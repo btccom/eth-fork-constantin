@@ -62,7 +62,7 @@ const pageMesage = {
     fromUncleInclReward: '来自叔块引用奖励：',
     fromUncleReward: '来自叔块播报奖励：',
     avgGasUsedPerTxn: '单笔平均Gas使用量：',
-    forkedAt: '君士坦丁堡硬分叉已成功激活于区块{block}，激活时间为{time}'
+    forkedAt: '君士坦丁堡硬分叉已成功激活于区块 {block}，激活时间为 {time}'
   }
 };
 const pageMesageFlatten = flatten(pageMesage);

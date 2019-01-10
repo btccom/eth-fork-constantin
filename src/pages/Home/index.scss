@@ -4,7 +4,7 @@
   margin: 48px 0 20px 0;
 
   .countdown-progress {
-    margin: 16px 220px 0;
+    margin: 10px 220px;
     display: flex;
     align-items: center;
     p {
@@ -25,7 +25,7 @@
 
   .block-upgrade {
     margin-top: 8px;
-    margin-bottom: 16px;
+    //margin-bottom: 16px;
     font-size: 32px;
     color: $text-color-primary;
     .current-block {
@@ -34,7 +34,7 @@
   }
 
   .countdown-info {
-    padding-top: 20px;
+    //padding-top: 20px;
     padding-bottom: 40px;
     font-size: 16px;
     font-weight: 600;

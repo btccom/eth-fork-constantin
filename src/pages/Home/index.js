@@ -51,7 +51,7 @@ export default class Home extends Component {
     );
   }
   componentDidMount() {
-    let intervalId = setInterval(this.loopQuery.bind(this), 20000);
+    let intervalId = setInterval(this.loopQuery.bind(this), 5000);
     this.setState({
       intervalId: intervalId
     });

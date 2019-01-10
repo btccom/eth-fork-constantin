@@ -48,15 +48,15 @@ class HomeStore {
   }
 
   startSocket = () => {
-    try {
-      this.socket = io.connect(
-        socketIOURL,
-        { transports: ['websocket', 'polling', 'flashsocket'] }
-      );
-      setTimeout(() => {
-        this.getLatestBlockList_io();
-      }, 5000);
-    } catch (error) {}
+    // try {
+    //   this.socket = io.connect(
+    //     socketIOURL,
+    //     { transports: ['websocket', 'polling', 'flashsocket'] }
+    //   );
+    //   setTimeout(() => {
+    //     this.getLatestBlockList_io();
+    //   }, 5000);
+    // } catch (error) {}
   };
 
   closeSocket = () => {
@@ -74,13 +74,16 @@ class HomeStore {
   @action
   getInstantData = () => {
     runInAction(() => {
-      // this.getBSVSpecialCodeList();
+      if (!this.isForked) {
+        this.getForkInfo();
+      }
+      this.getLatestBlockList();
     });
   };
 
   @action
   getForkInfo = async callback => {
-    this.isFinishedQuery = false;
+    //this.isFinishedQuery = false;
 
     const res = await ajax.get(`/fork/status`);
     this.isFinishedQuery = true;

@@ -12,6 +12,17 @@ import {
 } from 'utils';
 import RCTable from '../../../components/ui/RCTable';
 import '../index.scss';
+
+import { flash } from 'react-animations';
+import Radium, { StyleRoot } from 'radium';
+
+const styles = {
+  bounce: {
+    animation: 'x 1s',
+    animationName: Radium.keyframes(flash, 'flash')
+  }
+};
+
 @withRouter //必须放在最前面
 @inject('store')
 @observer
@@ -21,6 +32,22 @@ export default class BlockList extends Component {
     this.appStore = this.props.store.appStore;
     this.store = this.props.store.homeStore;
   }
+
+  animationHoc = (isEffect, targetEle) => {
+    // if (isEffect) {
+    //   return (
+    //     <StyleRoot>
+    //       <div style={styles.bounce}>{targetEle}</div>
+    //     </StyleRoot>
+    //   );
+    // } else {
+    return targetEle;
+    //}
+  };
+
+  cellZeroAnimationHoc = (index, targetEle) => {
+    return this.animationHoc(index === 0, targetEle);
+  };
 
   render() {
     const { lang } = this.appStore;
@@ -34,7 +61,8 @@ export default class BlockList extends Component {
         width: 110,
         align: 'left',
         fixed: 'left',
-        render: (block_height, data) => block_height,
+        render: (block_height, data, index) =>
+          this.cellZeroAnimationHoc(index, block_height),
         isShowAfterForked: true
       },
       {
@@ -42,7 +70,11 @@ export default class BlockList extends Component {
         dataIndex: 'time_in_sec',
         key: 'time_in_sec',
         align: 'left',
-        render: (time_in_sec, data) => second2Relative(data.time_in_sec, lang)
+        render: (time_in_sec, data, index) =>
+          this.cellZeroAnimationHoc(
+            index,
+            second2Relative(data.time_in_sec, lang)
+          )
       },
       {
         title: <Ts transKey="pages.miner" />,
@@ -50,8 +82,9 @@ export default class BlockList extends Component {
         align: 'left',
         dataIndex: 'miner_hash',
         key: 'miner_hash',
-        render: (miner_hash, data) => {
-          return (
+        render: (miner_hash, data, index) => {
+          return this.cellZeroAnimationHoc(
+            index,
             <span className="cell-text-ellipsis" style={{ width: 130 }}>
               {' '}
               {data.miner_name ? data.miner_name : miner_hash}
@@ -90,12 +123,16 @@ export default class BlockList extends Component {
 
     return (
       <div>
-        <RCTable
-          hasFixedColumn={true}
-          columns={columns}
-          dataSource={latestBlockList.toJS()}
-          style={{ width: '100%' }}
-        />
+        <StyleRoot>
+          <div style={styles.bounce}>
+            <RCTable
+              hasFixedColumn={true}
+              columns={columns}
+              dataSource={latestBlockList.toJS()}
+              style={{ width: '100%' }}
+            />
+          </div>
+        </StyleRoot>
       </div>
     );
   }

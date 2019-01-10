@@ -116,7 +116,7 @@ export default class Overview extends Component {
 
         <div className="countdown-info">
           <ul>
-            <li>
+            <li className={`${isForked ? 'text-center' : ''}`}>
               <span className="em-text">
                 {timestamp2Relative(
                   forkStatusInfo.latest_height_timestamp,
@@ -126,24 +126,34 @@ export default class Overview extends Component {
               </span>
               <Ts transKey="pages.sinceLastBlock" />
             </li>
-            <li>
-              <span className="em-text">{this.getBlockSpan()} </span>
-              <Ts transKey="pages.blockstoGo" />
-            </li>
+            {!isForked && (
+              <li>
+                <span className="em-text">{this.getBlockSpan()} </span>
+                <Ts transKey="pages.blockstoGo" />
+              </li>
+            )}
           </ul>
           <p>
             {isForked && <i className="cell-icon check-mark-icon" />}
-            <Ts
-              transKey="pages.activeAt"
-              values={{
-                block: this.store.forkTargetHeight,
-                time: isForked
-                  ? timestamp2UTC(
-                      this.store.forkStatusInfo.fork_timestamp * 1000
-                    )
-                  : '2019-01-16'
-              }}
-            />
+            {isForked ? (
+              <Ts
+                transKey="pages.forkedAt"
+                values={{
+                  block: this.store.forkTargetHeight,
+                  time: timestamp2UTC(
+                    this.store.forkStatusInfo.fork_timestamp * 1000
+                  )
+                }}
+              />
+            ) : (
+              <Ts
+                transKey="pages.activeAt"
+                values={{
+                  block: this.store.forkTargetHeight,
+                  time: '2019-01-16 UTC'
+                }}
+              />
+            )}
           </p>
           <p className="fork-remark">
             <Ts transKey="pages.forkRemark" />{' '}
