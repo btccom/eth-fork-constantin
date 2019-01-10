@@ -31,8 +31,8 @@ export default class App extends Component {
     const { lang } = this.store;
     document.title =
       lang === 'zh-CN'
-        ? '比特币现金区块浏览器 - BTC.com'
-        : 'BCH Block Explorer - BTC.com';
+        ? '以太坊君士坦丁堡升级 - BTC.com'
+        : ' Ethereum Constantinople Upgrade - BTC.com';
   }
 
   render() {
