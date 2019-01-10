@@ -67,7 +67,14 @@ export default class Home extends Component {
   };
 
   loopQuery = () => {
-    this.store.getInstantData();
+    this.store.getForkInfo(isForked => {
+      if (isForked) {
+        this.store.getHistoryBlockList();
+      } else {
+        this.store.getLatestBlockList();
+      }
+      //this.store.startSocket();
+    });
   };
 
   render() {

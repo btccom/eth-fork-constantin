@@ -72,16 +72,6 @@ class HomeStore {
   };
 
   @action
-  getInstantData = () => {
-    runInAction(() => {
-      if (!this.isForked) {
-        this.getForkInfo();
-      }
-      this.getLatestBlockList();
-    });
-  };
-
-  @action
   getForkInfo = async callback => {
     //this.isFinishedQuery = false;
 
