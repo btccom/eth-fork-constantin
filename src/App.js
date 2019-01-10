@@ -5,6 +5,7 @@ import DevTools from 'mobx-react-devtools';
 import routes from './pages';
 //import ErrorBoundary from './components/ErrorBoundary';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 @inject('store', 'routing')
 @withRouter
@@ -37,7 +38,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="relative">
-        <Header />
+        <Header onLocaleChange={this.handleLocalChange} />
         <div>
           <Switch>
             {routes.map((route, index) => (
@@ -45,6 +46,10 @@ export default class App extends Component {
             ))}
           </Switch>
         </div>
+        <Footer
+          style={{ textAlign: 'center' }}
+          onLocaleChange={this.handleLocalChange}
+        />
       </div>
     );
   }

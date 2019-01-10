@@ -57,6 +57,7 @@
     "mobx-react-devtools": "^6.0.2",
     "mobx-react-router": "^4.0.4",
     "qs": "^6.5.2",
+    "rc-select": "^8.7.0",
     "rc-table": "^6.4.2",
     "react": "^16.4.2",
     "react-bootstrap": "^0.32.4",

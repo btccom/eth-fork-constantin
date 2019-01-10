@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import Ts from 'Trans';
-import { DropdownButton, MenuItem } from 'react-bootstrap';
-import { getCountdownTime, getCurrentTimestamp, timestamp2UTC } from 'utils';
+import LocaleSelect from '../LocaleSelect';
 import './index.scss';
+
 @withRouter //必须放在最前面
 @inject('store')
 @observer
@@ -17,6 +17,10 @@ class Header extends Component {
     };
   }
 
+  handleLocaleChange = value => {
+    this.props.onLocaleChange(value);
+  };
+
   handleChangeLuange = (key, text) => {
     this.setState({ intlTitle: text });
     this.appStore.setLocaleLang(key);
@@ -28,32 +32,22 @@ class Header extends Component {
     return (
       <div className="header">
         <div className="view-width">
-          <a href="https://eth.btc.com" target="_blank" className="logo" />
-          <Link to="/">
+          <a href="https://btc.com/" target="_blank" className="logo" />
+          <a
+            href="https://eth.btc.com"
+            target="_blank"
+            style={{ display: 'inline-block' }}
+          >
             <div className="app-name">
               <Ts transKey="pages.appName" />
             </div>
-          </Link>
+          </a>
           <div className="header-pull-right">
             <div className="intl-select">
-              <DropdownButton title={this.state.intlTitle} id="intlSelect">
-                <MenuItem
-                  eventKey="en-US"
-                  onClick={() => {
-                    this.handleChangeLuange('en-US', 'English');
-                  }}
-                >
-                  English
-                </MenuItem>
-                <MenuItem
-                  eventKey="zh-CN"
-                  onClick={() => {
-                    this.handleChangeLuange('zh-CN', '中文');
-                  }}
-                >
-                  中文
-                </MenuItem>
-              </DropdownButton>
+              <LocaleSelect
+                onLocaleChange={this.handleLocaleChange}
+                lang={lang}
+              />
             </div>
           </div>
         </div>

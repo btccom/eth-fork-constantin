@@ -1,0 +1,89 @@
+// Footer component
+
+.footer {
+  height: 130px;
+  padding-top: 27px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.45);
+  display: flex;
+
+  .footer-left {
+    flex: 1;
+    .footer-logo {
+      display: block;
+      margin-bottom: 14px;
+      background: url(logo_hori.png) no-repeat center center;
+      background-size: 120px 20px;
+      width: 120px;
+      height: 20px;
+    }
+
+    .footer-policy {
+      margin-bottom: 4px;
+      a {
+        color: rgba(0, 0, 0, 0.45);
+        margin-left: 0.5ch;
+
+        &:first-child {
+          margin-right: 0.5ch;
+        }
+      }
+    }
+  }
+
+  .footer-middle {
+    flex: 1;
+    .footer-contact {
+      width: 120px;
+      margin: 12px auto 0 auto;
+      display: flex;
+      justify-content: space-around;
+
+      li a {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background-size: 24px 288px;
+        background-repeat: no-repeat;
+      }
+      .email {
+        background: url(sprite_icons.png) 0 0 no-repeat;
+        background-size: 24px 288px;
+        &:hover{
+          background: url(sprite_icons.png) 0 -24px no-repeat;
+          background-size: 24px 288px;
+        }
+      }
+      .twitter {
+        background: url(sprite_icons.png) 0 -48px no-repeat;
+        background-size: 24px 288px;
+        &:hover{
+          background: url(sprite_icons.png) 0 -72px no-repeat;
+        background-size: 24px 288px;
+        }
+      }
+      .weibo {
+        background: url(sprite_icons.png) 0 -96px no-repeat;
+        background-size: 24px 288px;
+        &:hover{
+          background: url(sprite_icons.png) 0 -120px no-repeat;
+        background-size: 24px 288px;
+        }
+      }
+      .telegram {
+        background: url(sprite_icons.png) 0 -144px no-repeat;
+        background-size: 24px 288px;
+        &:hover{
+          background: url(sprite_icons.png) 0 -168px no-repeat;
+        background-size: 24px 288px;
+        }
+      }
+    }
+  }
+
+  .footer-right {
+    flex: 1;
+    text-align: right;
+
+  }
+}
