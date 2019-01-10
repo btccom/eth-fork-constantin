@@ -218,7 +218,9 @@ class HomeStore {
     if (res && res.data) {
       runInAction(() => {
         let { fork_timestamp, time_axis, reward_axis } = res.data;
-        time_axis = time_axis.map(item => item.substr(0, 16));
+        time_axis = time_axis.map(item =>
+          freq == '1' ? item.substr(0, 16) : item.substr(0, 10)
+        );
         this.blockRewardChartData = {
           fork_timestamp,
           time_axis,
@@ -239,7 +241,9 @@ class HomeStore {
     if (res && res.data) {
       runInAction(() => {
         let { fork_timestamp, time_axis, price_axis } = res.data;
-        time_axis = time_axis.map(item => item.substr(0, 16));
+        time_axis = time_axis.map(item =>
+          freq == '1' ? item.substr(0, 16) : item.substr(0, 10)
+        );
         this.avgGasChartData = { fork_timestamp, time_axis, price_axis };
       });
     }
@@ -261,7 +265,9 @@ class HomeStore {
           price_usd_axis,
           price_cny_axis
         } = res.data;
-        time_axis = time_axis.map(item => item.substr(0, 16));
+        time_axis = time_axis.map(item =>
+          freq == '1' ? item.substr(0, 16) : item.substr(0, 10)
+        );
         this.pricesChartData = {
           fork_timestamp,
           time_axis,
