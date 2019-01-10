@@ -130,7 +130,10 @@ export default class Home extends Component {
               </div>
             </Col>
             <Col xs={12} sm={12} md={6}>
-              <div className="card hightlight" style={{ height: 500 }}>
+              <div
+                className="card hightlight avggas-chart-container"
+                style={{ height: 500 }}
+              >
                 <AvgGasChart
                   isSimple={true}
                   onClickZoom={() => {

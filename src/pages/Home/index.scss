@@ -31,6 +31,10 @@
     .current-block {
       color: $primary-color;
     }
+
+    @media only screen and (max-width: $break-middle) {
+      font-size: 24px;
+    }
   }
 
   .countdown-info {
@@ -40,6 +44,11 @@
     font-weight: 600;
     color: $text-color-default;
     line-height: 1.8rem;
+
+    @media only screen and (max-width: $break-middle) {
+      font-size: 14px;
+    }
+
     ul {
       display: flex;
       li {
@@ -56,7 +65,17 @@
     .fork-remark {
       font-size: 14px;
       font-weight: 400;
+
+      @media only screen and (max-width: $break-middle) {
+        font-size: 13px;
+      }
     }
+  }
+}
+
+.history-list-container,.avggas-chart-container{
+  @media only screen and (max-width: $break-horizontal) {
+    margin-top:18px;
   }
 }
 

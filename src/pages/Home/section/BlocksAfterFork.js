@@ -131,7 +131,7 @@ export default class BlockList extends Component {
                 style={{ width: '100%' }}
               />
             </Col>
-            <Col xs={12} sm={12} md={6}>
+            <Col xs={12} sm={12} md={6} className="history-list-container">
               <RCTable
                 columns={historyColumns}
                 dataSource={historyBlockList.toJS()}

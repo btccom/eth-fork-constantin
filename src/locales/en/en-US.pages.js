@@ -68,7 +68,7 @@ const pageMessage = {
     fromUncleInclReward: 'From UncelIncl Rewards:',
     fromUncleReward: 'From Uncel Rewards:',
     avgGasUsedPerTxn: 'Avg Gas Used Per Txn:',
-    forkedAt: '君士坦丁堡硬分叉已成功激活于区块 {block}，激活时间为 {time}'
+    forkedAt: 'Constantinople activated on block {block} at {time}'
   }
 };
 const pageMessageFlatten = flatten(pageMessage);
