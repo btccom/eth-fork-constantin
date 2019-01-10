@@ -123,16 +123,16 @@ export default class BlockList extends Component {
 
     return (
       <div>
-        <StyleRoot>
-          <div style={styles.bounce}>
-            <RCTable
-              hasFixedColumn={true}
-              columns={columns}
-              dataSource={latestBlockList.toJS()}
-              style={{ width: '100%' }}
-            />
-          </div>
-        </StyleRoot>
+        {/* <StyleRoot>
+          <div style={styles.bounce}> */}
+        <RCTable
+          hasFixedColumn={true}
+          columns={columns}
+          dataSource={latestBlockList.toJS()}
+          style={{ width: '100%' }}
+        />
+        {/* </div>
+        </StyleRoot> */}
       </div>
     );
   }
