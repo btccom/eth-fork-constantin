@@ -19,7 +19,7 @@ export default class Footer extends Component {
   render() {
     const { lang, currentYear } = this.store;
     return (
-      <div className="view-width">
+      <div className="view-width footer-wrapper">
         <div className="footer relative" id="footerContainer">
           <div className="footer-left">
             <a

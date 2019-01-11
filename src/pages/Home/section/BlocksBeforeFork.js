@@ -78,7 +78,7 @@ export default class BlockList extends Component {
       },
       {
         title: <Ts transKey="pages.miner" />,
-        width: '5%',
+        width: '4%',
         align: 'left',
         dataIndex: 'miner_hash',
         key: 'miner_hash',
@@ -86,7 +86,7 @@ export default class BlockList extends Component {
           return this.animationHoc(
             index,
             data.block_height,
-            <span className="cell-text-ellipsis" style={{ width: 130 }}>
+            <span className="cell-text-ellipsis" style={{ width: 120 }}>
               {' '}
               {data.miner_name ? data.miner_name : miner_hash}
             </span>

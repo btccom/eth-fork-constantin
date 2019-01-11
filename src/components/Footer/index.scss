@@ -1,5 +1,12 @@
+@import '../../styles/base/variable';
 // Footer component
 
+.footer-wrapper{
+  display: block;
+  @media only screen and (max-width: $break-horizontal) {
+    display: none;
+  }
+}
 .footer {
   height: 130px;
   padding-top: 27px;

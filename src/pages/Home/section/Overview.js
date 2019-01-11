@@ -10,7 +10,7 @@ import {
   timestamp2UTC,
   handlerToByte
 } from 'utils';
-import RCTable from '../../../components/ui/RCTable';
+
 import '../index.scss';
 @withRouter //必须放在最前面
 @inject('store')
@@ -118,9 +118,8 @@ export default class Overview extends Component {
           <ul>
             <li className={`${isForked ? 'text-center' : ''}`}>
               <span className="em-text">
-                {second2Relative(
-                  // forkStatusInfo.latest_height_timestamp,
-                  forkStatusInfo.time_in_secs,
+                {timestamp2Relative(
+                  forkStatusInfo.latest_height_timestamp,
                   lang,
                   false
                 )}{' '}
