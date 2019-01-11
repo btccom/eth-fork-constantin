@@ -80,13 +80,13 @@ class HomeStore {
     if (res && res.data) {
       runInAction(() => {
         this.forkStatusInfo = res.data;
-        // let mockHeight = 7035393;
-        // this.forkStatusInfo = {
-        //   fork_height: mockHeight,
-        //   fork_timestamp: 1547649000,
-        //   latest_height: mockHeight, //7050300,
-        //   latest_height_timestamp: 1546843540
-        // };
+        let mockHeight = 7080000;
+        this.forkStatusInfo = {
+          fork_height: mockHeight,
+          fork_timestamp: 1547649000,
+          latest_height: 7050300, //7050300,
+          latest_height_timestamp: 1546843540
+        };
         this.isForked =
           this.forkStatusInfo.fork_height <= this.forkStatusInfo.latest_height;
         callback && callback(this.isForked);

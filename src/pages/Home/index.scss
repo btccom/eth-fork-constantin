@@ -5,7 +5,7 @@
   font-weight: 600;
 
   .countdown-progress {
-    margin: 10px 220px;
+    margin: 10px 220px 15px;
     display: flex;
     align-items: center;
     p {
@@ -151,3 +151,76 @@ table tr td{
   }
 }
 
+.example-enter {
+  opacity: 0.01;
+  font-weight: 600;
+  //text-shadow: 1px 1px 2px #2A69CF;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 800ms ease-in-out;
+  animation:flash 1.5s ease .8;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  font-weight: 600;
+  //text-shadow: 1px 1px 2px #2A69CF;
+  transition: opacity 500ms ease-in-out;
+  animation:flash 1.5s ease .8;
+}
+
+.example-appear {
+  opacity: 0.01;
+  //text-shadow: 1px 1px 2px #2A69CF;
+  font-weight: 600;
+}
+
+.example-appear.example-appear-active {
+  opacity: 1;
+  transition: opacity 500s ease-in-out;
+  animation:flash 1.5s ease .8;
+}
+
+
+@-webkit-keyframes flash {
+  from {
+    transform: scale3d(0.3, 0.3, 0.3);
+
+  }
+  50%,
+  to {
+    opacity: 1;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  25%,
+  75% {
+    opacity: 0;
+   
+
+  }
+}
+
+@keyframes flash {
+  from {
+    transform: scale3d(0.3, 0.3, 0.3);
+
+  }
+  50%,
+  to {
+    opacity: 1;
+  }
+
+  25%,
+  75% {
+    opacity: 0;
+   
+
+  }
+}

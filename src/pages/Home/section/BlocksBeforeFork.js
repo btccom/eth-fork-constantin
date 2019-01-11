@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
+import Animate from 'rc-animate';
+import QueueAnim from 'rc-queue-anim';
+import ReactTransitionGroup from 'react-addons-transition-group';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Ts from 'Trans';
 import {
   formatNumber,
@@ -33,16 +37,26 @@ export default class BlockList extends Component {
     this.store = this.props.store.homeStore;
   }
 
-  animationHoc = (isEffect, targetEle) => {
-    // if (isEffect) {
-    //   return (
-    //     <StyleRoot>
-    //       <div style={styles.bounce}>{targetEle}</div>
-    //     </StyleRoot>
-    //   );
-    // } else {
-    return targetEle;
-    //}
+  componen;
+
+  animationHoc = (index, key, targetEle) => {
+    if (index === 0) {
+      return (
+        <div>
+          <ReactCSSTransitionGroup
+            transitionName="example"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnter={true}
+            transitionLeave={false}
+          >
+            <span key={key}> {targetEle}</span>
+          </ReactCSSTransitionGroup>
+        </div>
+      );
+    } else {
+      return targetEle;
+    }
   };
 
   cellZeroAnimationHoc = (index, targetEle) => {
@@ -61,8 +75,9 @@ export default class BlockList extends Component {
         width: 110,
         align: 'left',
         fixed: 'left',
-        render: (block_height, data, index) =>
-          this.cellZeroAnimationHoc(index, block_height),
+        render: (block_height, data, index) => {
+          return this.animationHoc(index, block_height, block_height);
+        },
         isShowAfterForked: true
       },
       {
@@ -71,8 +86,9 @@ export default class BlockList extends Component {
         key: 'time_in_sec',
         align: 'left',
         render: (time_in_sec, data, index) =>
-          this.cellZeroAnimationHoc(
+          this.animationHoc(
             index,
+            data.block_height,
             second2Relative(data.time_in_sec, lang)
           )
       },
@@ -83,8 +99,9 @@ export default class BlockList extends Component {
         dataIndex: 'miner_hash',
         key: 'miner_hash',
         render: (miner_hash, data, index) => {
-          return this.cellZeroAnimationHoc(
+          return this.animationHoc(
             index,
+            data.block_height,
             <span className="cell-text-ellipsis" style={{ width: 130 }}>
               {' '}
               {data.miner_name ? data.miner_name : miner_hash}
@@ -97,27 +114,39 @@ export default class BlockList extends Component {
         title: <Ts transKey="pages.reward" />,
         dataIndex: 'block_reward',
         key: 'block_reward',
-        render: (block_reward, data) => formatNumber(block_reward, 5) + ' ETH',
+        render: (block_reward, data, index) =>
+          this.animationHoc(
+            index,
+            data.block_height,
+            formatNumber(block_reward, 5) + ' ETH'
+          ),
+
         isShowAfterForked: true
       },
       {
         title: <Ts transKey="pages.blockTime" />,
         dataIndex: 'block_time_in_sec',
         key: 'block_time_in_sec',
-        render: (block_time_in_sec, data) =>
-          formatNumber(block_time_in_sec, 0) + ' s'
+        render: (block_time_in_sec, data, index) =>
+          this.animationHoc(
+            index,
+            data.block_height,
+            formatNumber(block_time_in_sec, 0) + ' s'
+          )
       },
       {
         title: <Ts transKey="pages.txns" />,
         dataIndex: 'total_tx',
         key: 'total_tx',
-        render: (total_tx, data) => total_tx
+        render: (total_tx, data, index) =>
+          this.animationHoc(index, data.block_height, total_tx)
       },
       {
         title: <Ts transKey="pages.size" />,
         dataIndex: 'block_size',
         key: 'block_size',
-        render: (block_size, data) => handlerToByte(block_size)
+        render: (block_size, data, index) =>
+          this.animationHoc(index, data.block_height, handlerToByte(block_size))
       }
     ];
 

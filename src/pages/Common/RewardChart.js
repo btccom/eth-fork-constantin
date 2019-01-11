@@ -49,11 +49,11 @@ export default class RewardChart extends Component {
     };
     let ucleInclRward = {
       'zh-CN': '来自叔块引用奖励：',
-      'en-US': 'From UcleIncl. Rewards: '
+      'en-US': 'From Uncle Reference Rewards: '
     };
     let ucleRewardTitle = {
       'zh-CN': '来自叔块播报奖励：',
-      'en-US': 'From Ucle Rewards: '
+      'en-US': 'From Uncle Rewards: '
     };
     let blocksLocale = {
       'zh-CN': '区块',
@@ -65,7 +65,7 @@ export default class RewardChart extends Component {
       'en-US': 'Uncles'
     };
     return function(params) {
-      let result = params.name;
+      let result = params.name + ' UTC';
       let currentData = addtionData[params.dataIndex];
       result =
         result +
@@ -84,7 +84,7 @@ export default class RewardChart extends Component {
           ucleInclRward[lang]
         }</span><span style="font-weight:500">${formatNumber(
           currentData.uncle_ref_reward,
-          2
+          5
         )} ETH<span></div>
         <div><span style="padding-right:5px;">${
           ucleRewardTitle[lang]

@@ -19,7 +19,7 @@ export default class App extends Component {
   handleLocalChange = lang => {
     this.store.setLocaleLang(lang);
     if (localStorage) {
-      localStorage.setItem('lang', value);
+      localStorage.setItem('lang', lang);
     }
   };
 

@@ -22,7 +22,7 @@ export default class EtherPriceChart extends Component {
       'en-US': 'Ether Price(USD): '
     };
     return function(params) {
-      let result = params.name;
+      let result = params.name + ' UTC';
       result =
         result +
         `</br> <div><span style="padding-right:5px;color:#2A69CF">${
@@ -34,6 +34,27 @@ export default class EtherPriceChart extends Component {
 
       return result;
     };
+  };
+
+  getChartMinValue = lang => {
+    const { pricesChartData } = this.store;
+    let data =
+      lang === 'zh-CN'
+        ? pricesChartData.price_cny_axis
+        : pricesChartData.price_usd_axis;
+    let min = Math.min.apply({}, data);
+    console.log(min);
+    if (min <= 100) {
+      return 0;
+    } else if (min > 100 && min <= 400) {
+      return 100;
+    } else if (min > 400 && min <= 800) {
+      return 400;
+    } else if (min > 800 && min <= 1200) {
+      return 800;
+    } else {
+      return 1000;
+    }
   };
 
   render() {
@@ -68,6 +89,7 @@ export default class EtherPriceChart extends Component {
           yAxisName={
             lang === 'zh-CN' ? '以太币价格（CNY）' : 'Ether Prices（USD）'
           }
+          minValue={this.getChartMinValue(lang)}
           xAxisData={pricesChartData.time_axis}
           seriesDataList={[
             {

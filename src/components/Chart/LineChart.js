@@ -31,6 +31,7 @@ export default class LineChart extends Component {
       markLinePointName,
       isSimple,
       tooltipFunc,
+      minValue,
       isFixed,
       isForked
     } = this.props;
@@ -77,7 +78,7 @@ export default class LineChart extends Component {
           }
         },
         axisLabel: {
-          color: '#545454',
+          color: 'rgba(0,0,0,0.45)',
           fontWeight: 400,
           rotate: 90,
           fontFamily: 'Arial',
@@ -97,7 +98,7 @@ export default class LineChart extends Component {
 
         name: yAxisName,
         nameLocation: 'middle',
-        nameGap: 50,
+        nameGap: (chartType = 'bar' ? 50 : 40),
         nameTextStyle: {
           color: '#CCCCCC'
         },
@@ -119,7 +120,9 @@ export default class LineChart extends Component {
           length: 0
         },
         axisLabel: {
-          color: 'rgba(84,84,84,1)',
+          padding: 10,
+          //margin: chartType === 'bar' ? 128 : 5,
+          color: 'rgba(0,0,0,0.45)',
           formatter: function(value, index) {
             // if (value.toString().indexOf('.') > 0) {
             //   return '';
@@ -136,10 +139,8 @@ export default class LineChart extends Component {
           }
           //showMinLabel: false,
           //showMaxLabel: false
-        }
-        // min: function(value) {
-        //   return 200;
-        // }
+        },
+        min: minValue
 
         // max:
         //   chartType === 'line'
@@ -154,7 +155,7 @@ export default class LineChart extends Component {
         top: 30,
         right: 20,
         bottom: 110,
-        left: 65
+        left: chartType === 'bar' ? 80 : 65
       },
       tooltip: {
         show: true,
@@ -188,18 +189,22 @@ export default class LineChart extends Component {
       },
       toolbox: {
         show: !isSimple,
-        showTitle: false,
+        showTitle: true,
         feature: {
-          restore: {},
-          saveAsImage: {},
+          restore: {
+            title: 'Restore'
+          },
+          saveAsImage: {
+            title: 'Save as image'
+          },
           dataView: {
             show: false
           },
           dataZoom: {
             show: true,
             title: {
-              zoom: ' ',
-              back: ' '
+              zoom: 'Zoom',
+              back: 'Back'
             }
           },
           x: 'left'

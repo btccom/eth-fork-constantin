@@ -21,7 +21,7 @@ export default class AvgGasChart extends Component {
       'en-US': 'Avg Gas Used Per Txn: '
     };
     return function(params) {
-      let result = params.name;
+      let result = params.name + ' UTC';
       result =
         result +
         `</br> <div><span style="padding-right:5px;color:#2A69CF">${

@@ -23,9 +23,9 @@
           background-color: #f5faff;
         }
         &:first-child {
-          //background-color: #2a69cf;
+          background-color: #2a69cf;
           td {
-            //color: #fff;
+            color: #fff;
           }
         }
       }
@@ -94,4 +94,9 @@
 
 .rc-table tr:hover,.rc-table tr.rc-table-row-hover {
   background-color: #f5faff;
+}
+
+
+.rc-table tr.row-appear{
+  transition: .5s ease-in-out all;
 }

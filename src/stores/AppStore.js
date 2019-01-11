@@ -10,6 +10,18 @@ class AppStore {
   constructor() {
     //locale
     this.lang = this.getDefaultLang();
+
+    // utilsSetting
+    this.utilsSetting();
+  }
+
+  utilsSetting() {
+    Array.prototype.max = function() {
+      return Math.max.apply({}, this);
+    };
+    Array.prototype.min = function() {
+      return Math.min.apply({}, this);
+    };
   }
 
   getDefaultLang() {
