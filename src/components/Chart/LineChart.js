@@ -143,7 +143,7 @@ export default class LineChart extends Component {
             if (value - 0 > 1000) {
               if (abbreviateFunc) {
                 if (abbreviateNumber_zh === abbreviateFunc) {
-                  return abbreviateFunc(value, 0);
+                  return abbreviateFunc(value, 1);
                 }
                 return abbreviateFunc(value, 0);
               }
@@ -229,7 +229,7 @@ export default class LineChart extends Component {
           type: 'group',
           //rotation: Math.PI / 4,
           bounding: 'raw',
-          right: '50%',
+          right: '45%',
           bottom: '50%',
           z: 100,
           children: [
