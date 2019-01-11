@@ -194,9 +194,9 @@ export default class LineChart extends Component {
           restore: {
             title: 'Restore'
           },
-          saveAsImage: {
-            title: 'Save as image'
-          },
+          // saveAsImage: {
+          //   title: 'Save as image'
+          // },
           dataView: {
             show: false
           },

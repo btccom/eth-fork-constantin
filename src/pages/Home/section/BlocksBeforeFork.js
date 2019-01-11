@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
-import Animate from 'rc-animate';
-import QueueAnim from 'rc-queue-anim';
-import ReactTransitionGroup from 'react-addons-transition-group';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Ts from 'Trans';
 import {
@@ -16,16 +13,6 @@ import {
 } from 'utils';
 import RCTable from '../../../components/ui/RCTable';
 import '../index.scss';
-
-import { flash } from 'react-animations';
-import Radium, { StyleRoot } from 'radium';
-
-const styles = {
-  bounce: {
-    animation: 'x 1s',
-    animationName: Radium.keyframes(flash, 'flash')
-  }
-};
 
 @withRouter //必须放在最前面
 @inject('store')
@@ -46,7 +33,8 @@ export default class BlockList extends Component {
           <ReactCSSTransitionGroup
             transitionName="example"
             transitionAppear={true}
-            transitionAppearTimeout={500}
+            transitionAppearTimeout={1000}
+            transitionEnterTimeout={1000}
             transitionEnter={true}
             transitionLeave={false}
           >
@@ -57,10 +45,6 @@ export default class BlockList extends Component {
     } else {
       return targetEle;
     }
-  };
-
-  cellZeroAnimationHoc = (index, targetEle) => {
-    return this.animationHoc(index === 0, targetEle);
   };
 
   render() {
@@ -152,16 +136,12 @@ export default class BlockList extends Component {
 
     return (
       <div>
-        {/* <StyleRoot>
-          <div style={styles.bounce}> */}
         <RCTable
           hasFixedColumn={true}
           columns={columns}
           dataSource={latestBlockList.toJS()}
           style={{ width: '100%' }}
         />
-        {/* </div>
-        </StyleRoot> */}
       </div>
     );
   }

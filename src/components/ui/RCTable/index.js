@@ -67,15 +67,9 @@
 // export default Table;
 
 import React from 'react';
-import Animate from 'rc-animate';
 import 'rc-table/assets/index.css';
-import 'rc-table/assets/animation.css';
 import './index.scss';
 import Table from 'rc-table';
-
-const AnimateBody = props => (
-  <Animate transitionName="move" component="tbody" {...props} />
-);
 
 const RCTable = ({
   columns,
@@ -89,32 +83,9 @@ const RCTable = ({
   return (
     <div className="table-container">
       {hasFixedColumn ? (
-        <Table
-          columns={columns}
-          data={dataSource}
-          scroll={{ x: 1140 }}
-          // components={{
-          //   body: { wrapper: AnimateBody }
-          // }}
-          rowClassName={(r, i) => {
-            if (i === 0) {
-              return 'row-appear';
-            }
-          }}
-        />
+        <Table columns={columns} data={dataSource} scroll={{ x: 1140 }} />
       ) : (
-        <Table
-          columns={columns}
-          data={dataSource}
-          // components={{
-          //   body: { wrapper: AnimateBody }
-          // }}
-          rowClassName={(r, i) => {
-            if (i === 0) {
-              return 'row-appear';
-            }
-          }}
-        />
+        <Table columns={columns} data={dataSource} />
       )}
     </div>
   );
