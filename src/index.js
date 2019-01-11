@@ -9,10 +9,13 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import stores from './stores'; //必须引入
 import { isProduction } from './utils/constants';
 import { dateFormat } from 'utils';
+import ReactGA from 'react-ga';
 import IntlProviderWrap from './components/IntlProviderWrap';
 import App from './App';
 
 import('./styles/main.scss');
+
+ReactGA.initialize('UA-66176065-33');
 
 //init prototype method
 dateFormat();
@@ -21,6 +24,28 @@ const renderApp = Component => {
   const browserHistory = createBrowserHistory();
   const routeStore = new RouterStore();
   const history = syncHistoryWithStore(browserHistory, routeStore);
+
+  if (typeof history.listen === 'function' && isProduction) {
+    history.listen(location => {
+      let firstLevel = location.pathname;
+      let secondaryLevel = location.hash;
+      let splitArr = location.hash.split('/');
+      if (splitArr.length > 2) {
+        secondaryLevel = splitArr[0] + '/' + splitArr[1];
+      }
+      let fullPath = firstLevel + secondaryLevel;
+      // Google Analatics
+      if (window.ga) {
+        window.ga('set', 'page', fullPath);
+        window.ga('send', 'pageview', fullPath);
+      }
+
+      // Baidu Tongji
+      if (_hmt) {
+        _hmt.push(['_trackPageview', fullPath]);
+      }
+    });
+  }
 
   render(
     <AppContainer>
