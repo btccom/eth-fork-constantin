@@ -72,6 +72,7 @@ import './index.scss';
 import Table from 'rc-table';
 
 const RCTable = ({
+  loadingText = 'Loading...',
   columns,
   dataSource,
   hasFixedColumn = false,
@@ -83,9 +84,14 @@ const RCTable = ({
   return (
     <div className="table-container">
       {hasFixedColumn ? (
-        <Table columns={columns} data={dataSource} scroll={{ x: 1140 }} />
+        <Table
+          columns={columns}
+          data={dataSource}
+          scroll={{ x: 1140 }}
+          emptyText={loadingText}
+        />
       ) : (
-        <Table columns={columns} data={dataSource} />
+        <Table columns={columns} data={dataSource} emptyText={loadingText} />
       )}
     </div>
   );
