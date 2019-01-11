@@ -127,7 +127,7 @@ export default class LineChart extends Component {
             // if (value.toString().indexOf('.') > 0) {
             //   return '';
             // }
-            if (value - 0 > 10000) {
+            if (value - 0 > 1000) {
               if (abbreviateFunc) {
                 if (abbreviateNumber_zh === abbreviateFunc) {
                   return abbreviateFunc(value, 0);

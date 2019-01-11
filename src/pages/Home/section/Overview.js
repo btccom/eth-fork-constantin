@@ -118,8 +118,9 @@ export default class Overview extends Component {
           <ul>
             <li className={`${isForked ? 'text-center' : ''}`}>
               <span className="em-text">
-                {timestamp2Relative(
-                  forkStatusInfo.latest_height_timestamp,
+                {second2Relative(
+                  // forkStatusInfo.latest_height_timestamp,
+                  forkStatusInfo.time_in_secs,
                   lang,
                   false
                 )}{' '}

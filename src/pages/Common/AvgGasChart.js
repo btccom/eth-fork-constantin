@@ -66,6 +66,7 @@ export default class AvgGasChart extends Component {
               ? '每笔交易平均Gas使用量'
               : 'Average Gas Used Per Transaction'
           }
+          key={isSimple ? 0 : new Date().getTime()} //解决zoom后，改变查询时间粒度图表不刷新
           xAxisData={avgGasChartData.time_axis}
           seriesDataList={[{ data: avgGasChartData.price_axis, name: 'BSV' }]}
           tooltipFunc={this.getChartTooltipFormatterFunc()}

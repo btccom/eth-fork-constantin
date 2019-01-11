@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
-import { formatNumber } from 'utils';
+import { formatNumber, abbreviateNumber_zh, abbreviateNumber_en } from 'utils';
 import Ts from 'Trans';
 
 import LineChart from '../../components/Chart/LineChart';
@@ -68,12 +68,16 @@ export default class EtherPriceChart extends Component {
     return (
       <div>
         <LineChart
+          key={isSimple ? 0 : new Date().getTime()} //解决zoom后，改变查询时间粒度图表不刷新
           chartType="line"
           title={<Ts transKey="pages.priceChart" />}
           isFixed={true}
           isForked={true}
           chartHeight={380}
           showMarkLine={isForked}
+          abbreviateFunc={
+            lang === 'zh-CN' ? abbreviateNumber_zh : abbreviateNumber_en
+          }
           markLinePoint={
             forkStatusInfo.fork_timestamp
               ? new Date(forkStatusInfo.fork_timestamp * 1000).format(
