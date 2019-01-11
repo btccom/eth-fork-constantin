@@ -21,6 +21,13 @@ export default class LineChart extends Component {
     };
   }
 
+  isMobileDevice = () => {
+    if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+      return true;
+    }
+    return false;
+  };
+
   getOption = toggleMarkLine => {
     let {
       chartType = 'line',
@@ -33,6 +40,7 @@ export default class LineChart extends Component {
       isSimple,
       tooltipFunc,
       minValue = 0,
+      showMarkLine,
       isFixed,
       isForked
     } = this.props;
@@ -44,30 +52,31 @@ export default class LineChart extends Component {
       itemStyle: {
         opacity: 0.4
       },
-      markLine: !toggleMarkLine
-        ? null
-        : {
-            lineStyle: {
-              color: '#F5A623',
-              type: 'solid'
-            },
-            label: {
-              //position: 'left'
-            },
-            data: [
-              [
-                {
-                  name: markLinePointName,
-                  coord: [markLinePoint, minValue]
-                },
-                {
-                  symbol: 'none',
-                  coord: [markLinePoint, minValue],
-                  y: '12%'
-                }
+      markLine:
+        !toggleMarkLine || !showMarkLine
+          ? null
+          : {
+              lineStyle: {
+                color: '#F5A623',
+                type: 'solid'
+              },
+              label: {
+                //position: 'left'
+              },
+              data: [
+                [
+                  {
+                    name: markLinePointName,
+                    coord: [markLinePoint, minValue]
+                  },
+                  {
+                    symbol: 'none',
+                    coord: [markLinePoint, minValue],
+                    y: '12%'
+                  }
+                ]
               ]
-            ]
-          }
+            }
     }));
     let option = {
       color: ['#2A69CF', '#149718'],
@@ -86,7 +95,7 @@ export default class LineChart extends Component {
           rotate: 90,
           fontFamily: 'Arial',
           verticalAlign: 'middle',
-          showMaxLabel: true,
+          //showMaxLabel: true,
           rich: {
             x: {
               fontSize: 18,
@@ -162,7 +171,7 @@ export default class LineChart extends Component {
         left: chartType === 'bar' ? 80 : 65
       },
       tooltip: {
-        show: true,
+        show: this.isMobileDevice() ? false : true,
         formatter: tooltipFunc,
         // formatter: function(params) {
         //   console.log(params);

@@ -10,7 +10,6 @@ class AppStore {
   constructor() {
     //locale
     this.lang = this.getDefaultLang();
-
     // utilsSetting
     this.utilsSetting();
   }
