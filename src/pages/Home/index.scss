@@ -65,7 +65,7 @@
       @media only screen and (max-width: $break-horizontal) {
         flex-direction: column;
         border:1px solid rgba(42,105,207,1);
-        margin:0 20% 10px;
+        margin:0 16% 10px;
       }
       li {
         flex: 1;
@@ -95,6 +95,17 @@
       @media only screen and (max-width: $break-middle) {
         font-size: 13px;
         text-align: left;
+      }
+    }
+  }
+}
+
+.before-fork-table-list{
+  table tbody tr {
+    &:first-child {
+      background-color: #2a69cf;
+      td {
+        color: #fff;
       }
     }
   }

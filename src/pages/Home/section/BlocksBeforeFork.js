@@ -135,7 +135,7 @@ export default class BlockList extends Component {
     ];
 
     return (
-      <div>
+      <div className="before-fork-table-list">
         <RCTable
           hasFixedColumn={true}
           columns={columns}

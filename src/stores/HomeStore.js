@@ -183,7 +183,34 @@ class HomeStore {
           latest_height_timestamp
         };
 
-        this.latestBlockList = oldList.slice(-10);
+        let tempList = oldList.slice(-10);
+        // DRY 后续优化
+        if (tempList[9].block_height > this.forkStatusInfo.fork_height) {
+          tempList = tempList.slice(0, 8);
+          let s = '......';
+          tempList.push({
+            id: s,
+            block_height: s,
+            block_reward: s,
+            miner_hash: s,
+            miner_name: s
+          });
+          const {
+            id,
+            block_height,
+            block_reward,
+            miner_hash,
+            miner_name
+          } = this.forkBlockInfo;
+          tempList.push({
+            id,
+            block_height,
+            block_reward,
+            miner_hash,
+            miner_name
+          });
+        }
+        this.latestBlockList = tempList;
       }
     });
   };

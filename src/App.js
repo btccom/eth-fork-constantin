@@ -32,7 +32,7 @@ export default class App extends Component {
     document.title =
       lang === 'zh-CN'
         ? '以太坊君士坦丁堡升级 - BTC.com'
-        : ' Ethereum Constantinople Upgrade - BTC.com';
+        : 'Ethereum Constantinople Upgrade - BTC.com';
   }
 
   render() {

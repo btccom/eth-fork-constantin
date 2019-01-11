@@ -3,15 +3,8 @@ import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import Ts from 'Trans';
 import { Grid, Row, Col } from 'react-bootstrap';
-
-import {
-  formatNumber,
-  second2Relative,
-  timestamp2Relative,
-  getCurrentTimestamp,
-  timestamp2UTC,
-  handlerToByte
-} from 'utils';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { formatNumber } from 'utils';
 import RCTable from '../../../components/ui/RCTable';
 import '../index.scss';
 @withRouter //必须放在最前面
@@ -24,6 +17,27 @@ export default class BlockList extends Component {
     this.store = this.props.store.homeStore;
   }
 
+  animationHoc = (index, key, targetEle) => {
+    if (index === 0) {
+      return (
+        <div>
+          <ReactCSSTransitionGroup
+            transitionName="example"
+            transitionAppear={true}
+            transitionAppearTimeout={1000}
+            transitionEnterTimeout={1000}
+            transitionEnter={true}
+            transitionLeave={false}
+          >
+            <span key={key}> {targetEle}</span>
+          </ReactCSSTransitionGroup>
+        </div>
+      );
+    } else {
+      return targetEle;
+    }
+  };
+
   render() {
     const { lang } = this.appStore;
     const {
@@ -33,39 +47,6 @@ export default class BlockList extends Component {
       historyBlockList,
       latestBlockList
     } = this.store;
-
-    const historyColumns = [
-      {
-        title: <Ts transKey="pages.height" />,
-        dataIndex: 'block_height',
-        key: 'block_height',
-        width: 110,
-        align: 'left',
-        render: (block_height, data) => block_height
-      },
-      {
-        title: <Ts transKey="pages.miner" />,
-        align: 'left',
-        dataIndex: 'miner_hash',
-        key: 'miner_hash',
-        render: (miner_hash, data) => {
-          return (
-            <span className="cell-text-ellipsis" style={{ width: 130 }}>
-              {' '}
-              {data.miner_name ? data.miner_name : miner_hash}
-            </span>
-          );
-        }
-      },
-      {
-        title: <Ts transKey="pages.reward" />,
-        dataIndex: 'block_reward',
-        key: 'block_reward',
-        className: 'em-cell-secondary',
-
-        render: (block_reward, data) => formatNumber(block_reward, 5) + ' ETH'
-      }
-    ];
 
     const latestColumns = [
       {
@@ -91,7 +72,9 @@ export default class BlockList extends Component {
         className: 'nopadding-left',
         width: 110,
         align: 'left',
-        render: (block_height, data) => block_height
+        render: (block_height, data, index) => {
+          return this.animationHoc(index, block_height, block_height);
+        }
       },
 
       {
@@ -99,9 +82,11 @@ export default class BlockList extends Component {
         align: 'left',
         dataIndex: 'miner_hash',
         key: 'miner_hash',
-        render: (miner_hash, data) => {
-          return (
-            <span className="cell-text-ellipsis" style={{ width: 130 }}>
+        render: (miner_hash, data, index) => {
+          return this.animationHoc(
+            index,
+            data.block_height,
+            <span className="cell-text-ellipsis" style={{ width: 120 }}>
               {' '}
               {data.miner_name ? data.miner_name : miner_hash}
             </span>
@@ -113,10 +98,47 @@ export default class BlockList extends Component {
         dataIndex: 'block_reward',
         key: 'block_reward',
         className: 'em-cell-primary',
-        render: (block_reward, data) =>
-          block_reward == '......' || !block_reward
-            ? block_reward
-            : formatNumber(block_reward, 5) + ' ETH'
+        render: (block_reward, data, index) =>
+          this.animationHoc(
+            index,
+            data.block_height,
+            block_reward == '......' || !block_reward
+              ? block_reward
+              : formatNumber(block_reward, 5) + ' ETH'
+          )
+      }
+    ];
+
+    const historyColumns = [
+      {
+        title: <Ts transKey="pages.height" />,
+        dataIndex: 'block_height',
+        key: 'block_height',
+        width: 110,
+        align: 'left',
+        render: (block_height, data) => block_height
+      },
+      {
+        title: <Ts transKey="pages.miner" />,
+        align: 'left',
+        dataIndex: 'miner_hash',
+        key: 'miner_hash',
+        render: (miner_hash, data) => {
+          return (
+            <span className="cell-text-ellipsis" style={{ width: 120 }}>
+              {' '}
+              {data.miner_name ? data.miner_name : miner_hash}
+            </span>
+          );
+        }
+      },
+      {
+        title: <Ts transKey="pages.reward" />,
+        dataIndex: 'block_reward',
+        key: 'block_reward',
+        className: 'em-cell-secondary',
+
+        render: (block_reward, data) => formatNumber(block_reward, 5) + ' ETH'
       }
     ];
 

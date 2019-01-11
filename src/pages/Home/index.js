@@ -126,6 +126,7 @@ export default class Home extends Component {
                   onClickZoom={() => {
                     window.open(this.getBigChartUrl('reward'), '_blank');
                   }}
+                  timerangeType="1"
                 />
               </div>
             </Col>

@@ -114,7 +114,7 @@ export default class RewardChart extends Component {
   render() {
     const { lang } = this.appStore;
     const { blockRewardChartData, forkStatusInfo, isForked } = this.store;
-    const { onClickZoom, isSimple } = this.props;
+    const { onClickZoom, isSimple, timerangeType } = this.props;
 
     let forkTimeStr = new Date(forkStatusInfo.fork_timestamp * 1000).format(
       'yyyy-MM-dd hh:mm'
@@ -146,8 +146,12 @@ export default class RewardChart extends Component {
           }
           yAxisName={
             lang === 'zh-CN'
-              ? '每小时新以太币产生'
-              : 'New Ether Supply Per Hour'
+              ? timerangeType == '1'
+                ? '每小时新以太币产生'
+                : '每天新以太币产生'
+              : timerangeType == '1'
+              ? 'New Ether Supply Per Hour'
+              : 'New Ether Supply Per Day'
           }
           xAxisData={blockRewardChartData.time_axis}
           seriesDataList={[

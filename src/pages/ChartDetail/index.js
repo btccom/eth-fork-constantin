@@ -19,7 +19,9 @@ export default class ChartDetail extends Component {
     super(props);
     this.store = this.props.store.homeStore;
     this.appsStore = this.props.store.appStore;
-
+    this.state = {
+      timerangeType: '1' // per hour
+    };
     console.log(this.props);
   }
 
@@ -49,6 +51,7 @@ export default class ChartDetail extends Component {
   };
 
   handleTimeRangeChange = timerangeType => {
+    this.setState({ timerangeType });
     let chartType = this.props.match.params.type;
     let startTime = chartStartTimeRangeMap[timerangeType];
     if (chartType === 'reward') {
@@ -72,7 +75,12 @@ export default class ChartDetail extends Component {
                 <div className="">
                   <ToggleGroupButton onChange={this.handleTimeRangeChange} />
                 </div>
-                {chartType === 'reward' && <RewardChart isSimple={false} />}
+                {chartType === 'reward' && (
+                  <RewardChart
+                    isSimple={false}
+                    timerangeType={this.state.timerangeType}
+                  />
+                )}
                 {chartType === 'avgGasPrice' && (
                   <AvgGasChart isSimple={false} />
                 )}
