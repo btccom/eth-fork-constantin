@@ -83,6 +83,7 @@ export default class LineChart extends Component {
           rotate: 90,
           fontFamily: 'Arial',
           verticalAlign: 'middle',
+          showMaxLabel: true,
           rich: {
             x: {
               fontSize: 18,
