@@ -33,7 +33,7 @@ const renderApp = Component => {
       if (splitArr.length > 2) {
         secondaryLevel = splitArr[0] + '/' + splitArr[1];
       }
-      let fullPath = firstLevel + secondaryLevel;
+      let fullPath = 'fork/' + firstLevel + secondaryLevel;
       // Google Analatics
       if (window.ga) {
         window.ga('set', 'page', fullPath);
