@@ -23,6 +23,7 @@ class LocaleSelect extends Component {
       <Select
         defaultValue={lang}
         combobox={false}
+        showSearch={false}
         optionLabelProp="children"
         value={lang}
         firstActiveValue={lang}
