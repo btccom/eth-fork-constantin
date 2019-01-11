@@ -7,6 +7,9 @@
   height: 16px;
   background: no-repeat center center;
   background-size: 22px 16px;
+  @media only screen and (max-width: $break-small) {
+    margin-right: 2px;
+  }
 
   &.locale-zh-CN {
     background: url(sprite_languages.png) 0 0 no-repeat;
