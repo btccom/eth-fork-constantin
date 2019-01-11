@@ -33,11 +33,11 @@ const renderApp = Component => {
       if (splitArr.length > 2) {
         secondaryLevel = splitArr[0] + '/' + splitArr[1];
       }
-      let fullPath = 'fork/' + firstLevel + secondaryLevel;
+      let fullPath = firstLevel + secondaryLevel;
       // Google Analatics
       if (window.ga) {
-        window.ga('set', 'page', fullPath);
-        window.ga('send', 'pageview', fullPath);
+        window.ga('set', 'page', fullPath + '(fork)');
+        window.ga('send', 'pageview', fullPath + '(fork)');
       }
 
       // Baidu Tongji
