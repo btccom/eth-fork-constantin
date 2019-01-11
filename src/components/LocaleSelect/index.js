@@ -29,7 +29,7 @@ class LocaleSelect extends Component {
         firstActiveValue={lang}
         defaultActiveFirstOption={true}
         onChange={this.handleLocaleChange}
-        getPopupContainer={() => document.getElementById('footerContainer')}
+        getPopupContainer={() => document.body}
       >
         <Option value="en-US">
           <span className="option-item">

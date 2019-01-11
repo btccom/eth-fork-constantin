@@ -102,7 +102,7 @@ export default class Home extends Component {
     //let isForked = true;
 
     return (
-      <div className="view-width relative" style={{ marginBottom: 100 }}>
+      <div className="view-width relative" style={{ marginBottom: 20 }}>
         <Grid>
           <Row>
             <Col xs={12} sm={12} md={12}>
