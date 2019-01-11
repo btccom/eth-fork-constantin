@@ -254,7 +254,7 @@ export default class LineChart extends Component {
               style: {
                 fill: '#888',
                 text: 'B T C . c o m',
-                opacity: 0.1,
+                opacity: 0.2,
                 font: 'bold 38px Microsoft YaHei'
               }
             }
