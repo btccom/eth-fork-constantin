@@ -8,6 +8,7 @@ import 'echarts/lib/chart/line';
 import 'echarts/lib/chart/bar';
 import 'echarts/lib/component/markLine';
 import 'echarts/lib/component/dataZoom';
+import 'echarts/lib/component/graphic';
 import './index.scss';
 import ChartMarkButton from '../ui/ChartMarkButton';
 import { abbreviateNumber_zh, abbreviateNumber_en } from 'utils';
@@ -16,7 +17,7 @@ export default class LineChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      toggleMarkLine: false
+      toggleMarkLine: true
     };
   }
 
@@ -31,7 +32,7 @@ export default class LineChart extends Component {
       markLinePointName,
       isSimple,
       tooltipFunc,
-      minValue,
+      minValue = 0,
       isFixed,
       isForked
     } = this.props;
@@ -50,17 +51,19 @@ export default class LineChart extends Component {
               color: '#F5A623',
               type: 'solid'
             },
-
+            label: {
+              //position: 'left'
+            },
             data: [
               [
                 {
                   name: markLinePointName,
-                  coord: [markLinePoint, 500]
+                  coord: [markLinePoint, minValue]
                 },
                 {
                   symbol: 'none',
-                  coord: [markLinePoint, 500],
-                  y: '8%'
+                  coord: [markLinePoint, minValue],
+                  y: '12%'
                 }
               ]
             ]
@@ -211,7 +214,44 @@ export default class LineChart extends Component {
           x: 'left'
         }
       },
-      series: seriesDataList
+      series: seriesDataList,
+      graphic: [
+        {
+          type: 'group',
+          //rotation: Math.PI / 4,
+          bounding: 'raw',
+          right: '50%',
+          bottom: '50%',
+          z: 100,
+          children: [
+            // {
+            //   type: 'rect',
+            //   left: 'center',
+            //   top: 'center',
+            //   z: 100,
+            //   shape: {
+            //     width: 400,
+            //     height: 50
+            //   },
+            //   style: {
+            //     fill: 'rgba(0,0,0,0.3)'
+            //   }
+            // },
+            {
+              type: 'text',
+              left: 'center',
+              top: 'center',
+              z: 900,
+              style: {
+                fill: '#888',
+                text: 'B T C . c o m',
+                opacity: 0.1,
+                font: 'bold 38px Microsoft YaHei'
+              }
+            }
+          ]
+        }
+      ]
       // dataZoom: [
       //   {
       //     type: 'inside',

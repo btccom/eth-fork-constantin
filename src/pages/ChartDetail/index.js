@@ -82,10 +82,16 @@ export default class ChartDetail extends Component {
                   />
                 )}
                 {chartType === 'avgGasPrice' && (
-                  <AvgGasChart isSimple={false} />
+                  <AvgGasChart
+                    isSimple={false}
+                    timerangeType={this.state.timerangeType}
+                  />
                 )}
                 {chartType === 'etherPrice' && (
-                  <EtherPriceChart isSimple={false} />
+                  <EtherPriceChart
+                    isSimple={false}
+                    timerangeType={this.state.timerangeType}
+                  />
                 )}
               </div>
             </Col>

@@ -3,7 +3,12 @@ import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import Ts from 'Trans';
 import LineChart from '../../components/Chart/LineChart';
-import { abbreviateNumber_zh, abbreviateNumber_en, formatNumber } from 'utils';
+import {
+  abbreviateNumber_zh,
+  abbreviateNumber_en,
+  formatNumber,
+  timestamp2UTC
+} from 'utils';
 @withRouter //必须放在最前面
 @inject('store')
 @observer
@@ -38,11 +43,25 @@ export default class AvgGasChart extends Component {
   render() {
     const { lang } = this.appStore;
     const { avgGasChartData, forkStatusInfo, isForked } = this.store;
-    const { onClickZoom, isSimple } = this.props;
+    const { onClickZoom, isSimple, timerangeType } = this.props;
 
-    let forkTimeStr = new Date(forkStatusInfo.fork_timestamp * 1000).format(
-      'yyyy-MM-dd hh:mm'
-    );
+    let forkTimeStr = timestamp2UTC(forkStatusInfo.fork_timestamp * 1000);
+    let markPoint = '';
+    if (timerangeType === '1') {
+      markPoint =
+        timestamp2UTC(
+          forkStatusInfo.fork_timestamp * 1000,
+          'yyyy-MM-dd hh',
+          false
+        ) + ':00';
+    } else {
+      markPoint = timestamp2UTC(
+        forkStatusInfo.fork_timestamp * 1000,
+        'yyyy-MM-dd',
+        false
+      );
+    }
+
     return (
       <div>
         <LineChart
@@ -55,7 +74,7 @@ export default class AvgGasChart extends Component {
             lang === 'zh-CN' ? abbreviateNumber_zh : abbreviateNumber_en
           }
           showMarkLine={isForked}
-          markLinePoint={forkStatusInfo.fork_timestamp ? forkTimeStr : null}
+          markLinePoint={forkStatusInfo.fork_timestamp ? markPoint : null}
           markLinePointName={
             lang === 'zh-CN'
               ? `${forkTimeStr} Constantinople Fork`

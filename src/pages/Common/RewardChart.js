@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import Ts from 'Trans';
-import { formatNumber, abbreviateNumber_zh, abbreviateNumber_en } from 'utils';
+import {
+  formatNumber,
+  abbreviateNumber_zh,
+  abbreviateNumber_en,
+  timestamp2UTC
+} from 'utils';
 import LineChart from '../../components/Chart/LineChart';
 @withRouter //必须放在最前面
 @inject('store')
@@ -116,9 +121,23 @@ export default class RewardChart extends Component {
     const { blockRewardChartData, forkStatusInfo, isForked } = this.store;
     const { onClickZoom, isSimple, timerangeType } = this.props;
 
-    let forkTimeStr = new Date(forkStatusInfo.fork_timestamp * 1000).format(
-      'yyyy-MM-dd hh:mm'
-    );
+    let forkTimeStr = timestamp2UTC(forkStatusInfo.fork_timestamp * 1000);
+    let markPoint = '';
+    if (timerangeType === '1') {
+      markPoint =
+        timestamp2UTC(
+          forkStatusInfo.fork_timestamp * 1000,
+          'yyyy-MM-dd hh',
+          false
+        ) + ':00';
+    } else {
+      markPoint = timestamp2UTC(
+        forkStatusInfo.fork_timestamp * 1000,
+        'yyyy-MM-dd',
+        false
+      );
+    }
+
     return (
       <div>
         <LineChart
@@ -132,13 +151,7 @@ export default class RewardChart extends Component {
           abbreviateFunc={
             lang === 'zh-CN' ? abbreviateNumber_zh : abbreviateNumber_en
           }
-          markLinePoint={
-            forkStatusInfo.fork_timestamp
-              ? new Date(forkStatusInfo.fork_timestamp * 1000).format(
-                  'yyyy-MM-dd hh:mm'
-                )
-              : null
-          }
+          markLinePoint={forkStatusInfo.fork_timestamp ? markPoint : null}
           markLinePointName={
             lang === 'zh-CN'
               ? `${forkTimeStr} Constantinople Fork`

@@ -525,11 +525,22 @@ export const getCurrentTimestamp = () => {
   return Math.round(new Date().getTime());
 };
 
-export const timestamp2UTC = timestamp => {
+export const timestamp2UTC = (
+  timestamp,
+  format = 'yyyy-MM-dd hh:mm:ss',
+  isShowUnit = true
+) => {
   let d = new Date(timestamp);
 
-  let D = [d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate()],
+  let D = [d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate()];
+  let T = [];
+  if (format === 'yyyy-MM-dd hh:mm:ss') {
     T = [d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds()];
+  } else if (format === 'yyyy-MM-dd hh:mm') {
+    T = [d.getUTCHours(), d.getUTCMinutes()];
+  } else if (format === 'yyyy-MM-dd hh') {
+    T = [d.getUTCHours()];
+  }
 
   let i = 3;
   while (i) {
@@ -537,7 +548,7 @@ export const timestamp2UTC = timestamp => {
     if (D[i] < 10) D[i] = '0' + D[i];
     if (T[i] < 10) T[i] = '0' + T[i];
   }
-  return D.join('-') + ' ' + T.join(':') + ' UTC';
+  return D.join('-') + ' ' + T.join(':') + (isShowUnit ? ' UTC' : '');
 };
 
 export const getCurrency = lang => {

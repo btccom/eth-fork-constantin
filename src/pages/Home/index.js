@@ -137,6 +137,7 @@ export default class Home extends Component {
               >
                 <AvgGasChart
                   isSimple={true}
+                  timerangeType="1"
                   onClickZoom={() => {
                     window.open(this.getBigChartUrl('avgGasPrice'), '_blank');
                   }}
@@ -149,6 +150,7 @@ export default class Home extends Component {
               <div className="card hightlight" style={{ height: 500 }}>
                 <EtherPriceChart
                   isSimple={true}
+                  timerangeType="1"
                   onClickZoom={() => {
                     window.open(this.getBigChartUrl('etherPrice'), '_blank');
                   }}
