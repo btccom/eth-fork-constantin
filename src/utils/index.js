@@ -531,14 +531,17 @@ export const timestamp2UTC = (
   isShowUnit = true
 ) => {
   let d = new Date(timestamp);
-
+  let isContainTime = false;
   let D = [d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate()];
   let T = [];
   if (format === 'yyyy-MM-dd hh:mm:ss') {
+    isContainTime = true;
     T = [d.getUTCHours(), d.getUTCMinutes(), d.getUTCSeconds()];
   } else if (format === 'yyyy-MM-dd hh:mm') {
+    isContainTime = true;
     T = [d.getUTCHours(), d.getUTCMinutes()];
   } else if (format === 'yyyy-MM-dd hh') {
+    isContainTime = true;
     T = [d.getUTCHours()];
   }
 
@@ -548,7 +551,12 @@ export const timestamp2UTC = (
     if (D[i] < 10) D[i] = '0' + D[i];
     if (T[i] < 10) T[i] = '0' + T[i];
   }
-  return D.join('-') + ' ' + T.join(':') + (isShowUnit ? ' UTC' : '');
+  return (
+    D.join('-') +
+    (isContainTime ? ' ' : '') +
+    T.join(':') +
+    (isShowUnit ? ' UTC' : '')
+  );
 };
 
 export const getCurrency = lang => {

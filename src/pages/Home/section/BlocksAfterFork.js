@@ -57,7 +57,10 @@ export default class BlockList extends Component {
           if (data.block_height === this.store.forkStatusInfo.fork_height) {
             return (
               <div>
-                <i className="cell-icon check-mark-icon" />
+                <i
+                  className="cell-icon check-mark-icon sm"
+                  style={{ marginLeft: 2 }}
+                />
               </div>
             );
           } else {
@@ -86,7 +89,7 @@ export default class BlockList extends Component {
           return this.animationHoc(
             index,
             data.block_height,
-            <span className="cell-text-ellipsis" style={{ width: 120 }}>
+            <span className="cell-text-ellipsis" style={{ width: 110 }}>
               {' '}
               {data.miner_name ? data.miner_name : miner_hash}
             </span>
@@ -111,9 +114,25 @@ export default class BlockList extends Component {
 
     const historyColumns = [
       {
+        dataIndex: 'id',
+        key: 'id',
+        className: 'smpadding-sides',
+        render: (id, data) => {
+          return (
+            <div>
+              <i
+                className="cell-icon check-mark-icon sm place-holder"
+                style={{ marginLeft: 2 }}
+              />
+            </div>
+          );
+        }
+      },
+      {
         title: <Ts transKey="pages.height" />,
         dataIndex: 'block_height',
         key: 'block_height',
+        className: 'nopadding-left',
         width: 110,
         align: 'left',
         render: (block_height, data) => block_height
@@ -125,7 +144,7 @@ export default class BlockList extends Component {
         key: 'miner_hash',
         render: (miner_hash, data) => {
           return (
-            <span className="cell-text-ellipsis" style={{ width: 120 }}>
+            <span className="cell-text-ellipsis" style={{ width: 110 }}>
               {' '}
               {data.miner_name ? data.miner_name : miner_hash}
             </span>
@@ -148,6 +167,7 @@ export default class BlockList extends Component {
           <Row>
             <Col xs={12} sm={12} md={6}>
               <RCTable
+                rowKey="id"
                 columns={latestColumns}
                 dataSource={latestBlockList.toJS()}
                 style={{ width: '100%' }}
@@ -155,6 +175,7 @@ export default class BlockList extends Component {
             </Col>
             <Col xs={12} sm={12} md={6} className="history-list-container">
               <RCTable
+                rowKey="id"
                 columns={historyColumns}
                 dataSource={historyBlockList.toJS()}
                 style={{ width: '100%' }}

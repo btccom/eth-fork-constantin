@@ -73,6 +73,7 @@ import Table from 'rc-table';
 
 const RCTable = ({
   loadingText = 'Loading...',
+  rowKey,
   columns,
   dataSource,
   hasFixedColumn = false,
@@ -85,13 +86,19 @@ const RCTable = ({
     <div className="table-container">
       {hasFixedColumn ? (
         <Table
+          rowKey={rowKey}
           columns={columns}
           data={dataSource}
           scroll={{ x: 1140 }}
           emptyText={loadingText}
         />
       ) : (
-        <Table columns={columns} data={dataSource} emptyText={loadingText} />
+        <Table
+          rowKey={rowKey}
+          columns={columns}
+          data={dataSource}
+          emptyText={loadingText}
+        />
       )}
     </div>
   );

@@ -22,7 +22,6 @@ export default class ChartDetail extends Component {
     this.state = {
       timerangeType: '1' // per hour
     };
-    console.log(this.props);
   }
 
   componentWillMount() {

@@ -56,6 +56,7 @@ export default class LineChart extends Component {
         !toggleMarkLine || !showMarkLine
           ? null
           : {
+              silent: true,
               lineStyle: {
                 color: '#F5A623',
                 type: 'solid'
@@ -72,7 +73,7 @@ export default class LineChart extends Component {
                   {
                     symbol: 'none',
                     coord: [markLinePoint, minValue],
-                    y: '12%'
+                    y: '14%'
                   }
                 ]
               ]
@@ -118,7 +119,6 @@ export default class LineChart extends Component {
         type: 'value',
         splitLine: {
           interval: function(index, value) {
-            console.log(index);
             return false;
           },
           lineStyle: {

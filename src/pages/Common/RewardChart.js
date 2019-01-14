@@ -17,7 +17,6 @@ export default class RewardChart extends Component {
     super(props);
     this.appStore = this.props.store.appStore;
     this.store = this.props.store.homeStore;
-    console.log(this.store.blockRewardChartData.price_axis);
   }
 
   componentWillMount() {}
@@ -138,6 +137,17 @@ export default class RewardChart extends Component {
       );
     }
 
+    let isShowMarkLine = false;
+    if (blockRewardChartData.time_axis) {
+      let markIndex = blockRewardChartData.time_axis.indexOf(markPoint);
+      isShowMarkLine =
+        markIndex >= 0 &&
+        ((timerangeType == '1' &&
+          markIndex < blockRewardChartData.time_axis.length - 6) ||
+          timerangeType == '2') &&
+        isForked;
+    }
+
     return (
       <div>
         <LineChart
@@ -147,15 +157,15 @@ export default class RewardChart extends Component {
           isFixed={true}
           isForked={true}
           chartHeight={380}
-          showMarkLine={isForked}
+          showMarkLine={isShowMarkLine}
           abbreviateFunc={
             lang === 'zh-CN' ? abbreviateNumber_zh : abbreviateNumber_en
           }
           markLinePoint={forkStatusInfo.fork_timestamp ? markPoint : null}
           markLinePointName={
             lang === 'zh-CN'
-              ? `${forkTimeStr} Constantinople Fork`
-              : `${forkTimeStr} 君士坦丁堡分叉`
+              ? `${forkTimeStr}\n君士坦丁堡分叉`
+              : `${forkTimeStr}\nConstantinople Fork`
           }
           yAxisName={
             lang === 'zh-CN'

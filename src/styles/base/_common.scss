@@ -114,7 +114,19 @@ i.cell-icon {
     transform:rotate(45deg);
     margin-right:9px;
     vertical-align: baseline;
+
+    &.sm{
+      width: 8px;
+      height: 14px;
+      margin-right:4px;
+      background: no-repeat center center;
+      background-size: 12px 12px;
+    }
+    &.place-holder{
+      visibility: hidden;
+    }
   }
+ 
 
   &.zoom-icon{
     position: absolute;

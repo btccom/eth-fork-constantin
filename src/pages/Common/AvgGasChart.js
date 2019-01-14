@@ -62,6 +62,17 @@ export default class AvgGasChart extends Component {
       );
     }
 
+    let isShowMarkLine = false;
+    if (avgGasChartData.time_axis) {
+      let markIndex = avgGasChartData.time_axis.indexOf(markPoint);
+      isShowMarkLine =
+        markIndex >= 0 &&
+        ((timerangeType == '1' &&
+          markIndex < avgGasChartData.time_axis.length - 6) ||
+          timerangeType == '2') &&
+        isForked;
+    }
+
     return (
       <div>
         <LineChart
@@ -73,12 +84,12 @@ export default class AvgGasChart extends Component {
           abbreviateFunc={
             lang === 'zh-CN' ? abbreviateNumber_zh : abbreviateNumber_en
           }
-          showMarkLine={isForked}
+          showMarkLine={isShowMarkLine}
           markLinePoint={forkStatusInfo.fork_timestamp ? markPoint : null}
           markLinePointName={
             lang === 'zh-CN'
-              ? `${forkTimeStr} Constantinople Fork`
-              : `${forkTimeStr} 君士坦丁堡分叉`
+              ? `${forkTimeStr}\n君士坦丁堡分叉`
+              : `${forkTimeStr}\nConstantinople Fork`
           }
           yAxisName={
             lang === 'zh-CN'

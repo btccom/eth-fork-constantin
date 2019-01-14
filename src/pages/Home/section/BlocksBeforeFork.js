@@ -137,6 +137,7 @@ export default class BlockList extends Component {
     return (
       <div className="before-fork-table-list">
         <RCTable
+          rowKey="id"
           hasFixedColumn={true}
           columns={columns}
           dataSource={latestBlockList.toJS()}
