@@ -1,6 +1,5 @@
 import { observable, action, runInAction, computed, reaction } from 'mobx';
 import ajax from 'ajax';
-import { getCurrentTimestamp, dateLocaleFormat } from 'utils';
 import io from 'socket.io-client';
 import { socketIOURL } from 'constants';
 
@@ -64,14 +63,6 @@ class HomeStore {
   };
 
   @action
-  getAll = () => {
-    runInAction(() => {
-      this.getForkInfo();
-      // this.getBSVSpecialCodeList();
-    });
-  };
-
-  @action
   getForkInfo = async callback => {
     //this.isFinishedQuery = false;
 
@@ -80,9 +71,11 @@ class HomeStore {
     if (res && res.data) {
       runInAction(() => {
         this.forkStatusInfo = res.data;
+
         // let mockHeight = 7062569;
         // this.forkStatusInfo.fork_height = mockHeight;
         // this.forkStatusInfo.fork_timestamp = 1547326680;
+
         this.isForked =
           this.forkStatusInfo.fork_height <= this.forkStatusInfo.latest_height;
         callback && callback(this.isForked);
@@ -299,37 +292,6 @@ class HomeStore {
         };
       });
     }
-  };
-
-  @action
-  getForkChartData = async () => {
-    // const res = await ajax.get(`/fork-chart`);
-    // if (res && res.data) {
-    //   runInAction(() => {
-    //     if (res.data.transaction_count) {
-    //       let transactionData = res.data.transaction_count;
-    //       this.transactionXAxisChartData_zh = transactionData.timestamp.map(
-    //         item => dateLocaleFormat(item, 'zh-CN')
-    //       );
-    //       this.transactionXAxisChartData_en = transactionData.timestamp.map(
-    //         item => dateLocaleFormat(item, 'en-US')
-    //       );
-    //       this.transactionChartData_BCH = transactionData.bch;
-    //       this.transactionChartData_BSV = transactionData.bsv;
-    //     }
-    //     if (res.data.block_reward) {
-    //       let blockRewardData = res.data.block_reward;
-    //       this.blockRewardXAxisChartData_en = blockRewardData.timestamp.map(
-    //         item => dateLocaleFormat(item, 'en-US')
-    //       );
-    //       this.blockRewardXAxisChartData_zh = blockRewardData.timestamp.map(
-    //         item => dateLocaleFormat(item, 'zh-CN')
-    //       );
-    //       this.blockRewardChartData_BCH = blockRewardData.bch;
-    //       this.blockRewardChartData_BSV = blockRewardData.bsv;
-    //     }
-    //   });
-    // }
   };
 }
 

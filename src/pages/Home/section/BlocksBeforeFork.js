@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Ts from 'Trans';
-import {
-  formatNumber,
-  second2Relative,
-  timestamp2Relative,
-  getCurrentTimestamp,
-  timestamp2UTC,
-  handlerToByte
-} from 'utils';
+import { formatNumber, second2Relative, handlerToByte } from 'utils';
 import RCTable from '../../../components/ui/RCTable';
 import '../index.scss';
 

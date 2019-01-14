@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { chartStartTimeRangeMap } from 'config';
@@ -78,28 +78,7 @@ export default class Home extends Component {
   };
 
   render() {
-    const { lang } = this.appsStore;
-    const {
-      forkInfo,
-      isForked,
-      isFinishedQuery,
-      forkStatusInfo,
-      statsInfo,
-      bchBlockList,
-      bsvBlockList,
-      transactionXAxisChartData_zh,
-      transactionXAxisChartData_en,
-      transactionChartData_BCH,
-      transactionChartData_BSV,
-      blockRewardXAxisChartData_zh,
-      blockRewardXAxisChartData_en,
-      blockRewardChartData_BCH,
-      blockRewardChartData_BSV,
-      bchSpecialCodeList,
-      bsvSpecialCodeList
-    } = this.store;
-
-    //let isForked = true;
+    const { isForked } = this.store;
 
     return (
       <div className="view-width relative" style={{ marginBottom: 20 }}>

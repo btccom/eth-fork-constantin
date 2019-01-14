@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import Ts from 'Trans';
 import {
   formatNumber,
-  second2Relative,
   timestamp2Relative,
   getCurrentTimestamp,
-  timestamp2UTC,
-  handlerToByte
+  timestamp2UTC
 } from 'utils';
 
 import '../index.scss';
@@ -71,9 +69,9 @@ export default class Overview extends Component {
   };
 
   getBlockSpan = () => {
-    return (
-      this.store.forkTargetHeight - this.store.forkStatusInfo.latest_height
-    );
+    return this.store.forkStatusInfo.latest_height
+      ? this.store.forkTargetHeight - this.store.forkStatusInfo.latest_height
+      : '';
   };
 
   render() {
@@ -118,11 +116,13 @@ export default class Overview extends Component {
           <ul>
             <li className={`${isForked ? 'text-center' : ''}`}>
               <span className="em-text">
-                {timestamp2Relative(
-                  forkStatusInfo.latest_height_timestamp,
-                  lang,
-                  false
-                )}{' '}
+                {forkStatusInfo.latest_height_timestamp
+                  ? timestamp2Relative(
+                      forkStatusInfo.latest_height_timestamp,
+                      lang,
+                      false
+                    )
+                  : ''}{' '}
               </span>
               <Ts transKey="pages.sinceLastBlock" />
             </li>
