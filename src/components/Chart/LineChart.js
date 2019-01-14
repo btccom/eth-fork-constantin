@@ -215,6 +215,7 @@ export default class LineChart extends Component {
           },
           dataZoom: {
             show: true,
+            yAxisIndex: false,
             title: {
               zoom: 'Zoom',
               back: 'Back'
