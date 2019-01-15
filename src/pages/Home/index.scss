@@ -102,7 +102,7 @@
 
 .before-fork-table-list{
   table tbody tr {
-    &:first-child {
+    &:first-child ,&:first-child:hover{
       background-color: #2a69cf;
       td {
         color: #fff;
