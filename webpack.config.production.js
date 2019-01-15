@@ -126,7 +126,7 @@ module.exports = {
       // Options similar to the same options in webpackOptions.output
       // both options are optional
       filename: 'assets/styles.css',
-      chunkFilename: '[hash:5].css'
+      chunkFilename: '[hash].css'
     }),
     new HtmlWebpackPlugin({
       hash: false,
