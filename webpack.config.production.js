@@ -125,8 +125,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: 'assets/styles.css',
-      chunkFilename: '[hash].css'
+      filename: 'assets/styles.[hash:5].css',
+      chunkFilename: '[id].css'
     }),
     new HtmlWebpackPlugin({
       hash: false,
