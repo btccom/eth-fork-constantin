@@ -62,11 +62,12 @@ class AppStore {
     if (res && res.data) {
       runInAction(() => {
         let data = res.data;
+        console.log(data);
         wx.config = {
           debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert，参数信息会通过log打出。
           appId: 'wxd5b42c7a0f3817bf', // 必填，公众号的唯一标识
           timestamp: data.timestamp, // 必填，生成签名的时间戳
-          nonceStr: 'undefined', // 必填，生成签名的随机串
+          nonceStr: 'pzkcwxklw82elvwarv0fp2y9zau0u2xaggrm0nvq0m', // 必填，生成签名的随机串
           signature: data.signature, // 必填，签名，见附录1
           jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData']
         };
@@ -79,6 +80,7 @@ class AppStore {
             link: 'http://fork-eth-dev.btc.com', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
             imgUrl: 'https://eth.btc.com/ec9cb9684dfff6ebdfb496989d224363.png', // 分享图标
             success: function() {
+              alert(1);
               // 设置成功
             }
           });
@@ -88,6 +90,7 @@ class AppStore {
             link: 'http://fork-eth-dev.btc.com', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
             imgUrl: 'https://eth.btc.com/ec9cb9684dfff6ebdfb496989d224363.png', // 分享图标
             success: function() {
+              alert(2);
               // 设置成功
             }
           });
