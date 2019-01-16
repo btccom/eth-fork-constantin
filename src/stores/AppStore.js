@@ -71,14 +71,7 @@ class AppStore {
           timestamp: res.timestamp, // 必填，生成签名的时间戳
           nonceStr: 'undefined', // 必填，生成签名的随机串
           signature: res.signature, // 必填，签名，见附录1
-          jsApiList: [
-            'onMenuShareTimeline',
-            'onMenuShareAppMessage',
-            'onMenuShareQQ',
-            'onMenuShareWeibo',
-            'onMenuShareQZone',
-            'scanQRCode'
-          ]
+          jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData']
         };
 
         wx.ready(function() {
