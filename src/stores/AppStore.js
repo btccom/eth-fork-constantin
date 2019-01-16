@@ -8,9 +8,13 @@ class AppStore {
   @observable
   appTheme;
 
+  @observable
+  errorInfo;
+
   constructor() {
     //locale
     this.lang = this.getDefaultLang();
+    this.errorInfo = 'empty';
     // utilsSetting
     this.utilsSetting();
 
@@ -56,12 +60,14 @@ class AppStore {
   //
   @action
   wxSignature = async () => {
+    this.errorInfo = 'start wx share';
     const res = await axios.get(
       `http://fe.btc.com/wechat/token?url=http://fork-eth-dev.btc.com&name=ethFork&type=json&debug=true`
     );
     if (res && res.data) {
       runInAction(() => {
         let data = res.data;
+        this.errorInfo = JSON.stringify(data);
         console.log(data);
         wx.config = {
           debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert，参数信息会通过log打出。
@@ -82,9 +88,11 @@ class AppStore {
             link: 'http://fork-eth-dev.btc.com',
             imgUrl: 'https://eth.btc.com/ec9cb9684dfff6ebdfb496989d224363.png',
             success: function() {
+              this.errorInfo = 'onMenuShareTimeline success';
               // alert(3);
             },
             cancel: function() {
+              this.errorInfo = 'onMenuShareTimeline cancel';
               // alert(5);
             }
           });
@@ -96,6 +104,7 @@ class AppStore {
             link: 'http://fork-eth-dev.btc.com',
             imgUrl: 'https://eth.btc.com/ec9cb9684dfff6ebdfb496989d224363.png',
             success: function() {
+              this.errorInfo = 'updateAppMessageShareData success';
               // alert(1);
             }
           });
@@ -105,6 +114,7 @@ class AppStore {
             link: 'http://fork-eth-dev.btc.com',
             imgUrl: 'https://eth.btc.com/ec9cb9684dfff6ebdfb496989d224363.png',
             success: function() {
+              this.errorInfo = 'updateTimelineShareData success';
               // alert(2);
             }
           });

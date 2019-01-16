@@ -80,6 +80,7 @@ export default class Home extends Component {
 
   render() {
     const { isForked } = this.store;
+    const { errorInfo } = this.appsStore;
 
     return (
       <div className="view-width relative" style={{ marginBottom: 20 }}>
@@ -96,6 +97,7 @@ export default class Home extends Component {
             </Col>
           </Row>
         </Grid>
+        <div>{errorInfo}</div>
         {isForked && <BlocksAfterFork />}
 
         <Grid className="margin-top-lg">
