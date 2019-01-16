@@ -90,42 +90,40 @@ class AppStore {
           this.errorInfo = JSON.stringify(res);
         });
 
-        wx.ready(function() {
-          wx.onMenuShareTimeline({
-            title: '分享测试',
-            link: 'http://fork-eth-dev.btc.com',
-            imgUrl: 'https://eth.btc.com/ec9cb9684dfff6ebdfb496989d224363.png',
-            success: function() {
-              this.errorInfo = 'onMenuShareTimeline success';
-              // alert(3);
-            },
-            cancel: function() {
-              this.errorInfo = 'onMenuShareTimeline cancel';
-              // alert(5);
-            }
-          });
+        wx.onMenuShareTimeline({
+          title: '分享测试',
+          link: 'http://fork-eth-dev.btc.com',
+          imgUrl: 'https://eth.btc.com/ec9cb9684dfff6ebdfb496989d224363.png',
+          success: function() {
+            this.errorInfo = 'onMenuShareTimeline success';
+            // alert(3);
+          },
+          cancel: function() {
+            this.errorInfo = 'onMenuShareTimeline cancel';
+            // alert(5);
+          }
+        });
 
-          //需在用户可能点击分享按钮前就先调用
-          wx.updateAppMessageShareData({
-            title: '分享测试',
-            desc: '这是微信分享测试',
-            link: 'http://fork-eth-dev.btc.com',
-            imgUrl: 'https://eth.btc.com/ec9cb9684dfff6ebdfb496989d224363.png',
-            success: function() {
-              this.errorInfo = 'updateAppMessageShareData success';
-              // alert(1);
-            }
-          });
+        //需在用户可能点击分享按钮前就先调用
+        wx.updateAppMessageShareData({
+          title: '分享测试',
+          desc: '这是微信分享测试',
+          link: 'http://fork-eth-dev.btc.com',
+          imgUrl: 'https://eth.btc.com/ec9cb9684dfff6ebdfb496989d224363.png',
+          success: function() {
+            this.errorInfo = 'updateAppMessageShareData success';
+            // alert(1);
+          }
+        });
 
-          wx.updateTimelineShareData({
-            title: '分享测试2',
-            link: 'http://fork-eth-dev.btc.com',
-            imgUrl: 'https://eth.btc.com/ec9cb9684dfff6ebdfb496989d224363.png',
-            success: function() {
-              this.errorInfo = 'updateTimelineShareData success';
-              // alert(2);
-            }
-          });
+        wx.updateTimelineShareData({
+          title: '分享测试2',
+          link: 'http://fork-eth-dev.btc.com',
+          imgUrl: 'https://eth.btc.com/ec9cb9684dfff6ebdfb496989d224363.png',
+          success: function() {
+            this.errorInfo = 'updateTimelineShareData success';
+            // alert(2);
+          }
         });
       });
     }
