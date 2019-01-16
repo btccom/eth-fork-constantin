@@ -112,7 +112,7 @@ const renderApp = Component => {
           }
         });
       }
-      //document.getElementById('errorInfo').innerText = errorInfo;
+      document.getElementById('errorInfo').innerText = errorInfo;
     });
 };
 
