@@ -95,9 +95,6 @@ export default class Overview extends Component {
             / <Ts transKey="pages.tbd" />
           </span>
           {` `}
-          <span className="md-font">
-            <Ts transKey="pages.block" />
-          </span>
         </p>
 
         <div className="countdown-info">
