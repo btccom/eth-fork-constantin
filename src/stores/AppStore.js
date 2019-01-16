@@ -1,5 +1,5 @@
-import { observable, action } from 'mobx';
-import ajax from 'ajax';
+import { observable, action, runInAction } from 'mobx';
+import axios from 'axios';
 
 class AppStore {
   @observable
@@ -56,21 +56,18 @@ class AppStore {
   //
   @action
   wxSignature = async () => {
-    //this.isFinishedQuery = false;
-
-    const res = await ajax.get(
-      `http://fe.btc.com/wechat/token?url=https://fork-eth.btc.com&name=ethFork&type=json&debug=true`
+    const res = await axios.get(
+      `http://fe.btc.com/wechat/token?url=http://fork-eth-dev.btc.com&name=ethFork&type=json&debug=true`
     );
-    this.isFinishedQuery = true;
     if (res && res.data) {
       runInAction(() => {
-        console.log('res', res);
+        let data = res.data;
         wx.config = {
           debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert，参数信息会通过log打出。
           appId: 'wxd5b42c7a0f3817bf', // 必填，公众号的唯一标识
-          timestamp: res.timestamp, // 必填，生成签名的时间戳
+          timestamp: data.timestamp, // 必填，生成签名的时间戳
           nonceStr: 'undefined', // 必填，生成签名的随机串
-          signature: res.signature, // 必填，签名，见附录1
+          signature: data.signature, // 必填，签名，见附录1
           jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData']
         };
 
