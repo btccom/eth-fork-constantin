@@ -82,6 +82,14 @@ class AppStore {
           ]
         };
 
+        wx.ready(() => {
+          this.errorInfo = 'config ready';
+        });
+
+        wx.error(res => {
+          this.errorInfo = JSON.stringify(res);
+        });
+
         wx.ready(function() {
           wx.onMenuShareTimeline({
             title: '分享测试',
