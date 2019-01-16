@@ -100,6 +100,15 @@
   }
 }
 
+a.warn-text{
+  color:#F5A623;
+  text-decoration: underline;
+  :hover{
+    color:#F9A623;
+    text-decoration: none;
+  }
+}
+
 .before-fork-table-list{
   table tbody tr {
     &:first-child ,&:first-child:hover{

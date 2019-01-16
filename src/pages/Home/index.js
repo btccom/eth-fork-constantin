@@ -4,6 +4,7 @@ import { inject, observer } from 'mobx-react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import { chartStartTimeRangeMap } from 'config';
 import Overview from './section/Overview';
+import Postponed from './section/Postponed';
 import RewardChart from '../Common/RewardChart';
 import AvgGasChart from '../Common/AvgGasChart';
 import EtherPriceChart from '../Common/EtherPriceChart';
@@ -85,7 +86,8 @@ export default class Home extends Component {
         <Grid>
           <Row>
             <Col xs={12} sm={12} md={12}>
-              <Overview />
+              {false && <Overview />}
+              <Postponed />
             </Col>
           </Row>
           <Row>

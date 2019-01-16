@@ -1,0 +1,145 @@
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { inject, observer } from 'mobx-react';
+import Ts from 'Trans';
+import {
+  formatNumber,
+  timestamp2Relative,
+  getCurrentTimestamp,
+  timestamp2UTC
+} from 'utils';
+
+import '../index.scss';
+@withRouter //必须放在最前面
+@inject('store')
+@observer
+export default class Overview extends Component {
+  constructor(props) {
+    super(props);
+    this.appStore = this.props.store.appStore;
+    this.store = this.props.store.homeStore;
+    this.state = {
+      intervalId: null,
+      currentSecond: Math.floor(new Date().getTime() / 1000),
+      relativeTime: '',
+      intlTitle: this.appStore.lang === 'zh-CN' ? '中文' : 'English'
+    };
+  }
+
+  componentDidMount() {
+    let intervalId = setInterval(this.loopRelative.bind(this), 1000);
+    this.setState({
+      intervalId: intervalId
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (getCurrentTimestamp() >= nextProps.fork_time) {
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.intervalId);
+  }
+
+  loopRelative = () => {
+    this.setState({
+      currentSecond: this.state.currentSecond + 1
+    });
+  };
+
+  handleChangeLuange = (key, text) => {
+    this.setState({ intlTitle: text });
+    this.appStore.setLocaleLang(key);
+  };
+
+  getUpgradeProgress = (forkStatusInfo, isForked) => {
+    if (isForked) {
+      return '100%';
+    }
+    let progressStartHeight = 6840000;
+    return (
+      formatNumber(
+        ((forkStatusInfo.latest_height - progressStartHeight) /
+          (this.store.forkTargetHeight - progressStartHeight)) *
+          100,
+        2
+      ) + '%'
+    );
+  };
+
+  getBlockSpan = () => {
+    return this.store.forkStatusInfo.latest_height
+      ? this.store.forkTargetHeight - this.store.forkStatusInfo.latest_height
+      : '';
+  };
+
+  render() {
+    const { lang } = this.appStore;
+    const {
+      isForked,
+      isFinishedQuery,
+      forkStatusInfo,
+      forkTargetHeight
+    } = this.store;
+
+    return (
+      <div className="countdown-container">
+        <h1>
+          <Ts transKey="pages.upgradedTip" />
+        </h1>
+        <p className="block-upgrade">
+          <span className="current-block">{forkStatusInfo.latest_height}</span>
+          <span className="target-block" style={{ fontWeight: 400 }}>
+            {' '}
+            / <Ts transKey="pages.tbd" />
+          </span>
+          {` `}
+          <span className="md-font">
+            <Ts transKey="pages.block" />
+          </span>
+        </p>
+
+        <div className="countdown-info">
+          <ul>
+            <li className={`${isForked ? 'text-center' : ''}`}>
+              <span className="em-text">
+                {forkStatusInfo.latest_height_timestamp
+                  ? timestamp2Relative(
+                      forkStatusInfo.latest_height_timestamp,
+                      lang,
+                      false
+                    )
+                  : ''}{' '}
+              </span>
+              <Ts transKey="pages.sinceLastBlock" />
+            </li>
+            {!isForked && (
+              <li>
+                <span className="em-text" style={{ fontWeight: 400 }}>
+                  <Ts transKey="pages.tbd" />{' '}
+                </span>
+                <Ts transKey="pages.blockstoGo" />
+              </li>
+            )}
+          </ul>
+          <p>
+            <a
+              className="warn-text"
+              target="_blank"
+              href="https://blog.ethereum.org/2019/01/15/security-alert-ethereum-constantinople-postponement/"
+            >
+              <Ts transKey="pages.postponedTip" />
+            </a>
+          </p>
+          <p className="fork-remark">
+            <Ts transKey="pages.forkRemark" />{' '}
+            <a className="link" href="#introduction">
+              <Ts transKey="pages.viewMore" />
+            </a>
+          </p>
+        </div>
+      </div>
+    );
+  }
+}

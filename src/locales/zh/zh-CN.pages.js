@@ -63,7 +63,11 @@ const pageMesage = {
     fromUncleInclReward: '来自叔块引用奖励：',
     fromUncleReward: '来自叔块播报奖励：',
     avgGasUsedPerTxn: '单笔平均Gas使用量：',
-    forkedAt: '君士坦丁堡硬分叉已成功激活于区块 {block}，激活时间为 {time}'
+    forkedAt: '君士坦丁堡硬分叉已成功激活于区块 {block}，激活时间为 {time}',
+    postponedTip: '延迟',
+    seeDetail: '查看详情',
+    tbd: '待定',
+    postponedTip: '由于发现安全漏洞，君士坦丁堡升级推迟，升级时间待定'
   }
 };
 const pageMesageFlatten = flatten(pageMesage);

@@ -69,7 +69,12 @@ const pageMessage = {
     fromUncleInclReward: 'From UncelIncl Rewards:',
     fromUncleReward: 'From Uncel Rewards:',
     avgGasUsedPerTxn: 'Avg Gas Used Per Txn:',
-    forkedAt: 'Constantinople activated on block {block} at {time}'
+    forkedAt: 'Constantinople activated on block {block} at {time}',
+    postponedTip: 'POSTPONED',
+    seeDetail: 'See More Detail',
+    tbd: 'TBD',
+    postponedTip:
+      'Constantinople network upgrade has been postponed due to security vulnerability until further notice'
   }
 };
 const pageMessageFlatten = flatten(pageMessage);
