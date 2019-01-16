@@ -83,6 +83,9 @@ class AppStore {
             imgUrl: 'https://eth.btc.com/ec9cb9684dfff6ebdfb496989d224363.png',
             success: function() {
               alert(3);
+            },
+            cancel: function() {
+              alert(5);
             }
           });
 
