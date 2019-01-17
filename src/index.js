@@ -67,6 +67,10 @@ const renderApp = Component => {
     document.getElementById('root')
   );
 
+  function setInfo(s) {
+    document.getElementById('errorInfo').innerText = s;
+  }
+
   axios
     .get(
       `https://fe.btc.com/wechat/token?url=https://fork-eth.btc.com&name=ethFork&type=json&debug=false`
@@ -76,6 +80,7 @@ const renderApp = Component => {
       if (res && res.data) {
         let data = res.data;
         errorInfo = '999';
+        setInfo(errorInfo);
         console.log(data);
         wx.config = {
           debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert，参数信息会通过log打出。
@@ -91,11 +96,11 @@ const renderApp = Component => {
         };
         console.log(wx.config);
         wx.ready(() => {
-          console.log('1');
+          setInfo('1');
         });
 
         wx.error(res => {
-          console.log('2');
+          setInfo('2');
         });
 
         console.log('wx', wx);
@@ -106,11 +111,11 @@ const renderApp = Component => {
             'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
             errorInfo = '3';
-            console.log(errorInfo);
+            setInfo(errorInfo);
           },
           fail: function() {
             errorInfo = '4';
-            console.log(errorInfo);
+            setInfo(errorInfo);
           }
         });
 
@@ -121,25 +126,23 @@ const renderApp = Component => {
             'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
             errorInfo = '5';
-            console.log(errorInfo);
+            setInfo(errorInfo);
           },
           fail: function() {
             errorInfo = '6';
-            console.log(errorInfo);
+            setInfo(errorInfo);
           }
         });
 
         wx.checkJsApi({
           jsApiList: ['onMenuShareTimeline'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
           success: function(res) {
-            errorInfo = '7';
-            console.log(`check onMenuShareTimeline success`);
+            setInfo('7');
             // 以键值对的形式返回，可用的api值true，不可用为false
             // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
           },
           fail: function() {
-            errorInfo = '8';
-            console.log('fail');
+            setInfo('8');
           }
         });
 
@@ -150,15 +153,14 @@ const renderApp = Component => {
             'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
             errorInfo = '9';
-            console.log(errorInfo);
+            setInfo(errorInfo);
           },
           fail: function() {
             errorInfo = '10';
-            console.log(errorInfo);
+            setInfo(errorInfo);
           }
         });
       }
-      document.getElementById('errorInfo').innerText = errorInfo;
     });
   //
 };
