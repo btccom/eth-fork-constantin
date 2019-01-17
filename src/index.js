@@ -98,9 +98,23 @@ const renderApp = Component => {
           errorInfo = JSON.stringify(res);
         });
 
-        wx.onMenuShareTimeline({
-          title: '分享测试',
+        wx.updateTimelineShareData({
+          title: '以太坊君士坦丁堡升级 - BTC.com',
           link: 'https://fork-eth.btc.com',
+          imgUrl: 'https://eth.btc.com/ec9cb9684dfff6ebdfb496989d224363.png',
+          success: function() {
+            errorInfo = 'onMenuShareTimeline success';
+            // alert(3);
+          },
+          cancel: function() {
+            errorInfo = 'onMenuShareTimeline cancel';
+            // alert(5);
+          }
+        });
+
+        wx.updateAppMessageShareData({
+          title: '以太坊君士坦丁堡升级 - BTC.com',
+          link: 'https://fork-eth.btc.com/',
           imgUrl: 'https://eth.btc.com/ec9cb9684dfff6ebdfb496989d224363.png',
           success: function() {
             errorInfo = 'onMenuShareTimeline success';
