@@ -81,7 +81,7 @@ const renderApp = Component => {
           debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert，参数信息会通过log打出。
           appId: 'wxc755b120860aea61', // 必填，公众号的唯一标识
           timestamp: data.wxToken.timestamp, // 必填，生成签名的时间戳
-          nonceStr: 'undefined', // 必填，生成签名的随机串
+          nonceStr: 'pzkcwxklw82elvwarv0fp2y9zau0u2xaggrm0nvq0m', // 必填，生成签名的随机串
           signature: data.wxToken.signature, // 必填，签名，见附录1
           jsApiList: [
             'onMenuShareTimeline',
