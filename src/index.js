@@ -156,7 +156,7 @@ const renderApp = Component => {
             setInfo(errorInfo);
           },
           fail: function(res) {
-            errorInfo = '10' + res;
+            errorInfo = '10' + JSON.stringify(res);
             setInfo(errorInfo);
           }
         });
