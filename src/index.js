@@ -68,7 +68,7 @@ const renderApp = Component => {
   );
 
   function setInfo(s) {
-    document.getElementById('errorInfo').innerText = s;
+    //document.getElementById('errorInfo').innerText = s;
   }
 
   axios
