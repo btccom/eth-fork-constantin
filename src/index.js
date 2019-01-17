@@ -69,7 +69,7 @@ const renderApp = Component => {
 
   axios
     .get(
-      `//fe.btc.com/wechat/token?url=https://fork-eth.btc.com&name=ethFork&type=json&debug=true`
+      `https://fe.btc.com/wechat/token?url=https://fork-eth.btc.com&name=ethFork&type=json&debug=true`
     )
     .then(res => {
       let errorInfo = 'not error';
@@ -120,19 +120,19 @@ const renderApp = Component => {
           imgUrl:
             'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
-            errorInfo = 'onMenuShareTimeline success';
+            errorInfo = 'updateTimelineShareData success';
             console.log(errorInfo);
           },
           fail: function() {
-            errorInfo = 'onMenuShareTimeline cancel';
+            errorInfo = 'updateTimelineShareData cancel';
             console.log(errorInfo);
           }
         });
 
         wx.checkJsApi({
-          jsApiList: ['updateAppMessageShareData'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+          jsApiList: ['onMenuShareTimeline'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
           success: function(res) {
-            console.log('success');
+            console.log(`check onMenuShareTimeline success`);
             // 以键值对的形式返回，可用的api值true，不可用为false
             // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
           },
@@ -147,11 +147,11 @@ const renderApp = Component => {
           imgUrl:
             'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
-            errorInfo = 'onMenuShareTimeline success';
+            errorInfo = 'updateAppMessageShareData success';
             console.log(errorInfo);
           },
           fail: function() {
-            errorInfo = 'onMenuShareTimeline cancel';
+            errorInfo = 'updateAppMessageShareData cancel';
             console.log(errorInfo);
           }
         });
