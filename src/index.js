@@ -106,11 +106,11 @@ const renderApp = Component => {
             'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
             errorInfo = 'onMenuShareTimeline success';
-            alert(3);
+            console.log(errorInfo);
           },
           fail: function() {
             errorInfo = 'onMenuShareTimeline cancel';
-            alert(5);
+            console.log(errorInfo);
           }
         });
 
@@ -121,11 +121,11 @@ const renderApp = Component => {
             'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
             errorInfo = 'onMenuShareTimeline success';
-            alert(3);
+            console.log(errorInfo);
           },
           fail: function() {
             errorInfo = 'onMenuShareTimeline cancel';
-            alert(5);
+            console.log(errorInfo);
           }
         });
 
@@ -148,11 +148,11 @@ const renderApp = Component => {
             'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
             errorInfo = 'onMenuShareTimeline success';
-            alert(3);
+            console.log(errorInfo);
           },
           fail: function() {
             errorInfo = 'onMenuShareTimeline cancel';
-            alert(5);
+            console.log(errorInfo);
           }
         });
       }
