@@ -91,11 +91,27 @@ const renderApp = Component => {
         };
         console.log(wx.config);
         wx.ready(() => {
-          errorInfo = 'config ready';
+          console.log('verify ready');
         });
 
         wx.error(res => {
-          errorInfo = JSON.stringify(res);
+          console.log('verify error');
+        });
+
+        console.log('wx', wx);
+        wx.onMenuShareTimeline({
+          title: '以太坊君士坦丁堡升级 - BTC.com',
+          link: 'https://fork-eth.btc.com',
+          imgUrl:
+            'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
+          success: function() {
+            errorInfo = 'onMenuShareTimeline success';
+            alert(3);
+          },
+          fail: function() {
+            errorInfo = 'onMenuShareTimeline cancel';
+            alert(5);
+          }
         });
 
         wx.updateTimelineShareData({
@@ -107,9 +123,21 @@ const renderApp = Component => {
             errorInfo = 'onMenuShareTimeline success';
             alert(3);
           },
-          cancel: function() {
+          fail: function() {
             errorInfo = 'onMenuShareTimeline cancel';
             alert(5);
+          }
+        });
+
+        wx.checkJsApi({
+          jsApiList: ['updateAppMessageShareData'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+          success: function(res) {
+            console.log('success');
+            // 以键值对的形式返回，可用的api值true，不可用为false
+            // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+          },
+          fail: function() {
+            console.log('fail');
           }
         });
 
@@ -122,7 +150,7 @@ const renderApp = Component => {
             errorInfo = 'onMenuShareTimeline success';
             alert(3);
           },
-          cancel: function() {
+          fail: function() {
             errorInfo = 'onMenuShareTimeline cancel';
             alert(5);
           }
