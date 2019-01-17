@@ -69,7 +69,7 @@ const renderApp = Component => {
 
   axios
     .get(
-      `http://fe.btc.com/wechat/token?url=https://fork-eth.btc.com&name=ethFork&type=json&debug=false`
+      `http://fe.btc.com/wechat/token?url=https://fork-eth.btc.com&name=ethFork&type=json&debug=true`
     )
     .then(res => {
       let errorInfo = 'not error';
@@ -105,11 +105,11 @@ const renderApp = Component => {
             'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
             errorInfo = 'onMenuShareTimeline success';
-            // alert(3);
+            alert(3);
           },
           cancel: function() {
             errorInfo = 'onMenuShareTimeline cancel';
-            // alert(5);
+            alert(5);
           }
         });
 
@@ -120,11 +120,11 @@ const renderApp = Component => {
             'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
             errorInfo = 'onMenuShareTimeline success';
-            // alert(3);
+            alert(3);
           },
           cancel: function() {
             errorInfo = 'onMenuShareTimeline cancel';
-            // alert(5);
+            alert(5);
           }
         });
       }
