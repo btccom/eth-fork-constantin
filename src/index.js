@@ -69,7 +69,7 @@ const renderApp = Component => {
 
   axios
     .get(
-      `http://fe.btc.com/wechat/token?url=https://fork-eth.btc.com&name=ethFork&type=json&debug=true`
+      `//fe.btc.com/wechat/token?url=https://fork-eth.btc.com&name=ethFork&type=json&debug=true`
     )
     .then(res => {
       let errorInfo = 'not error';
