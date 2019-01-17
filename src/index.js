@@ -69,7 +69,7 @@ const renderApp = Component => {
 
   axios
     .get(
-      `http://fe.btc.com/wechat/token?url=http://fork-eth.btc.com&name=ethFork&type=json&debug=false`
+      `http://fe.btc.com/wechat/token?url=https://fork-eth.btc.com&name=ethFork&type=json&debug=false`
     )
     .then(res => {
       let errorInfo = 'not error';
@@ -78,7 +78,7 @@ const renderApp = Component => {
         errorInfo = JSON.stringify(data);
         console.log(data);
         wx.config = {
-          debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert，参数信息会通过log打出。
+          debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert，参数信息会通过log打出。
           appId: 'wxc755b120860aea61', // 必填，公众号的唯一标识
           timestamp: data.wxToken.timestamp, // 必填，生成签名的时间戳
           nonceStr: 'pzkcwxklw82elvwarv0fp2y9zau0u2xaggrm0nvq0m', // 必填，生成签名的随机串
@@ -101,7 +101,8 @@ const renderApp = Component => {
         wx.updateTimelineShareData({
           title: '以太坊君士坦丁堡升级 - BTC.com',
           link: 'https://fork-eth.btc.com',
-          imgUrl: 'https://eth.btc.com/ec9cb9684dfff6ebdfb496989d224363.png',
+          imgUrl:
+            'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
             errorInfo = 'onMenuShareTimeline success';
             // alert(3);
@@ -115,7 +116,8 @@ const renderApp = Component => {
         wx.updateAppMessageShareData({
           title: '以太坊君士坦丁堡升级 - BTC.com',
           link: 'https://fork-eth.btc.com/',
-          imgUrl: 'https://eth.btc.com/ec9cb9684dfff6ebdfb496989d224363.png',
+          imgUrl:
+            'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
             errorInfo = 'onMenuShareTimeline success';
             // alert(3);
