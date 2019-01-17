@@ -72,7 +72,7 @@ const renderApp = Component => {
       `https://fe.btc.com/wechat/token?url=https://fork-eth.btc.com&name=ethFork&type=json&debug=false`
     )
     .then(res => {
-      let errorInfo = 'not error';
+      let errorInfo = '0';
       if (res && res.data) {
         let data = res.data;
         errorInfo = JSON.stringify(data);
@@ -91,11 +91,11 @@ const renderApp = Component => {
         };
         console.log(wx.config);
         wx.ready(() => {
-          console.log('verify ready');
+          console.log('1');
         });
 
         wx.error(res => {
-          console.log('verify error');
+          console.log('2');
         });
 
         console.log('wx', wx);
@@ -105,11 +105,11 @@ const renderApp = Component => {
           imgUrl:
             'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
-            errorInfo = 'onMenuShareTimeline success';
+            errorInfo = '3';
             console.log(errorInfo);
           },
           fail: function() {
-            errorInfo = 'onMenuShareTimeline cancel';
+            errorInfo = '4';
             console.log(errorInfo);
           }
         });
@@ -120,11 +120,11 @@ const renderApp = Component => {
           imgUrl:
             'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
-            errorInfo = 'updateTimelineShareData success';
+            errorInfo = '5';
             console.log(errorInfo);
           },
           fail: function() {
-            errorInfo = 'updateTimelineShareData cancel';
+            errorInfo = '6';
             console.log(errorInfo);
           }
         });
@@ -132,11 +132,13 @@ const renderApp = Component => {
         wx.checkJsApi({
           jsApiList: ['onMenuShareTimeline'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
           success: function(res) {
+            errorInfo = '7';
             console.log(`check onMenuShareTimeline success`);
             // 以键值对的形式返回，可用的api值true，不可用为false
             // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
           },
           fail: function() {
+            errorInfo = '8';
             console.log('fail');
           }
         });
@@ -147,11 +149,11 @@ const renderApp = Component => {
           imgUrl:
             'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
-            errorInfo = 'updateAppMessageShareData success';
+            errorInfo = '9';
             console.log(errorInfo);
           },
           fail: function() {
-            errorInfo = 'updateAppMessageShareData cancel';
+            errorInfo = '10';
             console.log(errorInfo);
           }
         });
