@@ -75,7 +75,7 @@ const renderApp = Component => {
       let errorInfo = '0';
       if (res && res.data) {
         let data = res.data;
-        errorInfo = JSON.stringify(data);
+        errorInfo = '999';
         console.log(data);
         wx.config = {
           debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert，参数信息会通过log打出。
