@@ -90,7 +90,8 @@ export default class EtherPriceChart extends Component {
         markIndex >= 0 &&
         ((timerangeType == '1' &&
           markIndex < pricesChartData.time_axis.length - 6) ||
-          timerangeType == '2') &&
+          (timerangeType == '2' &&
+            markIndex < pricesChartData.time_axis.length - 1)) &&
         isForked;
     }
 

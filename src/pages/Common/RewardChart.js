@@ -144,7 +144,8 @@ export default class RewardChart extends Component {
         markIndex >= 0 &&
         ((timerangeType == '1' &&
           markIndex < blockRewardChartData.time_axis.length - 6) ||
-          timerangeType == '2') &&
+          (timerangeType == '2' &&
+            markIndex < blockRewardChartData.time_axis.length - 1)) &&
         isForked;
     }
 
