@@ -86,8 +86,8 @@ export default class Home extends Component {
         <Grid>
           <Row>
             <Col xs={12} sm={12} md={12}>
-              <Overview />
-              {false && <Postponed />}
+              {false && <Overview />}
+              <Postponed />
             </Col>
           </Row>
           <Row>
