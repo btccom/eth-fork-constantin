@@ -36,7 +36,7 @@ class HomeStore {
     this.loading = false;
     this.isFinishedQuery = false;
     this.isForked = false;
-    this.forkTargetHeight = 7080000;
+    this.forkTargetHeight = 7086010;
     this.forkStatusInfo = {};
     this.forkBlockInfo = {};
     this.latestBlockList = [];
