@@ -150,7 +150,7 @@ export default class Overview extends Component {
                 transKey="pages.activeAt"
                 values={{
                   block: this.store.forkTargetHeight,
-                  time: '2019-01-17 UTC'
+                  time: '2019-02-27 UTC'
                 }}
               />
             )}

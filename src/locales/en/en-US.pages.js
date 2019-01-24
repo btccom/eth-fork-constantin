@@ -28,7 +28,7 @@ const pageMessage = {
     introduction: 'Constantinople Introduction',
     introPrg1Title: '1. What is Constantinople Hard Fork?',
     introPrg1:
-      "Constantinople mainnet hard fork scheduled for block #7080000, estimated around the 16th of January, 2019. Constantinople fork is the concluding part of Metropolis phase to make adjustments to Ethereum's economic policy, which partly focuses on delaying the difficulty bomb, reducing ETH reward and excessive gas costs.",
+      "Constantinople mainnet hard fork scheduled for block #7280000, estimated around the 27th of February, 2019. Constantinople fork is the concluding part of Metropolis phase to make adjustments to Ethereum's economic policy, which partly focuses on delaying the difficulty bomb, reducing ETH reward and excessive gas costs.",
     introPrg2Title: '2. Which EIPs are implemented?',
     introPrg2:
       'The Constantinople hard fork encompasses five separate Ethereum Improvement Proposals (EIPs).',
