@@ -80,7 +80,7 @@ const renderApp = Component => {
       let errorInfo = '0';
       if (res && res.data) {
         let data = res.data;
-        errorInfo = '999';
+        errorInfo = '99';
         setInfo(errorInfo);
         console.log(data);
         wx.config = {
