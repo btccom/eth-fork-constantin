@@ -96,7 +96,7 @@ const renderApp = Component => {
             'updateTimelineShareData'
           ]
         };
-        console.log(wx.config);
+        setInfo(JSON.stringify(wx.config));
         wx.ready(() => {
           setInfo('1');
         });
