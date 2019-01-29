@@ -121,20 +121,20 @@ const renderApp = Component => {
           }
         });
 
-        wx.updateTimelineShareData({
-          title: '以太坊君士坦丁堡升级 - BTC.com',
-          link: 'http://fork-eth-dev.btc.com/',
-          imgUrl:
-            'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
-          success: function() {
-            errorInfo = '5';
-            setInfo(errorInfo);
-          },
-          fail: function(res) {
-            errorInfo = '6' + JSON.stringify(res);
-            setInfo(errorInfo);
-          }
-        });
+        // wx.updateTimelineShareData({
+        //   title: '以太坊君士坦丁堡升级 - BTC.com',
+        //   link: 'http://fork-eth-dev.btc.com/',
+        //   imgUrl:
+        //     'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
+        //   success: function() {
+        //     errorInfo = '5';
+        //     setInfo(errorInfo);
+        //   },
+        //   fail: function(res) {
+        //     errorInfo = '6' + JSON.stringify(res);
+        //     setInfo(errorInfo);
+        //   }
+        // });
 
         wx.checkJsApi({
           jsApiList: ['onMenuShareTimeline'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
@@ -148,20 +148,20 @@ const renderApp = Component => {
           }
         });
 
-        wx.updateAppMessageShareData({
-          title: '以太坊君士坦丁堡升级 - BTC.com',
-          link: 'http://fork-eth-dev.btc.com/',
-          imgUrl:
-            'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
-          success: function() {
-            errorInfo = '9';
-            setInfo(errorInfo);
-          },
-          fail: function(res) {
-            errorInfo = '10' + JSON.stringify(res);
-            setInfo(errorInfo);
-          }
-        });
+        // wx.updateAppMessageShareData({
+        //   title: '以太坊君士坦丁堡升级 - BTC.com',
+        //   link: 'http://fork-eth-dev.btc.com/',
+        //   imgUrl:
+        //     'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
+        //   success: function() {
+        //     errorInfo = '9';
+        //     setInfo(errorInfo);
+        //   },
+        //   fail: function(res) {
+        //     errorInfo = '10' + JSON.stringify(res);
+        //     setInfo(errorInfo);
+        //   }
+        // });
       }
     });
 };
