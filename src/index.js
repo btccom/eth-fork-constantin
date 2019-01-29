@@ -98,11 +98,11 @@ const renderApp = Component => {
         };
         setInfo(JSON.stringify(wx.config));
         wx.ready(() => {
-          setInfo('1');
+          setInfo('wx ready');
         });
 
         wx.error(res => {
-          setInfo('2');
+          setInfo('wx error');
         });
 
         console.log('wx', wx);
