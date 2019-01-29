@@ -122,23 +122,22 @@ const renderApp = Component => {
           }
         });
 
-        // wx.updateTimelineShareData({
-        //   title: '以太坊君士坦丁堡升级 - BTC.com',
-        //   link: 'http://fork-eth-dev.btc.com/',
-        //   imgUrl:
-        //     'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
-        //   success: function() {
-        //     errorInfo = '5';
-        //     setInfo(errorInfo);
-        //   },
-        //   fail: function(res) {
-        //     errorInfo = '6' + JSON.stringify(res);
-        //     setInfo(errorInfo);
-        //   }
-        // });
+        wx.updateTimelineShareData({
+          title: '以太坊君士坦丁堡升级 - BTC.com123',
+          link: 'http://fork-eth-dev.btc.com/',
+          imgUrl: 'http://fork-eth-dev.btc.com/static/images/favicon.ico',
+          success: function() {
+            errorInfo = '5';
+            setInfo(errorInfo);
+          },
+          fail: function(res) {
+            errorInfo = '6' + JSON.stringify(res);
+            setInfo(errorInfo);
+          }
+        });
 
         wx.checkJsApi({
-          jsApiList: ['onMenuShareTimeline'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+          jsApiList: ['onMenuShareTimeline', 'updateTimelineShareData'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
           success: function(res) {
             setInfo('check api success');
             // 以键值对的形式返回，可用的api值true，不可用为false
