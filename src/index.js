@@ -123,7 +123,7 @@ const renderApp = Component => {
 
         wx.updateTimelineShareData({
           title: '以太坊君士坦丁堡升级 - BTC.com',
-          link: 'https://fork-eth.btc.com',
+          link: 'http://fork-eth-dev.btc.com/',
           imgUrl:
             'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
@@ -139,18 +139,18 @@ const renderApp = Component => {
         wx.checkJsApi({
           jsApiList: ['onMenuShareTimeline'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
           success: function(res) {
-            setInfo('7');
+            setInfo('check api success');
             // 以键值对的形式返回，可用的api值true，不可用为false
             // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
           },
           fail: function() {
-            setInfo('8');
+            setInfo('check api fail');
           }
         });
 
         wx.updateAppMessageShareData({
           title: '以太坊君士坦丁堡升级 - BTC.com',
-          link: 'https://fork-eth.btc.com/',
+          link: 'http://fork-eth-dev.btc.com/',
           imgUrl:
             'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
           success: function() {
