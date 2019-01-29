@@ -109,8 +109,7 @@ const renderApp = Component => {
         wx.onMenuShareTimeline({
           title: '以太坊君士坦丁堡升级111 - BTC.com',
           // link: 'http://fork-eth-dev.btc.com/',
-          imgUrl:
-            'https://fork-eth.btc.com/a95436b65e6d6247f79d9acbe2eebf2f.png',
+          imgUrl: 'http://fork-eth-dev.btc.com/static/images/favicon.ico',
           success: function() {
             errorInfo = '3';
             alert('share success');
