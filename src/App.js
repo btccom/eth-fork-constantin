@@ -31,8 +31,8 @@ export default class App extends Component {
     const { lang } = this.store;
     document.title =
       lang === 'zh-CN'
-        ? '以太坊君士坦丁堡升级 - BTC.com'
-        : 'Ethereum Constantinople Upgrade - BTC.com';
+        ? '以太坊君士坦丁堡/圣彼得堡升级 - BTC.com'
+        : 'Ethereum Constantinople/St.Petersburg Upgrade - BTC.com';
   }
 
   render() {
