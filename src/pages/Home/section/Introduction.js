@@ -19,7 +19,7 @@ const Introduction = () => {
         <Ts transKey="pages.introPrg2eip145" tagName="p" />
         <Ts transKey="pages.introPrg2eip1014" />
         <Ts transKey="pages.introPrg2eip1052" tagName="p" />
-        <Ts transKey="pages.introPrg2eip1283" tagName="p" />
+        {/* <Ts transKey="pages.introPrg2eip1283" tagName="p" /> */}
         <Ts transKey="pages.introPrg2eip1234" tagName="p" />
         <ul className="eip-info">
           <li>
@@ -58,7 +58,7 @@ const Introduction = () => {
               </a>
             </Chunk>
           </li>
-          <li>
+          {/* <li>
             <Chunk type="red">
               <a href="https://eips.ethereum.org/EIPS/eip-1283" target="_blank">
                 <Ts
@@ -69,7 +69,7 @@ const Introduction = () => {
                 <Ts transKey="pages.eipBrief1283" />
               </a>
             </Chunk>
-          </li>
+          </li> */}
           <li>
             <Chunk type="purple">
               <a href="https://eips.ethereum.org/EIPS/eip-1234" target="_blank">
@@ -83,6 +83,9 @@ const Introduction = () => {
             </Chunk>
           </li>
         </ul>
+        <p className="remark">
+          <Ts transKey="pages.remove1283Tip" />
+        </p>
         <h4>
           <Ts transKey="pages.introPrg3Title" />
         </h4>

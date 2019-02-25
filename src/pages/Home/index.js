@@ -116,17 +116,24 @@ export default class Home extends Component {
                 className="card hightlight avggas-chart-container"
                 style={{ height: 500 }}
               >
-                <AvgGasChart
+                {/* <AvgGasChart
                   isSimple={true}
                   timerangeType="1"
                   onClickZoom={() => {
                     window.open(this.getBigChartUrl('avgGasPrice'), '_blank');
                   }}
+                /> */}
+                <EtherPriceChart
+                  isSimple={true}
+                  timerangeType="1"
+                  onClickZoom={() => {
+                    window.open(this.getBigChartUrl('etherPrice'), '_blank');
+                  }}
                 />
               </div>
             </Col>
           </Row>
-          <Row className="margin-top-lg ">
+          {/* <Row className="margin-top-lg ">
             <Col xs={12} sm={12} md={12}>
               <div className="card hightlight" style={{ height: 500 }}>
                 <EtherPriceChart
@@ -138,7 +145,7 @@ export default class Home extends Component {
                 />
               </div>
             </Col>
-          </Row>
+          </Row> */}
           <Row className="margin-top-lg ">
             <Col xs={12} sm={12} md={12}>
               <Introduction />
