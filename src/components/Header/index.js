@@ -28,13 +28,13 @@ class Header extends Component {
 
   handleLogoClick = () => {
     if (window.ga) {
-      window.ga('send', 'event', 'LinkOut', 'diversion', 'BtcExplore');
+      window.ga('send', 'event', 'diversion', 'LinkOut', 'BtcExplore');
     }
   };
 
   handleEthLogoClick = () => {
     if (window.ga) {
-      window.ga('send', 'event', 'LinkOut', 'diversion', 'EthExplore');
+      window.ga('send', 'event', 'diversion', 'LinkOut', 'EthExplore');
     }
   };
 

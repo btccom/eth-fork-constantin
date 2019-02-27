@@ -81,7 +81,7 @@ export default class Home extends Component {
 
   handleClickLink = () => {
     if (window.ga) {
-      window.ga('send', 'event', 'LinkOut', 'diversion', 'BtcPool');
+      window.ga('send', 'event', 'diversion', 'LinkOut', 'BtcPool');
     }
   };
 
