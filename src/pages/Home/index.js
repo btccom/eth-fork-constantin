@@ -81,7 +81,7 @@ export default class Home extends Component {
 
   handleClickLink = () => {
     if (window.ga) {
-      window.ga('send', 'event', 'LinkOut', 'diversion', 'EthExplore');
+      window.ga('send', 'event', 'LinkOut', 'diversion', 'BtcPool');
     }
   };
 
@@ -98,7 +98,7 @@ export default class Home extends Component {
           className="link exchange-link"
           href={`${lang === 'zh-CN' ? linkZH : linkEN}`}
           target="_blank"
-          onClick={this.handleClickLink}
+          // onClick={this.handleClickLink}
         >
           <FormattedHTMLMessage id="pages.linkText" />
         </a>

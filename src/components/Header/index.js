@@ -28,7 +28,12 @@ class Header extends Component {
 
   handleLogoClick = () => {
     if (window.ga) {
-      window.ga('set', 'page', fullPath);
+      window.ga('send', 'event', 'LinkOut', 'diversion', 'BtcExplore');
+    }
+  };
+
+  handleEthLogoClick = () => {
+    if (window.ga) {
       window.ga('send', 'event', 'LinkOut', 'diversion', 'EthExplore');
     }
   };
@@ -49,6 +54,7 @@ class Header extends Component {
             href="https://eth.btc.com"
             target="_blank"
             style={{ display: 'inline-block' }}
+            onClick={this.handleEthLogoClick}
           >
             <div className="app-name">
               <Ts transKey="pages.appName" />
