@@ -28,7 +28,13 @@ class Header extends Component {
 
   handleLogoClick = () => {
     if (window.ga) {
-      window.ga('send', 'event', 'LinkOut', 'diversion', 'EthExplore');
+      console.log('ga event');
+      ga('send', 'event', {
+        eventCategory: 'Outbound Link',
+        eventAction: 'click',
+        eventLabel: event.target.href,
+        transport: 'beacon'
+      });
     }
   };
 
