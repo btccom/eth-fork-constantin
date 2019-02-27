@@ -94,20 +94,15 @@ export default class Home extends Component {
       'https://pool.btc.com/?utm_source=ethfork&utm_medium=text&utm_campaign=English';
     return (
       <div className="view-width relative" style={{ marginBottom: 20 }}>
+        <a
+          className="link exchange-link"
+          href={`${lang === 'zh-CN' ? linkZH : linkEN}`}
+          target="_blank"
+          onClick={this.handleClickLink}
+        >
+          <FormattedHTMLMessage id="pages.linkText" />
+        </a>
         <Grid>
-          <Row>
-            <Col xs={12} sm={12} md={12}>
-              <a
-                className="link exchange-link"
-                href={`${lang === 'zh-CN' ? linkZH : linkEN}`}
-                target="_blank"
-                onClick={this.handleClickLink}
-              >
-                <FormattedHTMLMessage id="pages.linkText" />
-              </a>
-            </Col>
-          </Row>
-
           <Row>
             <Col xs={12} sm={12} md={12}>
               <Overview />
