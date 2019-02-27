@@ -11,6 +11,7 @@ import EtherPriceChart from '../Common/EtherPriceChart';
 import Introduction from './section/Introduction';
 import BlocksBeforeFork from './section/BlocksBeforeFork';
 import BlocksAfterFork from './section/BlocksAfterFork';
+import { FormattedHTMLMessage } from 'react-intl';
 
 import './index.scss';
 
@@ -78,12 +79,35 @@ export default class Home extends Component {
     });
   };
 
+  handleClickLink = () => {
+    if (window.ga) {
+      window.ga('send', 'event', 'LinkOut', 'diversion', 'EthExplore');
+    }
+  };
+
   render() {
     const { isForked } = this.store;
-
+    const { lang } = this.appsStore;
+    let linkZH =
+      'https://pool.btc.com/?utm_source=ethfork&utm_medium=text&utm_campaign=Chinese';
+    let linkEN =
+      'https://pool.btc.com/?utm_source=ethfork&utm_medium=text&utm_campaign=English';
     return (
       <div className="view-width relative" style={{ marginBottom: 20 }}>
         <Grid>
+          <Row>
+            <Col xs={12} sm={12} md={12}>
+              <a
+                className="link exchange-link"
+                href={`${lang === 'zh-CN' ? linkZH : linkEN}`}
+                target="_blank"
+                onClick={this.handleClickLink}
+              >
+                <FormattedHTMLMessage id="pages.linkText" />
+              </a>
+            </Col>
+          </Row>
+
           <Row>
             <Col xs={12} sm={12} md={12}>
               <Overview />

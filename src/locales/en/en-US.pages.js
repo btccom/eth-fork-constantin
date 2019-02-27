@@ -78,7 +78,9 @@ const pageMessage = {
     postponedTip:
       'Constantinople/St.Petersburg network upgrade has been postponed due to security vulnerability until further notice',
     remove1283Tip:
-      '* EIP 1283 will be removed from the St.Petersburg network upgrade.'
+      '* EIP 1283 will be removed from the St.Petersburg network upgrade.',
+    linkText:
+      'More than <b>500,000</b> miners choose BTC.com mining pool, once come and wont leave because High profit!'
   }
 };
 const pageMessageFlatten = flatten(pageMessage);

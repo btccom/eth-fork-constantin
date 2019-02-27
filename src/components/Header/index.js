@@ -26,13 +26,24 @@ class Header extends Component {
     this.appStore.setLocaleLang(key);
   };
 
+  handleLogoClick = () => {
+    if (window.ga) {
+      window.ga('send', 'event', 'LinkOut', 'diversion', 'EthExplore');
+    }
+  };
+
   render() {
     const { lang } = this.appStore;
 
     return (
       <div className="header">
         <div className="view-width">
-          <a href="https://btc.com/" target="_blank" className="logo" />
+          <a
+            href="https://btc.com/"
+            target="_blank"
+            className="logo"
+            onClick={this.handleLogoClick}
+          />
           <a
             href="https://eth.btc.com"
             target="_blank"

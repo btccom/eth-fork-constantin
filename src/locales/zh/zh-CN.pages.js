@@ -69,7 +69,8 @@ const pageMesage = {
     seeDetail: '查看详情',
     tbd: '待定',
     postponedTip: '由于发现安全漏洞，君士坦丁堡/圣彼得堡升级推迟，升级时间待定',
-    remove1283Tip: '* 圣彼得堡升级将移除 EIP 1283。'
+    remove1283Tip: '* 圣彼得堡升级将移除 EIP 1283。',
+    linkText: '超<b>50</b>万矿工选择BTC.com，来了就不想走的高收益矿池！'
   }
 };
 const pageMesageFlatten = flatten(pageMesage);
