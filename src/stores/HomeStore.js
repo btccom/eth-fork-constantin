@@ -48,10 +48,9 @@ class HomeStore {
 
   startSocket = () => {
     try {
-      this.socket = io.connect(
-        socketIOURL,
-        { transports: ['websocket', 'polling', 'flashsocket'] }
-      );
+      this.socket = io.connect(socketIOURL, {
+        transports: ['websocket', 'polling', 'flashsocket']
+      });
       setTimeout(() => {
         this.getLatestBlockList_io();
       }, 5000);
@@ -90,7 +89,7 @@ class HomeStore {
 
   @action
   getLatestBlockList = async () => {
-    const res = await ajax.get(`/block/list`, {
+    const res = await ajax.get(`/blocks`, {
       params: {
         page: 1,
         size: 10
@@ -206,7 +205,7 @@ class HomeStore {
 
   @action
   getHistoryBlockList = async () => {
-    const res = await ajax.get(`/block/list`, {
+    const res = await ajax.get(`/blocks`, {
       params: {
         start: this.forkStatusInfo.fork_height - 11,
         end: this.forkStatusInfo.fork_height
