@@ -89,8 +89,8 @@ export default class AvgGasChart extends Component {
           markLinePoint={forkStatusInfo.fork_timestamp ? markPoint : null}
           markLinePointName={
             lang === 'zh-CN'
-              ? `${forkTimeStr}\n君士坦丁堡分叉`
-              : `${forkTimeStr}\nConstantinople Fork`
+              ? `${forkTimeStr}\n君士坦丁堡/圣彼得堡分叉`
+              : `${forkTimeStr}\nConstantinople/St.Petersburg Fork`
           }
           yAxisName={
             lang === 'zh-CN'
